@@ -34,3 +34,12 @@ Route::resource('artesanos', App\Http\Controllers\ArtesanoController::class);
 
 
 Route::resource('rubros', App\Http\Controllers\RubroController::class);
+
+
+
+
+
+
+
+
+Route::resource('tipopiezas', App\Http\Controllers\TipopiezaController::class);

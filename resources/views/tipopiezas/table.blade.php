@@ -1,25 +1,31 @@
 <div class="table-responsive">
-    <table class="table" id="rubros-table">
+    <table class="table" id="tipopiezas-table">
         <thead>
         <tr>
             <th>Id</th>
         <th>Descrip</th>
+        <th>Tecnica</th>
+        <th>Rubro Id</th>
+        <th>Insumo</th>
             <th colspan="3">Action</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($rubros as $rubro)
+        @foreach($tipopiezas as $tipopieza)
             <tr>
-                <td>{{ $rubro->id }}</td>
-            <td>{{ $rubro->descrip }}</td>
+                <td>{{ $tipopieza->id }}</td>
+            <td>{{ $tipopieza->descrip }}</td>
+            <td>{{ $tipopieza->tecnica }}</td>
+            <td>{{ $tipopieza->rubro_id }}</td>
+            <td>{{ $tipopieza->insumo }}</td>
                 <td width="120">
-                    {!! Form::open(['route' => ['rubros.destroy', $rubro->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['tipopiezas.destroy', $tipopieza->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('rubros.show', [$rubro->id]) }}"
+                        <a href="{{ route('tipopiezas.show', [$tipopieza->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('rubros.edit', [$rubro->id]) }}"
+                        <a href="{{ route('tipopiezas.edit', [$tipopieza->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>

@@ -17,3 +17,14 @@
 </li>
 
 
+
+
+
+<li class="nav-item">
+    <a href="{{ route('tipopiezas.index') }}"
+       class="nav-link {{ Request::is('tipopiezas*') ? 'active' : '' }}">
+        <p>Tipopiezas</p>
+    </a>
+</li>
+
+

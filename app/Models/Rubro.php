@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Rubro
  * @package App\Models
- * @version July 26, 2022, 1:09 pm UTC
+ * @version July 26, 2022, 1:36 pm UTC
  *
  * @property string $descrip
  */
