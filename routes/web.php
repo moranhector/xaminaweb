@@ -31,3 +31,6 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('artesanos', App\Http\Controllers\ArtesanoController::class);
+
+
+Route::resource('rubros', App\Http\Controllers\RubroController::class);

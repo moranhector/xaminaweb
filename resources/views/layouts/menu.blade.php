@@ -9,3 +9,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('rubros.index') }}"
+       class="nav-link {{ Request::is('rubros*') ? 'active' : '' }}">
+        <p>Rubros</p>
+    </a>
+</li>
+
+
