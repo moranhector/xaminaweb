@@ -7,40 +7,6 @@
 
 26/ de Julio / Agregué entidad Rubro
 
-RECORTE.TXT
-
- php artisan infyom:scaffold Artesano
-
-Specify fields for the model (skip id & timestamp fields, we will add it automat
-ically)
-Read docs carefully to specify field inputs)
-Enter "exit" to finish
-
- Field: (name db_type html_type options) []:
- > nombre string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > documento
-
-Invalid Input. Try again
-
- Field: (name db_type html_type options) []:
- > documento string numeric
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > direccion string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > exit
 
 php artisan infyom:scaffold Artesano SIN ARCHIVO JSON
 
@@ -90,3 +56,13 @@ php artisan infyom:scaffold Cheque
         "name": "depositado",
         "dbType": "boolean",
         "htmlType": "checkbox",
+
+Entidad Recibos
+
+Crear Recibos y RecibosLineas por separado, luego copiar modelo de Facturas de u2
+
+Elijo la palabra linea y no renglon, o item, porque es más regular su pluralidad
+para favorecer la generación automática.
+También tendremos las entidades FacturasLineas y RemitosLineas
+
+php artisan infyom:scaffold Recibo
