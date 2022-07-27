@@ -46,8 +46,12 @@ https://bestofphp.com/repo/InfyOmLabs-laravel-generator-php-developer-tools
 input value onkeyup="this.value = this.value.toUpperCase();"
 
 Como generar los Select Options
+https://labs.infyom.com/laravelgenerator/docs/5.8/fields-input-guide
+
 
 -
-php artisan infyom:rollback Rubro scaffold
+php artisan infyom:scaffold Rubro
 
+php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESDE ARCHIVO JSON
 
+php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION

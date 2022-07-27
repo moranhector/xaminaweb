@@ -29,14 +29,14 @@ class ViewServiceProvider extends ServiceProvider
             $rubroItems = Rubro::pluck('descrip','id')->toArray();
             $view->with('rubroItems', $rubroItems);
         });
-        View::composer(['tipopiezas.fields'], function ($view) {
-            $rubroItems = Rubro::pluck('descrip','id')->toArray();
-            $view->with('rubroItems', $rubroItems);
-        });
-        View::composer(['tipopiezas.fields'], function ($view) {
-            $rubroItems = Rubro::pluck('descrip','id')->toArray();
-            $view->with('rubroItems', $rubroItems);
-        });
+        // View::composer(['tipopiezas.fields'], function ($view) {
+        //     $rubroItems = Rubro::pluck('descrip','id')->toArray();
+        //     $view->with('rubroItems', $rubroItems);
+        // });
+        // View::composer(['tipopiezas.fields'], function ($view) {
+        //     $rubroItems = Rubro::pluck('descrip','id')->toArray();
+        //     $view->with('rubroItems', $rubroItems);
+        // });
         //
     }
 }

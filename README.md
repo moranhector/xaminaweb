@@ -65,3 +65,11 @@ php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESD
 
 php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
 
+
+27/7/2022
+
+Modificar vista Login
+C:\xampp\htdocs\xaminaweb\resources\views\auth\login.blade.php
+Para cambiar textos que quedaron parametrizados mal con LANG().
+
+
