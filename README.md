@@ -73,3 +73,20 @@ C:\xampp\htdocs\xaminaweb\resources\views\auth\login.blade.php
 Para cambiar textos que quedaron parametrizados mal con LANG().
 
 
+Entidad Cheques
+
+php artisan infyom:scaffold Cheque
+
+        "name": "numero",
+        "dbType": "integer",
+        "htmlType": "text",
+        "validations": "unique:cheques,numero",
+
+        "name": "fecha",
+        "dbType": "date",
+        "htmlType": "date",
+        "validations": "required",
+
+        "name": "depositado",
+        "dbType": "boolean",
+        "htmlType": "checkbox",

@@ -28,3 +28,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('cheques.index') }}"
+       class="nav-link {{ Request::is('cheques*') ? 'active' : '' }}">
+        <p>Cheques</p>
+    </a>
+</li>
+
+

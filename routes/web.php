@@ -43,3 +43,6 @@ Route::resource('rubros', App\Http\Controllers\RubroController::class);
 
 
 Route::resource('tipopiezas', App\Http\Controllers\TipopiezaController::class);
+
+
+Route::resource('cheques', App\Http\Controllers\ChequeController::class);
