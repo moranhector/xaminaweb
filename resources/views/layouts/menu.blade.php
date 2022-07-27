@@ -44,3 +44,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('recibosLineas.index') }}"
+       class="nav-link {{ Request::is('recibosLineas*') ? 'active' : '' }}">
+        <p>Recibos Lineas</p>
+    </a>
+</li>
+
+

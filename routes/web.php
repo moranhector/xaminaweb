@@ -49,3 +49,6 @@ Route::resource('cheques', App\Http\Controllers\ChequeController::class);
 
 
 Route::resource('recibos', App\Http\Controllers\ReciboController::class);
+
+
+Route::resource('recibosLineas', App\Http\Controllers\RecibosLineasController::class);

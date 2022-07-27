@@ -66,3 +66,8 @@ para favorecer la generación automática.
 También tendremos las entidades FacturasLineas y RemitosLineas
 
 php artisan infyom:scaffold Recibo
+
+php artisan infyom:scaffold RecibosLineas
+
+Creé la entidad RecibosLineas para generar algunos recursos, pero no necesitaré la entrada al menú ni las vistas.
+
