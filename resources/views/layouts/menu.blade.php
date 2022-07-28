@@ -51,4 +51,11 @@
     </a>
 </li>
 
+ 
 
+<li class="nav-item">
+    <a href="{{ route('preparar.recibo') }}"
+       class="nav-link {{ Request::is('preparar.recibo*') ? 'active' : '' }}">
+        <p>Registrar Recibo</p>
+    </a>
+</li>

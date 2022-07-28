@@ -9,6 +9,8 @@ use App\Models\Recibo;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
+
 
 class ReciboController extends AppBaseController
 {
@@ -27,6 +29,56 @@ class ReciboController extends AppBaseController
         return view('recibos.index')
             ->with('recibos', $recibos);
     }
+
+
+
+/**
+     * Show the form for creating a new factura.
+     *
+     * @return Illuminate\View\View
+     */
+    public function preparar()
+    {
+   
+            //dd('entro');    
+             /*listar los productos en ventana modal*/
+             $articulos=DB::table('tipopiezas as ar')
+             ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
+             ->get(); 
+
+             /*listar las clientes en ventana modal*/
+             //$clientes=DB::table('clientes')->get();     
+             $artesanos=DB::table('artesanos')->get();     
+
+
+             //Factura Electrónica
+               $dni = "18083471";
+             //$MODO = 0;
+             //$afip = new wsfev1($CUIT,$MODO);
+             //$result = $afip->consultarUltimoComprobanteAutorizado(1, 1);
+
+             //$nTipoFactura = TipoFacturaAfip($tipofactura) ; //Obtengo el código numérico
+
+
+
+             //$result = $afip->consultarUltimoComprobanteAutorizado(1,$nTipoFactura);             
+             //$nueva_factura = $result +1 ;     
+             $nuevo_formulario = zeros('1',8)   ;     
+
+             //$factura = new Factura();
+             //$factura->ptovta = '0001';
+        
+        $data['articulos'] = $articulos;     
+        $data['artesanos'] = $artesanos;     
+        $data['nuevo_formulario'] = $nuevo_formulario;     
+        $data['dni'] = $dni;     
+        
+        return view('recibos.preparar',$data );        
+
+    }
+
+    
+
 
     /**
      * Show the form for creating a new Recibo.
@@ -153,3 +205,28 @@ class ReciboController extends AppBaseController
         return redirect(route('recibos.index'));
     }
 }
+
+///// FUNCIONES GENERALES FUERA DE LA CLASE
+
+function Fecha()
+{
+
+    $date = Carbon::today();
+    $fecha = $date->format('Ymd');   
+    // Esto debe devolver AAAAMMDD por ejemplo  "20190909"
+
+    //dd($fecha);
+
+    echo $fecha;
+    return $fecha;
+}
+
+function zeros($cadena,$longitud)
+{
+
+    $zeros =  substr("00000000".$cadena,-1 * $longitud ,$longitud);
+    //dd($zeros);
+    return $zeros;
+}
+
+////////////////////////////////////////////

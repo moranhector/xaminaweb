@@ -37,11 +37,6 @@ Route::resource('rubros', App\Http\Controllers\RubroController::class);
 
 
 
-
-
-
-
-
 Route::resource('tipopiezas', App\Http\Controllers\TipopiezaController::class);
 
 
@@ -49,6 +44,8 @@ Route::resource('cheques', App\Http\Controllers\ChequeController::class);
 
 
 Route::resource('recibos', App\Http\Controllers\ReciboController::class);
+
+Route::get('preparar_recibo','App\Http\Controllers\ReciboController@preparar')->name('preparar.recibo');   
 
 
 Route::resource('recibosLineas', App\Http\Controllers\RecibosLineasController::class);
