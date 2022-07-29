@@ -1,11 +1,11 @@
 <script language="JavaScript">
-<!--
+
 function abre_buscador() { 
-//   var nwin = window.open("{ { route('clientes.seleccionar') } }","abookpopup","width=400,height=500,resizable=yes,scrollbars=yes;location=no");
-//   if((!nwin.opener) && (document.windows != null))
-//     nwin.opener = document.windows;
+   var nwin = window.open("{{ route('seleccionar_artesanos') }}","abookpopup","width=400,height=500,resizable=yes,scrollbars=yes;location=no");
+  if((!nwin.opener) && (document.windows != null))
+   nwin.opener = document.windows;
 }
-// -->
+
 </script>
 
 
@@ -15,15 +15,15 @@ function abre_buscador() {
 
 
 <div class="row">
-        <!-- CELDA dni  -->
+        <!-- CELDA documento  -->
         <div class="col-md-3">
-            <div class="{{ $errors->has('cuit') ? 'has-error' : '' }}">
-                <label class="form-control-label" for="dni">DNI</label>                 
+            <div class="{{ $errors->has('documento') ? 'has-error' : '' }}">
+                <label class="form-control-label" for="documento">Documento</label>                 
                 <div>
-                    <input class="form-control" name="dni" type="text" id="dni" value="{{ old('dni', optional($recibo)->dni) }}" minlength="1" maxlength="11" readonly >
+                    <input class="form-control" name="documento" type="text" id="documento" value="{{ old('documento', optional($recibo)->documento) }}" minlength="1" maxlength="11" readonly >
                     {!! $errors->first('dni', '<p class="help-block">:message</p>') !!}
 
-                    <input  type=button class="btn btn-primary" value="Selección de Clientes" onclick="abre_buscador()" >
+                    <input  type=button class="btn btn-primary" value="Selección de Artesanos" onclick="abre_buscador()" >
 
 
 
@@ -96,7 +96,7 @@ function abre_buscador() {
         <div class="{{ $errors->has('nrocomp') ? 'has-error' : '' }}">
             <label class="form-control-label" for="nrocomp">Número Recibo</label>  
             <div>
-                <input class="form-control" name="nrocomp" type="text" id="nrocomp" value="{{ $nuevo_formulario }}" minlength="1" maxlength="8">
+                <input class="form-control" name="formulario" type="text" id="formulario" value="{{ $nuevo_formulario }}" minlength="1" maxlength="8">
                 {!! $errors->first('nrocomp', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
@@ -118,7 +118,7 @@ function abre_buscador() {
       
         <!--<input type="number" id="articulo" name="articulo" class="form-control" > -->
 
-        <select class="form-control selectpicker" name="id_producto" id="id_producto" data-live-search="true" required >
+        <select class="form-control selectpicker" name="id_producto" id="id_producto" data-live-search="true" >
                                                             
             <option value="0" selected>Seleccione tipo de pieza</option>
                                                             

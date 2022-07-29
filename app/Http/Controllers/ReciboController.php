@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use DB;
+use Carbon\Carbon;
 
 
 class ReciboController extends AppBaseController
@@ -97,8 +98,12 @@ class ReciboController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateReciboRequest $request)
+    public function store(Request $request)
     {
+
+        
+        
+
         $input = $request->all();
 
         /** @var Recibo $recibo */
@@ -108,6 +113,43 @@ class ReciboController extends AppBaseController
 
         return redirect(route('recibos.index'));
     }
+
+    /**
+     * Guardar recibo
+     *
+     * @param CreateReciboRequest $request
+     *
+     * @return Response
+     */
+    public function guardar(Request $request)
+    {
+        $input = $request->all();
+
+        $mytime= Carbon::now('America/Argentina/Mendoza');
+        $mytime= $mytime->toDateString();
+        //dd($mytime);
+  
+        $recibo = new Recibo();
+        
+        $recibo->formulario =   $request->formulario; 
+        $recibo->fecha = $mytime ;
+        $recibo->artesano_id = 2 ;
+        $recibo->total = 0 ;
+        $recibo->cheque_id = 1 ;
+        $recibo->rendido = 0 ;
+        $recibo->save();
+
+        //dd($request->all());
+
+        /** @var Recibo $recibo */
+        //$recibo = Recibo::create($input);
+
+        Flash::success('Recibo saved successfully.');
+
+        return redirect(route('recibos.index'));
+    }
+
+    
 
     /**
      * Display the specified Recibo.

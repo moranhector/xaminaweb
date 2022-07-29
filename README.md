@@ -115,7 +115,7 @@ Para no confundirlas les antepongo un guión _precio
 
 
 
-En la grilla de renglone hay que hacer que sean readonly
+En la grilla de renglones hay que hacer que sean readonly
 
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
                                '<td><input type="text" name="_descrip"  value="'+_descrip     +'"></td>',
@@ -140,3 +140,67 @@ C:\xampp\htdocs\xaminaweb\resources\views\layouts\menu.blade.php
         <p>Registrar Recibo</p>
     </a>
 </li>
+
+
+Viernes 29/7/2022 
+
+Empecé a grabar recibos.
+
+Tuve algunos problemas. Estuve estancado un rato largo porque no grababa. Resulta que Infyom intenta hacer STORE
+con un REQUEST personalizado que es un CreateRecibosLineasRequest
+Hice un método guardar para preservar el Store original y poder usarlo en un sistema de ADMINISTRADOR.
+
+_______________________ formulario de busqueda
+
+Escribí un formulario de búsqueda de artesanos basado en el buscador de clientes de u2.
+Remplazando nombres de variables se resolvió la mayor parte del código.
+
+C:\xampp\htdocs\xaminaweb\resources\views\artesanos\seleccionar.blade.php
+
+
+
+    function copiar_cerrar($docum,$nombre) {
+      
+        copiar_celdas($docum,$nombre);
+        parent.close();
+    }
+
+    function copiar_celdas($documento,$nombre) {
+        var prefix    = "";
+        var pwintype = typeof parent.opener.document;
+
+        
+
+        if (pwintype != "undefined") {
+
+                parent.opener.document.getElementById("documento").value  = $documento;
+                //alert($documento);        
+                parent.opener.document.getElementById("nombre").value  = $nombre;                
+                //alert($nombre);                        
+         
+        }
+    }
+
+C:\xampp\htdocs\xaminaweb\resources\views\layouts\miniapp.blade.php
+
+Ruta del buscador: 
+Route::get('/seleccionarartesanos', 'App\Http\Controllers\ArtesanoController@seleccionar')->name('seleccionar_artesanos');
+
+En el controlador de Artesanos el método Seleccionar
+C:\xampp\htdocs\xaminaweb\app\Http\Controllers\ArtesanoController.php
+
+    public function seleccionar(Request $request)
+    {
+         if($request){
+
+            $sql=trim($request->get('buscarTexto'));
+            $artesanos=DB::table('artesanos')
+            ->where('nombre','LIKE','%'.$sql.'%')
+            ->orwhere('documento','LIKE','%'.$sql.'%')
+            ->orderBy('id','asc')
+            ->paginate(8);
+            return view('artesanos.seleccionar',["artesanos"=>$artesanos,"buscarTexto"=>$sql]);
+            //return $clientes;
+        }
+    }
+

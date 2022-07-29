@@ -47,5 +47,10 @@ Route::resource('recibos', App\Http\Controllers\ReciboController::class);
 
 Route::get('preparar_recibo','App\Http\Controllers\ReciboController@preparar')->name('preparar.recibo');   
 
+Route::post('guardar_recibo','App\Http\Controllers\ReciboController@guardar')->name('guardar.recibo');   
+
 
 Route::resource('recibosLineas', App\Http\Controllers\RecibosLineasController::class);
+
+/* Incorporo una función de búsqueda para seleccionar artesanos */
+Route::get('/seleccionarartesanos', 'App\Http\Controllers\ArtesanoController@seleccionar')->name('seleccionar_artesanos');

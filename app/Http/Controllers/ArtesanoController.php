@@ -9,6 +9,7 @@ use App\Models\Artesano;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
 
 class ArtesanoController extends AppBaseController
 {
@@ -27,6 +28,22 @@ class ArtesanoController extends AppBaseController
         return view('artesanos.index')
             ->with('artesanos', $artesanos);
     }
+
+    public function seleccionar(Request $request)
+    {
+         if($request){
+
+            $sql=trim($request->get('buscarTexto'));
+            $artesanos=DB::table('artesanos')
+            ->where('nombre','LIKE','%'.$sql.'%')
+            ->orwhere('documento','LIKE','%'.$sql.'%')
+            ->orderBy('id','asc')
+            ->paginate(8);
+            return view('artesanos.seleccionar',["artesanos"=>$artesanos,"buscarTexto"=>$sql]);
+            //return $clientes;
+        }
+    }
+    
 
     /**
      * Show the form for creating a new Artesano.

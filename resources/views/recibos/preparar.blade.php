@@ -13,7 +13,7 @@
 
     <div class="content px-3">
 
-    <form method="POST" action="{{ route('recibos.store') }}" accept-charset="UTF-8" id="create_recibo_form" name="create_recibo_form" class="form-horizontal">
+    <form method="POST" action="{{ route('guardar.recibo') }}" accept-charset="UTF-8" id="create_recibo_form" name="create_recibo_form" class="form-horizontal">
             {{ csrf_field() }} 
             @include ('recibos.form', [ 'recibo' => null, ]) 
 
