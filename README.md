@@ -150,43 +150,51 @@ Tuve algunos problemas. Estuve estancado un rato largo porque no grababa. Result
 con un REQUEST personalizado que es un CreateRecibosLineasRequest
 Hice un método guardar para preservar el Store original y poder usarlo en un sistema de ADMINISTRADOR.
 
-_______________________ formulario de busqueda
+_______________________ formulario de busqueda __________________________________________
+
+
 
 Escribí un formulario de búsqueda de artesanos basado en el buscador de clientes de u2.
 Remplazando nombres de variables se resolvió la mayor parte del código.
 
-C:\xampp\htdocs\xaminaweb\resources\views\artesanos\seleccionar.blade.php
+Tiene 5 partes
 
 
+1 C:\xampp\htdocs\xaminaweb\resources\views\recibos\form.blade.php
+
+Codigo javascript que se activa en el botón de Busqueda de
+
+function abre_buscador() { 
+   var nwin = window.open("{{ route('seleccionar_artesanos') }}","abookpopup","width=400,height=500,resizable=yes,scrollbars=yes;location=no");
+  if((!nwin.opener) && (document.windows != null))
+   nwin.opener = document.windows;
+}
+
+2 C:\xampp\htdocs\xaminaweb\resources\views\artesanos\seleccionar.blade.php
+
+Contiene la plantilla blade y códigos Javascript
 
     function copiar_cerrar($docum,$nombre) {
-      
         copiar_celdas($docum,$nombre);
         parent.close();
     }
-
     function copiar_celdas($documento,$nombre) {
         var prefix    = "";
         var pwintype = typeof parent.opener.document;
-
-        
-
         if (pwintype != "undefined") {
-
                 parent.opener.document.getElementById("documento").value  = $documento;
-                //alert($documento);        
                 parent.opener.document.getElementById("nombre").value  = $nombre;                
-                //alert($nombre);                        
-         
+
         }
     }
 
-C:\xampp\htdocs\xaminaweb\resources\views\layouts\miniapp.blade.php
+3 Una plantilla Blade en Layout
+ C:\xampp\htdocs\xaminaweb\resources\views\layouts\miniapp.blade.php
 
-Ruta del buscador: 
+4 Ruta del buscador: 
 Route::get('/seleccionarartesanos', 'App\Http\Controllers\ArtesanoController@seleccionar')->name('seleccionar_artesanos');
 
-En el controlador de Artesanos el método Seleccionar
+5 En el controlador de Artesanos el método Seleccionar
 C:\xampp\htdocs\xaminaweb\app\Http\Controllers\ArtesanoController.php
 
     public function seleccionar(Request $request)
@@ -203,4 +211,7 @@ C:\xampp\htdocs\xaminaweb\app\Http\Controllers\ArtesanoController.php
             //return $clientes;
         }
     }
+_______________________________________________________________________________________________
 
+
+--- PROXIMOS PASOS ---
