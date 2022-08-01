@@ -37,7 +37,8 @@ class Recibo extends Model
         'artesano_id',
         'total',
         'cheque_id',
-        'rendido'
+        'rendido', 
+        'user_name'
     ];
 
     /**

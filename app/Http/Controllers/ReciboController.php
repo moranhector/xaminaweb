@@ -6,11 +6,13 @@ use App\Http\Requests\CreateReciboRequest;
 use App\Http\Requests\UpdateReciboRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Recibo;
+use App\Models\RecibosLineas;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 use DB;
 use Carbon\Carbon;
+use Auth;
 
 
 class ReciboController extends AppBaseController
@@ -68,10 +70,15 @@ class ReciboController extends AppBaseController
 
              //$factura = new Factura();
              //$factura->ptovta = '0001';
-        
+
+        $mytime= Carbon::now('America/Argentina/Mendoza');
+        $mytime= $mytime->toDateString();             
+
+
         $data['articulos'] = $articulos;     
         $data['artesanos'] = $artesanos;     
         $data['nuevo_formulario'] = $nuevo_formulario;     
+        $data['fecha'] = $mytime;     
         $data['dni'] = $dni;     
         
         return view('recibos.preparar',$data );        
@@ -79,6 +86,82 @@ class ReciboController extends AppBaseController
     }
 
     
+
+    /**
+     * Guardar recibo
+     *
+     * @param CreateReciboRequest $request
+     *
+     * @return Response
+     */
+    public function guardar(Request $request)
+    {
+        $input = $request->all();
+        //dd($input);
+
+        $mytime= Carbon::now('America/Argentina/Mendoza');
+        $mytime= $mytime->toDateString();
+        //dd($mytime);
+  
+        $recibo = new Recibo();
+        
+        $recibo->formulario =   $request->formulario; 
+        $recibo->fecha = $request->fecha ;
+        $recibo->artesano_id = 2 ;
+        $recibo->total = 0 ;
+        $recibo->cheque_id = 1 ;
+        $recibo->rendido = 0 ;
+        $recibo->total = 0 ;
+        //GUARDAR USUARIO
+        $user = Auth::user();
+        $recibo->user_name = $user->name ;
+        $recibo->save();
+
+
+        $lineas_detalle = $request->_producto_id ;
+        $cont=0;
+
+        while($cont < count($lineas_detalle)){
+
+            $detalle = new RecibosLineas();
+            //dd($detalle);
+            /*enviamos valores a las propiedades del objeto detalle*/
+            /*al idcompra del objeto detalle le envio el id del objeto venta, que es el objeto que se ingresó en la tabla ventas de la bd*/
+            /*el id es del registro de la venta*/
+            $detalle->recibo_id     = $recibo->id;
+            $detalle->tipopieza_id  = $request->_producto_id[$cont];
+            $detalle->cantidad      = $request->_cantidad[$cont];
+            $detalle->preciounit    = $request->_precio_venta[$cont];
+            $detalle->importe       = 0;
+            //$detalle->updated_at    = null ;
+            //$detalle->created_at    = $mytime ;
+            //$detalle->total         = 0;
+
+            // 'recibo_id' => 'integer',
+            // 'tipopieza_id' => 'integer',
+            // 'cantidad' => 'integer',
+            // 'preciounit' => 'decimal:2',
+            // 'importe' => 'decimal:2'            
+
+            $detalle->save();
+
+            $cont=$cont+1;
+        }
+
+
+
+
+        //dd($request->all());
+
+        /** @var Recibo $recibo */
+        //$recibo = Recibo::create($input);
+
+        Flash::success('Recibo saved successfully.');
+
+        return redirect(route('recibos.index'));
+    }
+
+
 
 
     /**
@@ -113,42 +196,6 @@ class ReciboController extends AppBaseController
 
         return redirect(route('recibos.index'));
     }
-
-    /**
-     * Guardar recibo
-     *
-     * @param CreateReciboRequest $request
-     *
-     * @return Response
-     */
-    public function guardar(Request $request)
-    {
-        $input = $request->all();
-
-        $mytime= Carbon::now('America/Argentina/Mendoza');
-        $mytime= $mytime->toDateString();
-        //dd($mytime);
-  
-        $recibo = new Recibo();
-        
-        $recibo->formulario =   $request->formulario; 
-        $recibo->fecha = $mytime ;
-        $recibo->artesano_id = 2 ;
-        $recibo->total = 0 ;
-        $recibo->cheque_id = 1 ;
-        $recibo->rendido = 0 ;
-        $recibo->save();
-
-        //dd($request->all());
-
-        /** @var Recibo $recibo */
-        //$recibo = Recibo::create($input);
-
-        Flash::success('Recibo saved successfully.');
-
-        return redirect(route('recibos.index'));
-    }
-
     
 
     /**

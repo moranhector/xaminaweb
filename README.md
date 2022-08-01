@@ -213,5 +213,54 @@ C:\xampp\htdocs\xaminaweb\app\Http\Controllers\ArtesanoController.php
     }
 _______________________________________________________________________________________________
 
+https://vscode.dev/github/moranhector/xaminaweb/blob/a0b69fb311cea1ff0817048a28b9558338ff6519/README.md#L197
+
 
 --- PROXIMOS PASOS ---
+
+1/8/2022 LUnes 
+Terminar Alta de Recibos
+
+18:53 Ya puedo grabar Lineas de recibos pero aún falta terminar detalles
+Los problemas principales los tuve en que no sabía como enviar datos Array desde HTML hacia PHP
+Aprendí que en el form los datos tipo array deben venir con CORCHETES
+
+    <div class="col-md-2">
+            <label class="form-control-label" for="precio_venta">Precio</label>
+            
+            <input type="text"  id="precio_venta" name="precio_venta[]" class="form-control" placeholder="Precio de compra" >
+    </div>
+
+
+
+    <div class="col-md-2">
+            <label class="form-control-label" for="cantidad">Cantidad</label>
+            
+            <input type="text"   id="cantidad" name="cantidad[]" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}">
+    </div>
+
+Me queda la duda de porqué en el programa u2 no lo tenía de esa manera. 
+-----
+Otra cosa muy importante, a los modelos hay que pasarle muy bien los campos enumerados en FILLABLE
+de lo contrario hace errores inesperados al armar los insert que llevan a diagnósticos desviados. 
+--- Otro tema resuelto hoy fue Poblar campos al seleccionar el Select Option
+
+Con jquery queda ................
+        // ACA CAMBIO EL VALOR DEL PRECIOS SEGUN EL SELECT
+        $('#id_producto').on('change', function() {
+           
+   
+            var articulos_data = $("#id_producto").val();
+
+            articulos_data = articulos_data.split('_');
+            //console.log('en el select',articulos_data);       
+            $("#precio_venta").val( articulos_data[1]  );         <--- Esta es la clave ... no hay signo igual, es función.
+        
+       
+        });
+
+--- PARA MAÑANA
+
+Terminarl el alta de Recibos y sus renglones.
+
+

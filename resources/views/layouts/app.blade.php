@@ -192,49 +192,38 @@
             //id_producto= datosProducto[0];
             //producto= $("#id_producto option:selected").text();
 
+            cantidad= $("#cantidad").val();
+            //precio_venta= $("#precio_venta").val();            
 
-            let _id_producto = $("#id_producto").val();
-            console.log('_id_producto',_id_producto);         
-            
-            let _descrip     = $("#id_producto").val();
-            
-            _descrip = _descrip.substring(11,40);
-            console.log('_descrip',_descrip);         
+            articulos_data = $("#id_producto").val();
+            articulos_data = articulos_data.split('_') ;
+            producto_id = articulos_data[0] ;
 
+            // _id_tipo_pieza = articulos_data[0];
 
-            let _cantidad= $("#cantidad").val();
-            console.log('_cantidad',_cantidad);
-
-
-            let _precio= $("#precio").val();
-            console.log('_precio',_precio);            
-
-
-            
-            
-            //stock= $("#stock").val();
-            //impuesto=20;
-             
-             //if(id_producto !="" && cantidad!="" && cantidad>0  && descuento!="" && precio_venta!=""){
+            descrip = articulos_data[2] ;
+            precio_venta= articulos_data[1];            
+            //console.log('_descrip',_descrip);         
+ 
    
-             if(_cantidad!="" && _cantidad>0 ){            
+             if(cantidad!="" && cantidad>0 ){            
    
    
-                       subtotal[cont]=( _cantidad * _precio);
-                       _subtotal = subtotal[cont] ;
+                       subtotal[cont]=( cantidad * precio_venta);
+                       //_subtotal = subtotal[cont] ;
                        total= total+subtotal[cont];
    
                        var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text" name="_descrip"  value="'+_descrip     +'"></td>',
-                               '<td><input type="text" name="_precio"   value="'+_precio      +'"></td>',
-                               '<td><input type="text" name="_cantidad" value="'+_cantidad    +'"></td>',
-                               '<td><input type="text" name="_subtotal" value="'+_subtotal    +'"></td></tr>');
+                               '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'"  ></td>',
+                               '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   ></td>',
+                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  ></td>',
+                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   ></td>',
+                               '<td><input type="text"   name="_subtotal"           ></td></tr>');
    
-                       limpiar();
-                       totales();
-                       /*$("#total").html("USD$ " + total.toFixed(2));
-                       $("#total_venta").val(total.toFixed(2));*/   
+                       //limpiar();
+                       //totales();
+                        
                        evaluar();
    
    
@@ -248,9 +237,9 @@
          
         function limpiar(){
            
-           $("#id_producto").val("");
+           $("#producto_id").val("");
            $("#cantidad").val("");
-           $("#precio").val("");
+           $("#precio_venta").val("");
    
         }
    
@@ -290,7 +279,23 @@
            $("#fila" + index).remove();
            evaluar();
         }
+
+        // ACA CAMBIO EL VALOR DEL PRECIOS SEGUN EL SELECT
+        $('#id_producto').on('change', function() {
+           
    
+            var articulos_data = $("#id_producto").val();
+
+            articulos_data = articulos_data.split('_');
+            //console.log('en el select',articulos_data);       
+            $("#precio_venta").val( articulos_data[1]  );        
+        
+       
+        });
+
+
+        
+        
     </script>
     
     

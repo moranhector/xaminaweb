@@ -6,6 +6,11 @@ function abre_buscador() {
    nwin.opener = document.windows;
 }
 
+
+
+
+
+
 </script>
 
 
@@ -16,7 +21,7 @@ function abre_buscador() {
 
 <div class="row">
         <!-- CELDA documento  -->
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="{{ $errors->has('documento') ? 'has-error' : '' }}">
                 <label class="form-control-label" for="documento">Documento</label>                 
                 <div>
@@ -33,7 +38,7 @@ function abre_buscador() {
         <!-- FIN CELDA dni  -->
 
 
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="{{ $errors->has('nombre') ? 'has-error' : '' }}">
                 <label class="form-control-label" for="tipo">Nombre del Artesano</label>         
                 <div>
@@ -49,60 +54,37 @@ function abre_buscador() {
 </div>
 
 
-
-
-
-
-
 <div class="form-group row">
 
-<!-- <div class="col-md-4" >
 
-        <div class="{ { $errors->has('tipo') ? 'has-error' : '' } }">
-            <label class="form-control-label" for="tipo">Tipo</label>            
-            <div>
-
-            <input class="form-control" name="tipo" type="text" id="tipo" value="{ { $tipofactura } }" readonly >
-
-                
-                { ! ! $errors->first('tipo', '<p class="help-block">:message</p>') ! ! }
+    <div class="col-md-2">        
+            
+            <div class="{{ $errors->has('nrocomp') ? 'has-error' : '' }}">
+                <label class="form-control-label" for="nrocomp">Número Recibo</label>  
+                <div>
+                    <input class="form-control" name="formulario" type="number" id="formulario" value="{{ $nuevo_formulario }}">
+                    {!! $errors->first('nrocomp', '<p class="help-block">:message</p>') !!}
+                </div>
             </div>
-        </div>
 
-</div> -->
+    </div>
 
-<!-- <div class="col-md-4">
-
-        <div class="{ { $errors->has('ptovta') ? 'has-error' : '' } }">
-            <label class="form-control-label" for="ptovta">Punto de Venta</label>                        
-
-            <div>
-                <select class="form-control" id="ptovta" name="ptovta">
-                        <option value="" style="display: none;" { { old('ptovta', optional($factura)->ptovta ?: '') == '' ? 'selected' : '' } } disabled selected>Seleccione</option>
-                    @foreach (['0001' => '0001',         '0002' => '0002',         '0003' => '0003',         '0004' => '0004'] as $key => $text)
-                        <option value="{ { $key } }" { { old('ptovta', optional($factura)->ptovta) == $key ? 'selected' : '' } }>
-                            { { $text } }
-                        </option>
-                    @endforeach
-                </select>
-                
-                 { ! $errors->first('ptovta', '<p class="help-block">:message</p>') ! !}
-            </div>
-        </div>
-
-</div> -->
-<div class="col-md-4">        
+    <div class="col-md-2">        
         
-        <div class="{{ $errors->has('nrocomp') ? 'has-error' : '' }}">
-            <label class="form-control-label" for="nrocomp">Número Recibo</label>  
+        <div class="{{ $errors->has('fecha') ? 'has-error' : '' }}">
+            <label class="form-control-label" for="fecha">Fecha</label>  
             <div>
-                <input class="form-control" name="formulario" type="text" id="formulario" value="{{ $nuevo_formulario }}" minlength="1" maxlength="8">
-                {!! $errors->first('nrocomp', '<p class="help-block">:message</p>') !!}
+                <input class="form-control" name="fecha" type="date" id="fecha" value="{{ $fecha }}" >
+                {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
 
+    </div>
+    
+
+
 </div>
-</div>
+
 
 
 
@@ -112,43 +94,43 @@ function abre_buscador() {
 
 
 
-<div class="col-md-4">
-        <label class="form-control-label" for="articulo">Tipo de Pieza</label>
+    <div class="col-md-3">
+            <label class="form-control-label" for="articulo">Tipo de Pieza</label>
 
-      
-        <!--<input type="number" id="articulo" name="articulo" class="form-control" > -->
-
-        <select class="form-control selectpicker" name="id_producto" id="id_producto" data-live-search="true" >
-                                                            
-            <option value="0" selected>Seleccione tipo de pieza</option>
-                                                            
-            @foreach($articulos as $artic)
-                                                            
-                <option value="{{$artic->id}}_{{$artic->precio}}_{{$artic->articulo}}">{{$artic->articulo}}</option>
-                                                                    
-            @endforeach
-                                
-        </select>
-
-
-
-
-</div>
-
-
-<div class="col-md-2">
-        <label class="form-control-label" for="precio_venta">Precio</label>
         
-        <input type="text"  id="precio" name="precio_venta" class="form-control" placeholder="Precio de compra" >
-</div>
+            <!--<input type="number" id="articulo" name="articulo" class="form-control" > -->
+
+            <select class="form-control selectpicker" name="id_producto[]" id="id_producto" data-live-search="true" >
+                                                                
+                <option value="0" selected>Seleccione tipo de pieza</option>
+                                                                
+                @foreach($articulos as $artic)
+                                                                
+                    <option value="{{$artic->id}}_{{$artic->precio}}_{{$artic->articulo}}">{{$artic->articulo}}</option>
+                                                                        
+                @endforeach
+                                    
+            </select>
 
 
 
-<div class="col-md-2">
-        <label class="form-control-label" for="cantidad">Cantidad</label>
-        
-        <input type="text"   id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}">
-</div>
+
+    </div>
+
+
+    <div class="col-md-2">
+            <label class="form-control-label" for="precio_venta">Precio</label>
+            
+            <input type="text"  id="precio_venta" name="precio_venta[]" class="form-control" placeholder="Precio de compra" >
+    </div>
+
+
+
+    <div class="col-md-2">
+            <label class="form-control-label" for="cantidad">Cantidad</label>
+            
+            <input type="text"   id="cantidad" name="cantidad[]" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}">
+    </div>
 
 
 </div>
@@ -167,13 +149,14 @@ function abre_buscador() {
 
 <div class="form-group row border">
 
-<h3>Detalle de Recibo</h3>
 
-<div class="table-responsive col-md-12">
+
+<div class="table-responsive col-md-8">
   <table id="detalles" class="table table-bordered table-striped table-sm">
   <thead>
       <tr class="bg-success">
           <th>Acción</th>
+          <th>Id</th>
           <th>Tipo Pieza</th>
           <th>Precio $</th>
           <th>Cantidad</th>

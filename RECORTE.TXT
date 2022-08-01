@@ -55,3 +55,16 @@ php artisan infyom:scaffold Rubro
 php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESDE ARCHIVO JSON
 
 php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
+
+
+<div class="col-md-4">        
+        
+        <div class="{{ $errors->has('fecha') ? 'has-error' : '' }}">
+            <label class="form-control-label" for="fecha">Fecha</label>  
+            <div>
+                <input class="form-control" name="fecha" type="fecha" id="fecha" value="{{ $fecha }}" >
+                {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>
+
+</div>
