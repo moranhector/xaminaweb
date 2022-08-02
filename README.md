@@ -263,4 +263,33 @@ Con jquery queda ................
 
 Terminarl el alta de Recibos y sus renglones.
 
+-------------------------------------------------------------
+
+2/8/2022 Martes
+Objetivo: Terminar Recibo con Renglones
+
+Precio: Toma el precio de la lista y no el editado.
+No subtotaliza
+Los items no deberían ser editables.
+El recibo no graba el total.
+En recibolineas debe grabar importe.
+
+
+Validar y devolver Errores
+
+En plantilla blade preparar.blade.php 
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
+El método guardar de Recibos ahora Hace Try Catch
+
 

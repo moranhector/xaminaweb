@@ -68,3 +68,12 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
         </div>
 
 </div>
+
+
+                       var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
+                       concat('<i class="fa fa-times fa-2x"></i></button></td>',
+                               '<td><input type="text"   name="producto_id"></td>',
+                               '<td><input type="text"   name="descrip"  ></td>',
+                               '<td><input type="text"   name="precio_venta"   ></td>',
+                               '<td><input type="text"   name="cantidad" value="'+cantidad+'"   ></td>',
+                               '<td><input type="text"   name="subtotal"  ></td></tr>');

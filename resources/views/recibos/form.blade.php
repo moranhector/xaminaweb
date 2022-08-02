@@ -17,7 +17,7 @@ function abre_buscador() {
 
 
 
-
+@include('flash::message') 
 
 <div class="row">
         <!-- CELDA documento  -->

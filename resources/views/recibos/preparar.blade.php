@@ -5,11 +5,25 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Registrar Recibo {{$nuevo_formulario}}</h1>
+                    <h1>Registrar Recibo</h1>
                 </div>
             </div>
         </div>
     </section>
+
+    @include('flash::message')    
+
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    
 
     <div class="content px-3">
 

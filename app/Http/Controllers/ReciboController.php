@@ -6,6 +6,7 @@ use App\Http\Requests\CreateReciboRequest;
 use App\Http\Requests\UpdateReciboRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Recibo;
+use App\Models\Artesano;
 use App\Models\RecibosLineas;
 use Illuminate\Http\Request;
 use Flash;
@@ -43,43 +44,30 @@ class ReciboController extends AppBaseController
     public function preparar()
     {
    
-            //dd('entro');    
+
              /*listar los productos en ventana modal*/
              $articulos=DB::table('tipopiezas as ar')
              ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
              ->get(); 
 
              /*listar las clientes en ventana modal*/
-             //$clientes=DB::table('clientes')->get();     
              $artesanos=DB::table('artesanos')->get();     
 
+             //PROXIMO NUMERO DE FORMULARIO
+             $ultimo_formulario = Recibo::latest()->first();
+             $valor_proximo_formulario = $ultimo_formulario->formulario + 1;
+             $proximo_formulario = zeros($valor_proximo_formulario,8);
 
-             //Factura Electrónica
-               $dni = "18083471";
-             //$MODO = 0;
-             //$afip = new wsfev1($CUIT,$MODO);
-             //$result = $afip->consultarUltimoComprobanteAutorizado(1, 1);
-
-             //$nTipoFactura = TipoFacturaAfip($tipofactura) ; //Obtengo el código numérico
-
-
-
-             //$result = $afip->consultarUltimoComprobanteAutorizado(1,$nTipoFactura);             
-             //$nueva_factura = $result +1 ;     
-             $nuevo_formulario = zeros('1',8)   ;     
-
-             //$factura = new Factura();
-             //$factura->ptovta = '0001';
-
-        $mytime= Carbon::now('America/Argentina/Mendoza');
-        $mytime= $mytime->toDateString();             
+            // Fecha por Default
+            $mytime= Carbon::now('America/Argentina/Mendoza');
+            $mytime= $mytime->toDateString();             
 
 
-        $data['articulos'] = $articulos;     
-        $data['artesanos'] = $artesanos;     
-        $data['nuevo_formulario'] = $nuevo_formulario;     
-        $data['fecha'] = $mytime;     
-        $data['dni'] = $dni;     
+            $data['articulos'] = $articulos;     
+            $data['artesanos'] = $artesanos;     
+            $data['nuevo_formulario'] = $proximo_formulario;     
+            $data['fecha'] = $mytime;     
+            $data['dni'] = '';     
         
         return view('recibos.preparar',$data );        
 
@@ -96,69 +84,93 @@ class ReciboController extends AppBaseController
      */
     public function guardar(Request $request)
     {
-        $input = $request->all();
-        //dd($input);
 
-        $mytime= Carbon::now('America/Argentina/Mendoza');
-        $mytime= $mytime->toDateString();
-        //dd($mytime);
-  
-        $recibo = new Recibo();
+        try {
+
+                $input = $request->all();
+                //dd($input);
+
+
+                $rules = [
+                     'formulario' => 'required',
+                     'fecha' => 'required',
+                     //'artesano_id' => 'required'                                      
+                ];
         
-        $recibo->formulario =   $request->formulario; 
-        $recibo->fecha = $request->fecha ;
-        $recibo->artesano_id = 2 ;
-        $recibo->total = 0 ;
-        $recibo->cheque_id = 1 ;
-        $recibo->rendido = 0 ;
-        $recibo->total = 0 ;
-        //GUARDAR USUARIO
-        $user = Auth::user();
-        $recibo->user_name = $user->name ;
-        $recibo->save();
+                
+                $data = $request->validate($rules);
 
-
-        $lineas_detalle = $request->_producto_id ;
-        $cont=0;
-
-        while($cont < count($lineas_detalle)){
-
-            $detalle = new RecibosLineas();
-            //dd($detalle);
-            /*enviamos valores a las propiedades del objeto detalle*/
-            /*al idcompra del objeto detalle le envio el id del objeto venta, que es el objeto que se ingresó en la tabla ventas de la bd*/
-            /*el id es del registro de la venta*/
-            $detalle->recibo_id     = $recibo->id;
-            $detalle->tipopieza_id  = $request->_producto_id[$cont];
-            $detalle->cantidad      = $request->_cantidad[$cont];
-            $detalle->preciounit    = $request->_precio_venta[$cont];
-            $detalle->importe       = 0;
-            //$detalle->updated_at    = null ;
-            //$detalle->created_at    = $mytime ;
-            //$detalle->total         = 0;
-
-            // 'recibo_id' => 'integer',
-            // 'tipopieza_id' => 'integer',
-            // 'cantidad' => 'integer',
-            // 'preciounit' => 'decimal:2',
-            // 'importe' => 'decimal:2'            
-
-            $detalle->save();
-
-            $cont=$cont+1;
-        }
+                //dd($data)    ;
 
 
 
+                //Fecha
+                $mytime= Carbon::now('America/Argentina/Mendoza');
+                $mytime= $mytime->toDateString();
+                //dd($mytime);
 
-        //dd($request->all());
 
-        /** @var Recibo $recibo */
-        //$recibo = Recibo::create($input);
+                //Traer datos del Artesano
+                $artesano = Artesano::where('documento', $request->documento  )->first();     
 
-        Flash::success('Recibo saved successfully.');
+                if ( !$artesano ) {
+                    // Handle error here
+                    Flash::error('Seleccione el artesano' );                    
+                    return back()->with('error', 'Seleccione el artesano');                    
+                }   
 
-        return redirect(route('recibos.index'));
+
+                
+                //datos a guardar en Recibo
+                $recibo = new Recibo();
+                $recibo->formulario =   $request->formulario; 
+                $recibo->fecha = $request->fecha ;
+                $recibo->artesano_id = $artesano->id ;
+                $recibo->total = $request->total_pagar;
+                $recibo->cheque_id = 1 ;
+                $recibo->rendido = 0 ;
+            
+                //GUARDAR USUARIO
+                $user = Auth::user();
+                $recibo->user_name = $user->name ;
+                $recibo->save();
+
+                //GUARDAR RENGLONES DEL RECIBO
+                $lineas_detalle = $request->_producto_id ; //Tomo el Id del Recibo insertado
+                $cont=0;
+
+                while($cont < count($lineas_detalle)){
+
+                    $detalle = new RecibosLineas();
+        
+                    $detalle->recibo_id     = $recibo->id;
+                    $detalle->tipopieza_id  = $request->_producto_id[$cont];
+                    $detalle->cantidad      = $request->_cantidad[$cont];
+                    $detalle->preciounit    = $request->_precio_venta[$cont];
+                    $detalle->importe       = $request->_subtotal[$cont];
+                    //$detalle->updated_at    = null ;
+                    //$detalle->created_at    = $mytime ;
+                    $detalle->save();
+                    $cont=$cont+1;
+                }
+
+
+                Flash::success('Recibo guardado: ' . $recibo->formulario );
+
+                return redirect(route('recibos.index'));
+
+
+        } catch(Exception $e){
+            
+            
+              
+
+
+                $mensaje_error= $e->getMessage(); 
+                Flash::error($mensaje_error );                    
+                return back()->withInput()
+                    ->withErrors([$mensaje_error]);
+        }                  
     }
 
 

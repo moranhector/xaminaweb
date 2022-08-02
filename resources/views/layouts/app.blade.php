@@ -202,7 +202,9 @@
             // _id_tipo_pieza = articulos_data[0];
 
             descrip = articulos_data[2] ;
-            precio_venta= articulos_data[1];            
+            //precio_venta= articulos_data[1];            
+            precio_venta= $("#precio_venta").val();
+            
             //console.log('_descrip',_descrip);         
  
    
@@ -215,14 +217,14 @@
    
                        var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'"  ></td>',
-                               '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   ></td>',
-                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  ></td>',
-                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   ></td>',
-                               '<td><input type="text"   name="_subtotal"           ></td></tr>');
+                               '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'" readonly ></td>',
+                               '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
+                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly ></td>',
+                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly ></td>',
+                               '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly   ></td></tr>');
    
-                       //limpiar();
-                       //totales();
+                       limpiar();
+                       totales();
                         
                        evaluar();
    
@@ -237,7 +239,7 @@
          
         function limpiar(){
            
-           $("#producto_id").val("");
+           $("#id_producto").val("");
            $("#cantidad").val("");
            $("#precio_venta").val("");
    
