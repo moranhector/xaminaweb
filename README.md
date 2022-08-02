@@ -1,8 +1,6 @@
 ## xaminaweb
 
 
-# xaminaweb
-# xaminaweb
 
 
 26/ de Julio / Agregué entidad Rubro
@@ -274,8 +272,8 @@ Los items no deberían ser editables.
 El recibo no graba el total.
 En recibolineas debe grabar importe.
 
+# Validar y devolver Errores
 
-Validar y devolver Errores
 
 En plantilla blade preparar.blade.php 
 
@@ -289,7 +287,20 @@ En plantilla blade preparar.blade.php
     </div>
     @endif
 
+También inserté un flash de messages en form.blade.php
+Habría que ver si se hace falta o eliminarlo.
 
+# ULTIMO REGISTRO CON ELOQUENT
+-- En método preparar armo el FORMULARIO por Default
+             //PROXIMO NUMERO DE FORMULARIO
+             $ultimo_formulario = Recibo::latest()->first();              //// Método Eloquent muy útil
+             $valor_proximo_formulario = $ultimo_formulario->formulario + 1;
+             $proximo_formulario = zeros($valor_proximo_formulario,8);
+
+
+
+# TRY CATCH
 El método guardar de Recibos ahora Hace Try Catch
 
 
+--- Lo que sigue - Entidad Deposito  e Inventario
