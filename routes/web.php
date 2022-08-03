@@ -54,3 +54,10 @@ Route::resource('recibosLineas', App\Http\Controllers\RecibosLineasController::c
 
 /* Incorporo una función de búsqueda para seleccionar artesanos */
 Route::get('/seleccionarartesanos', 'App\Http\Controllers\ArtesanoController@seleccionar')->name('seleccionar_artesanos');
+
+
+
+Route::resource('depositos', App\Http\Controllers\DepositoController::class);
+
+
+Route::resource('inventarios', App\Http\Controllers\InventarioController::class);

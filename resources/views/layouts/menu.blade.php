@@ -59,3 +59,19 @@
         <p>Registrar Recibo</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('depositos.index') }}"
+       class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
+        <p>Depositos</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('inventarios.index') }}"
+       class="nav-link {{ Request::is('inventarios*') ? 'active' : '' }}">
+        <p>Inventarios</p>
+    </a>
+</li>
+
+
