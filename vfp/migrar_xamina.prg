@@ -1,6 +1,6 @@
 *MIGRAR XAMINA
 
-
+ 
 CLOSE ALL
 SET STEP ON 
 DO proyecto 

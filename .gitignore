@@ -13,5 +13,9 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-
+/vfp/*.bak
+/vfp/*.fxp
+/vfp/*.tmp
+/vfp/log_sql.txt
+/vfp/*.err   
 
