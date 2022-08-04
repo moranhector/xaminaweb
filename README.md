@@ -314,7 +314,15 @@ Carpeta VFP
 Ejecutar
 DO c:\xampp\htdocs\xaminaweb\vfp\migrar_xamina.prg
 
+ARTESANOS
+migrar_artesanos.prg
 
-# Entidad Artesanos
 ![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/2022-08-03.png?raw=true "Title")
+
+# MIGRACIONES de tipo de piezas
+
+migrar_tipopiezas.prg
+
+
+
 
