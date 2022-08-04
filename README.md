@@ -304,3 +304,12 @@ El método guardar de Recibos ahora Hace Try Catch
 
 
 --- Lo que sigue - Entidad Deposito  e Inventario
+
+4/8/2022 Miércoles
+# ENTIDAD DEPOSITO E INVENTARIO
+
+# MIGRACIONES DESDE XAMINA FOX
+
+Carpeta VFP
+Ejecutar
+DO c:\xampp\htdocs\xaminaweb\vfp\migrar_xamina.prg
