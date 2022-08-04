@@ -56,7 +56,7 @@ oConexion.ejecutar(cCadena, 'buffer')
 	skip
 endd 
 
-MESSAGEBOX('TERMINADO')
+MESSAGEBOX('TERMINADO ')
 CLOSE ALL
 
 

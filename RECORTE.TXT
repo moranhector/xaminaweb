@@ -77,3 +77,10 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
                                '<td><input type="text"   name="precio_venta"   ></td>',
                                '<td><input type="text"   name="cantidad" value="'+cantidad+'"   ></td>',
                                '<td><input type="text"   name="subtotal"  ></td></tr>');
+
+
+/vfp/*.bak
+/vfp/*.fxp
+/vfp/*.tmp
+/vfp/log_sql.txt
+/vfp/*.err                               

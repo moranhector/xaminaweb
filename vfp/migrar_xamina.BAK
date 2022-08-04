@@ -41,8 +41,8 @@ cCadena = [INSERT INTO xaminaweb.artesanos ]+;
            ['&Cdireccion', ]+;
            ['&Clugar', ]+;   
            ['&Cdepartamento', ]+;  
-           [ '&cnacimiento_at, ]+;   
-           [ '&csexo, ]+;                                   
+           [ '&cnacimiento_at', ]+;   
+           [ '&csexo', ]+;                                   
            [ CURRENT_DATE , ]+;
 		   [ NULL, ]+;
            [ NULL ) ]  
