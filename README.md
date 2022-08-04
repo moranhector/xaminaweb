@@ -313,3 +313,7 @@ El método guardar de Recibos ahora Hace Try Catch
 Carpeta VFP
 Ejecutar
 DO c:\xampp\htdocs\xaminaweb\vfp\migrar_xamina.prg
+
+
+# Entidad Artesanos
+![Alt text](out_of_project/2022-08-03.png?raw=true "Title")
