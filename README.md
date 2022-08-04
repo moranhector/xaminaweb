@@ -322,7 +322,7 @@ migrar_artesanos.prg
 # MIGRACIONES de tipo de piezas
 
 migrar_tipopiezas.prg
-
+![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/tipopiezas.png?raw=true "Title")
 
 
 
