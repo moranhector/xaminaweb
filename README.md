@@ -366,3 +366,53 @@ Linea 57
                         </p>
                     </li>
 
+# FILTROS DE BUSQUEDA
+
+Hice el prototipo de búsqueda con INVENTARIO
+
+C:\xampp\htdocs\xaminaweb\resources\views\inventarios\index.blade.php
+
+Caja de búsqueda
+
+
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Inventarios</h1>
+                    <div class="col-sm">
+                        <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline" method {{route('inventarios.index')}} >
+                            <input name='namepieza' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                        </form>
+                    </nav>                     
+                </div>
+            </div>
+
+
+En el controlador de Inventario
+
+C:\xampp\htdocs\xaminaweb\app\Http\Controllers\InventarioController.php
+
+
+    public function index(Request $request)
+    {
+
+        $namepieza  = $request->get('namepieza');
+
+        if($namepieza)
+        {        
+            $inventarios = DB::table('inventarios')
+            ->where('namepieza','like','%'.$namepieza.'%' )  
+            ->get();          
+        } 
+        else
+        {
+            $inventarios = Inventario::all();
+        }
+
+
+        return view('inventarios.index')
+            ->with('inventarios', $inventarios);
+    }
+
+![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/buscador_inventarios.jpg?raw=true "Title")

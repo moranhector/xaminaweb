@@ -9,6 +9,7 @@ use App\Models\Inventario;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class InventarioController extends AppBaseController
 {
@@ -21,8 +22,20 @@ class InventarioController extends AppBaseController
      */
     public function index(Request $request)
     {
-        /** @var Inventario $inventarios */
-        $inventarios = Inventario::all();
+
+        $namepieza  = $request->get('namepieza');
+
+        if($namepieza)
+        {        
+            $inventarios = DB::table('inventarios')
+            ->where('namepieza','like','%'.$namepieza.'%' )  
+            ->get();          
+        } 
+        else
+        {
+            $inventarios = Inventario::all();
+        }
+
 
         return view('inventarios.index')
             ->with('inventarios', $inventarios);
