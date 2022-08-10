@@ -326,3 +326,43 @@ migrar_tipopiezas.prg
 
 
 
+10/8/2022 
+Título Laravel -> XaminaWeb
+Logo ? Gobierno de Mendoza
+
+Logout section Logo
+
+Filtros de búsqueda ?
+
+Traducción secciones inglés. 
+
+LOGO OFICIAL
+Assets
+C:\xampp\htdocs\xaminaweb\public\images
+
+
+Archivo: 
+C:\xampp\htdocs\xaminaweb\resources\views\layouts\sidebar.blade.php
+Linea 4
+
+C:\xampp\htdocs\xaminaweb\resources\views\layouts\app.blade.php
+
+Linea 57
+
+                 <!-- SECCION DE LOGO -->
+                    <img src="images/usuario.jpg" class="user-image img-circle elevation-2" alt="User Image">
+                     
+                    <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <!-- IMAGEN DEL USUARIO -->
+                    <li class="user-header bg-primary">
+                        <img src="images/usuario.jpg"
+                             class="img-circle elevation-2"
+                             alt="User Image">
+                        <p>
+                            {{ Auth::user()->name }}
+                            <small>@lang('auth.app.member_since') {{ Auth::user()->created_at->format('M. Y') }}</small>
+                        </p>
+                    </li>
+
