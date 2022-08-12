@@ -416,3 +416,72 @@ C:\xampp\htdocs\xaminaweb\app\Http\Controllers\InventarioController.php
     }
 
 ![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/buscador_inventarios.jpg?raw=true "Title")
+
+
+Próximo Paso: Migrar inventario ( Piezas )
+
+Implementar Filtros en otras entidades
+
+Factura de Ventan
+
+11/8/2022 Jueves
+
+
+# Migración de Inventarios desde Xamina 
+
+Carpeta VFP
+Ejecutar
+migrar_inventario.prg
+
+# Paginado de Index de Inventarios 
+
+Uso de la función Paginate  
+
+
+    public function index(Request $request)
+    {
+
+        $namepieza  = $request->get('namepieza');
+
+        if($namepieza)
+        {        
+            $inventarios = DB::table('inventarios')
+            ->where('namepieza','like','%'.$namepieza.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['inventarios'] = $inventarios;     
+            $data['namepieza'] = $namepieza;     
+
+            return view('inventarios.index',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
+        } 
+        else
+        {
+            //$inventarios = Inventario::all()->paginate(25);
+            $inventarios = DB::table('inventarios')->paginate(25);
+        }
+        return view('inventarios.index')
+            ->with('inventarios', $inventarios);
+    }
+
+En Blade usar Links $inventarios->links()
+C:\xampp\htdocs\xaminaweb\resources\views\inventarios\index.blade.php
+
+
+
+
+    <div class="content px-3">
+        @include('flash::message')
+        <div class="clearfix"></div>
+        <div class="card">
+            <div class="card-body p-0">
+                @include('inventarios.table')
+                <div class="card-footer clearfix">
+                    <div class="float-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+         {{ $inventarios->links() }} 
+    </div>
+
+

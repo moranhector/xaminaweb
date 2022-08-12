@@ -10,7 +10,7 @@
                     <div class="col-sm">
                         <nav class="navbar navbar-light bg-light">
                         <form class="form-inline" method {{route('inventarios.index')}} >
-                            <input name='namepieza' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" aria-label="Search">
+                            <input name='namepieza' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" value="{{ old('namepieza') }}" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                         </form>
                     </nav>                     
@@ -48,6 +48,10 @@
             </div>
 
         </div>
+
+         {{ $inventarios->links() }} 
+
+
     </div>
 
 @endsection

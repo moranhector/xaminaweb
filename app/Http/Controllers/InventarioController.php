@@ -28,15 +28,19 @@ class InventarioController extends AppBaseController
         if($namepieza)
         {        
             $inventarios = DB::table('inventarios')
-            ->where('namepieza','like','%'.$namepieza.'%' )  
-            ->get();          
+            ->where('namepieza','like','%'.$namepieza.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['inventarios'] = $inventarios;     
+            $data['namepieza'] = $namepieza;     
+
+            return view('inventarios.index',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
         } 
         else
         {
-            $inventarios = Inventario::all();
+            //$inventarios = Inventario::all()->paginate(25);
+            $inventarios = DB::table('inventarios')->paginate(25);
         }
-
-
         return view('inventarios.index')
             ->with('inventarios', $inventarios);
     }
