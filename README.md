@@ -485,3 +485,55 @@ C:\xampp\htdocs\xaminaweb\resources\views\inventarios\index.blade.php
     </div>
 
 
+# Datatables - Plugin para grillas con buscador, filtro y paginador
+
+21/8/2022 
+
+En Artesanos
+
+En index de Artesanos incorporar secciones de CSS y JS
+
+C:\xampp\htdocs\xaminaweb\resources\views\artesanos\index.blade.php
+
+
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" >
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" >
+@endsection
+
+
+@section('js')
+
+
+@endsection
+
+
+Esta última sección no me tomaba los javascript y los tuve que mover a el Layout App
+
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+
+
+        $(document).ready(function () {
+            console.log('entra1');            
+            $('#artesanos-table').DataTable();
+            console.log('entra');
+         });   
+
+
+En el controlador de Artesanos no tuve que tocar nada.
+
+En la vista de artesanos de la tabla
+C:\xampp\htdocs\xaminaweb\resources\views\artesanos\table.blade.php
+
+Tuve que poner id a la tabla 
+
+    <table class="table" id="artesanos-table">
+
+Y comenté todos los botones y action
+
+
+
+
+![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/datatables.jpg?raw=true "Title")
+
