@@ -535,5 +535,4 @@ Y comenté todos los botones y action
 
 
 
-![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/datatables.jpg?raw=true "Title")
-
+![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/datatablesartesanos.png?raw=true "Title")
