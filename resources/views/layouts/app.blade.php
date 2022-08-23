@@ -100,8 +100,8 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 3.1.0
         </div>
-        <strong>2022 <a href="https://www.mendoza.gov.ar/desarrollosocial/">Desarrollo Social - Gobierno de Mendoza</a>.</strong>
-        
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+        reserved.
     </footer>
 </div>
 
@@ -158,70 +158,7 @@
 </body>
 
 
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
-
-
-
-
-
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-
-
-
 <script>
-
-
-
-   
-        $(document).ready(function () {
-            
-            $('#artesanos-table').DataTable(
-                {
-                    "language": {
-                        "lengthMenu": "Mostrar _MENU_ Registros por página",
-                        "zeroRecords": "No hay registros con la condición pedida",
-                        "info": "Mostrando  página _PAGE_ de _PAGES_",
-                        "infoEmpty": "Sin registros para mostrar",
-                        "infoFiltered": "(filtrados de _MAX_ total registros)",
-                        "search": "Buscar:",
-                        "paginate": {
-                            "first":      "Primera",
-                            "last":       "Ultima",
-                            "next":       "Siguiente",
-                            "previous":   "Anterior"
-                        },
-                     
-                    },
-                    columnDefs: [
-                        {
-                            targets: 2,
-                            data: null,
-                            defaultContent: '<button>Editar</button>',
-                        },    
-                    ],                    
-
-                }
-            );
-
-
-            $('#artesanos-table').on('click', 'button', function () {
-                                alert("algo");
-            });
-
-            
-         });    
-    
-     
-
      
      $(document).ready(function(){
         

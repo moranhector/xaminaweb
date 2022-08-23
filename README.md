@@ -560,3 +560,12 @@ https://datatables.net/examples/basic_init/language.html
 
 
 Próximo paso ... Ver los botones en Datatable
+
+23/8/2022
+
+Deshice los cambios de los datatables.
+Prefiero mantener la simplicidad del mantenimiento del sistema.
+Las ventajas de datatable son: Búsqueda por Ajax, y por múltiples columnas. 
+La primera característica no es crítica. 
+La segunda, si hace falta, se puede programar en la búsquda tradicional. 
+Me quedo con la duda de implementar datatable en el buscador de artesanos anexo a Recibos. 
