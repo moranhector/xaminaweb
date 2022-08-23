@@ -530,9 +530,33 @@ Tuve que poner id a la tabla
 
     <table class="table" id="artesanos-table">
 
+También encuadré todo dentro de un CARD
+
+<div class="card">
+    <div class="card-body">
+
+
+
 Y comenté todos los botones y action
 
 
 
 
 ![Alt text](https://github.com/moranhector/xaminaweb/blob/main/_out_of_project/datatablesartesanos.png?raw=true "Title")
+
+
+No me toma el responsive.
+
+
+            $('#artesanos-table').DataTable(
+            //   responsive : true  
+            );
+
+
+Traducción de datatables.
+
+https://datatables.net/examples/basic_init/language.html
+
+
+
+Próximo paso ... Ver los botones en Datatable
