@@ -80,6 +80,35 @@ function abre_buscador() {
         </div>
 
     </div>
+
+
+
+    <div class="col-md-3">
+            <label class="form-control-label" for="articulo">Cheque</label>
+
+        
+ 
+
+            <select class="form-control selectpicker" name="id_cheque" id="id_cheque" data-live-search="true" >
+                                                                
+                <option value="0" selected>Seleccione cheque</option>
+                                                                
+                @foreach($cheques as $cheque)
+                                                                
+                    <option value="{{ $cheque->id }}">{{$cheque->chequedescrip}}</option>
+                                                                        
+                @endforeach
+                                    
+            </select>
+
+
+
+
+    </div>
+
+
+
+
     
 
 

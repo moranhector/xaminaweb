@@ -569,3 +569,48 @@ Las ventajas de datatable son: Búsqueda por Ajax, y por múltiples columnas.
 La primera característica no es crítica. 
 La segunda, si hace falta, se puede programar en la búsquda tradicional. 
 Me quedo con la duda de implementar datatable en el buscador de artesanos anexo a Recibos. 
+
+
+29/8/2022 
+
+Seleccionar Cheque en el Recibo
+
+
+
+
+Generar Entidad Talonario
+
+php artisan infyom:scaffold Artesano SIN ARCHIVO JSON
+
+php artisan infyom:rollback Artesano scaffold  PARA DESHACER ULTIMA GENERACION
+
+php artisan infyom:scaffold Artesano --fieldsFile Artesano.json PARA GENERAR DESDE ARCHIVO JSON
+
+
+Problemas para separar 
+   public function Actualizar($tipo, $UltimoDoc)
+
+   Quedó acoplado en ReciboController: refactorizar.
+
+
+
+
+30/8/2022 -
+
+Avances con funciones DescontarSaldo en Cheques y ActualizarTalonarios
+
+Lecciones del día
+
+-los nombre de los campos son Case Sensitive OJO !
+
+-Tinker no recarga automáticamente el código modificado, hay que salir y volver a entrar.
+
+-Las funciones a ser llamadas desde otra clase deben ser ubicadas en el Modelo y no en el controller.
+
+
+Próximo Paso: Rendición de Cheque e ingreso de Piezas en Inventario. 
+
+
+
+
+

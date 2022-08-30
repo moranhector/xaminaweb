@@ -67,5 +67,27 @@ class Cheque extends Model
         'saldo' => 'required'
     ];
 
-    
+
+
+    // $ultimo_formulario = Talonario::proximodocumento('REC');
+
+    public function DescontarSaldo($idCheque,$MontoDescontar)
+    {
+        //$cheque = Cheque::find($idCheque);
+        $cheque = Cheque::where('id', $idCheque)->first();
+
+        //dd($cheque->saldo);
+        
+        $nSaldoNuevo = ($cheque->saldo )  - $MontoDescontar;
+        
+        $cheque->saldo = $nSaldoNuevo ;
+
+        $cheque->save() ;
+        
+        return;
+
+    }    
+
+
+
 }

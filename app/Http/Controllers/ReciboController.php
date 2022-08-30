@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateReciboRequest;
 use App\Http\Requests\UpdateReciboRequest;
 use App\Http\Controllers\AppBaseController;
+
 use App\Models\Recibo;
 use App\Models\Artesano;
+use App\Models\Talonario;
+use App\Models\Cheque;
 use App\Models\RecibosLineas;
 use Illuminate\Http\Request;
 use Flash;
@@ -50,20 +53,37 @@ class ReciboController extends AppBaseController
              ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
              ->get(); 
 
+             /*listar los cheques en ventana modal*/
+             $cheques=DB::table('cheques')
+             ->select(DB::raw('CONCAT(numero," ",fecha, saldo) AS chequedescrip'),'id')
+             ->get();              
+
+
+
              /*listar las clientes en ventana modal*/
              $artesanos=DB::table('artesanos')->get();     
 
              //PROXIMO NUMERO DE FORMULARIO
-             $ultimo_formulario = Recibo::latest()->first();
-             $valor_proximo_formulario = $ultimo_formulario->formulario + 1;
-             $proximo_formulario = zeros($valor_proximo_formulario,8);
+             //$ultimo_formulario = Recibo::latest()->first();
+
+             $talonario = new Talonario;
+             $proximo_recibo = $talonario->proximodocumento('REC');
+
+             //dd($ultimo_formulario);
+
+              
+             $proximo_formulario = zeros($proximo_recibo,8);
 
             // Fecha por Default
             $mytime= Carbon::now('America/Argentina/Mendoza');
             $mytime= $mytime->toDateString();             
 
 
+
+
+
             $data['articulos'] = $articulos;     
+            $data['cheques'] = $cheques;     
             $data['artesanos'] = $artesanos;     
             $data['nuevo_formulario'] = $proximo_formulario;     
             $data['fecha'] = $mytime;     
@@ -127,8 +147,13 @@ class ReciboController extends AppBaseController
                 $recibo->fecha = $request->fecha ;
                 $recibo->artesano_id = $artesano->id ;
                 $recibo->total = $request->total_pagar;
-                $recibo->cheque_id = 1 ;
+                //$recibo->cheque_id = 1 ;
                 $recibo->rendido = 0 ;
+
+
+                $recibo->cheque_id = $request->id_cheque ;
+
+
             
                 //GUARDAR USUARIO
                 $user = Auth::user();
@@ -155,6 +180,44 @@ class ReciboController extends AppBaseController
                 }
 
 
+                //Actualizar Talonarios
+                //cCadena = [update talonarios set proximodoc = '&cFormulario' +1 where tipo='REC' ]
+
+                //Talonario::Actualizar('REC', $recibo->formulario) ;
+
+
+                //$recibo->Actualizar('REC', $recibo->formulario) ;
+
+                //$talonario = new Talonario();
+
+
+
+
+                $talonario = new Talonario;
+                $talonario->Actualizarproximodocumento('REC', $recibo->formulario );
+   
+                //dd($ultimo_formulario);
+
+
+
+
+
+
+
+                // $tipo = 'REC';
+                // $talonario = Talonario::where('tipo', $tipo)->first();
+                // $UltimoDoc = $recibo->formulario;
+                // $nProximoDoc = strval($UltimoDoc) + 1  ;
+                // $talonario->proximodoc = $nProximoDoc;
+                // $talonario->save();
+                
+            
+                //** Grabar SAldo de cheque
+                //cCadena = [update cheques set saldo = saldo - '&cTotal' where cheque = '&cCheque' ]	
+                
+                $cheque = new Cheque;
+                $cheque->DescontarSaldo( $recibo->cheque_id , $recibo->total );
+
                 Flash::success('Recibo guardado: ' . $recibo->formulario );
 
                 return redirect(route('recibos.index'));
@@ -172,6 +235,35 @@ class ReciboController extends AppBaseController
                     ->withErrors([$mensaje_error]);
         }                  
     }
+
+
+
+    /**
+     * Actualizar Formularios
+     *
+     * @param int $id
+     * @param UpdateTalonarioRequest $request
+     *
+     * @return Response
+     */
+    public function Actualizar($tipo, $UltimoDoc)
+    {
+        /** @var Talonario $talonario */
+
+        $talonario = Talonario::where('tipo', '==', $tipo)->firstOrFail();
+
+        $nProximoDoc = strval($UltimoDoc) + 1  ;
+
+
+
+        $talonario->proximodoc = $nProximoDoc;
+        $talonario->save();
+
+        
+
+        return $nProximoDoc ;
+    }
+
 
 
 

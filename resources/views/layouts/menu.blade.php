@@ -75,3 +75,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('talonarios.index') }}"
+       class="nav-link {{ Request::is('talonarios*') ? 'active' : '' }}">
+        <p>Talonarios</p>
+    </a>
+</li>
+
+
