@@ -9,6 +9,7 @@ use App\Models\Cheque;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class ChequeController extends AppBaseController
 {
@@ -152,4 +153,98 @@ class ChequeController extends AppBaseController
 
         return redirect(route('cheques.index'));
     }
+
+
+    /**
+     * Display the specified Cheque.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function rendir($id)
+    {
+
+
+        
+        /** @var Cheque $cheque */
+        $cheque = Cheque::find($id);
+
+        if (empty($cheque)) {
+            Flash::error('Cheque not found');
+
+            return redirect(route('cheques.index'));
+        }
+
+        /*listar las piezas a rendir*/
+
+        $recibosr = DB::table('recibos_lineas as rr')
+        ->join('recibos as r', 'rr.recibo_id', '=', 'r.id')
+        ->join('tipopiezas as p', 'rr.tipopieza_id', '=', 'p.id')
+        ->join('artesanos as a', 'r.artesano_id', '=', 'a.id')
+        ->select('r.id','r.cheque_id','r.formulario', 'r.artesano_id',  'rr.tipopieza_id', 'rr.cantidad', 'rr.preciounit', 
+        'rr.importe', 'p.descrip','p.tecnica','p.precio','a.nombre' )
+        ->whereRaw('cheque_id = ?', $id) 
+        ->get();
+
+        //collect(['zero', 'two', 'three'])->insertAt(1, 'one');
+        //$recibosr->insertAt(3, 'one');
+
+        //dd($recibosr);
+
+        $reccount = $recibosr->count();
+
+        // foreach ($recibosr as &$recibos) {
+
+        //         if ( $recibos->cantidad > 1 ){
+        //             dd($recibos);
+        //         }
+            
+        // }
+
+        $renglones = collect() ;
+
+        //dd($renglones);
+
+        $nRenglon = 0;
+        foreach ($recibosr as &$recibos) {
+
+            
+            for ($i = 1; $i <= $recibos->cantidad ; $i++) {
+                
+                $registro = $recibosr->at( $nRenglon ); // 1
+
+                $renglones = $renglones->push($registro);
+
+                
+            }
+        
+            $nRenglon = $nRenglon + 1 ;
+        }        
+
+        dd($renglones);
+
+
+
+       
+
+
+        // APPEND FROM REGISTRO 
+        // $recibosr->push($registro2); Spatie Laravel Collection
+ 
+       
+
+
+ 
+
+
+
+
+        return view('cheques.show')->with('cheque', $cheque);
+    }
+
+
+
+
+
 }

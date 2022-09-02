@@ -612,5 +612,28 @@ Próximo Paso: Rendición de Cheque e ingreso de Piezas en Inventario.
 
 
 
+1/9/2022 -
+
+Sería bueno diseñar una página homepage para Xamina. Buscar alguna plantilla.
+
+En el fondo de Login cambiar el color.
+
+Colores de Xamina.??
+
+Rendiciones
+
+Las rendiciones están directamente vinculadas a los Cheques
+
+Se rendirá desde la grilla de cheques.
+
+La entidad de los renglones de rendicion se llamará rendicion
 
 
+
+Tabla Cheques
+Agrego campo rendido_at
+
+
+Voy por acá 
+Ya logré armar una colleccion de
+app\Http\Controllers\ChequeController.php

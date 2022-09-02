@@ -37,7 +37,8 @@ class Cheque extends Model
         'importe',
         'ncuenta',
         'depositado',
-        'saldo'
+        'saldo',
+        'rendido_at'
     ];
 
     /**
@@ -73,8 +74,8 @@ class Cheque extends Model
 
     public function DescontarSaldo($idCheque,$MontoDescontar)
     {
-        //$cheque = Cheque::find($idCheque);
-        $cheque = Cheque::where('id', $idCheque)->first();
+        $cheque = Cheque::find($idCheque);
+        //$cheque = Cheque::where('id', $idCheque)->first();
 
         //dd($cheque->saldo);
         
