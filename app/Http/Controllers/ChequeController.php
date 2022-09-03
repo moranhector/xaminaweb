@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
+use App\Models\Talonario;
 
 class ChequeController extends AppBaseController
 {
@@ -183,31 +185,27 @@ class ChequeController extends AppBaseController
         ->join('tipopiezas as p', 'rr.tipopieza_id', '=', 'p.id')
         ->join('artesanos as a', 'r.artesano_id', '=', 'a.id')
         ->select('r.id','r.cheque_id','r.formulario', 'r.artesano_id',  'rr.tipopieza_id', 'rr.cantidad', 'rr.preciounit', 
-        'rr.importe', 'p.descrip','p.tecnica','p.precio','a.nombre' )
+        'rr.importe', 'p.descrip','p.tecnica','p.precio','a.nombre', 'rr.tipopieza_id as inventario' )
         ->whereRaw('cheque_id = ?', $id) 
         ->get();
 
-        //collect(['zero', 'two', 'three'])->insertAt(1, 'one');
-        //$recibosr->insertAt(3, 'one');
-
-        //dd($recibosr);
+ 
 
         $reccount = $recibosr->count();
 
-        // foreach ($recibosr as &$recibos) {
-
-        //         if ( $recibos->cantidad > 1 ){
-        //             dd($recibos);
-        //         }
-            
-        // }
+ 
 
         $renglones = collect() ;
 
         //dd($renglones);
 
+        // https://www.youtube.com/watch?v=HWQv5WWojfg&list=PLBli5uT0LXytLdgsEzHqTKJCBjQAmXGkh&index=2
+        // Refactorizar 
+
+        // Multiplicar los renglones que tienen cantidad > 1
+
         $nRenglon = 0;
-        foreach ($recibosr as &$recibos) {
+        foreach ($recibosr as $recibos) {
 
             
             for ($i = 1; $i <= $recibos->cantidad ; $i++) {
@@ -222,11 +220,25 @@ class ChequeController extends AppBaseController
             $nRenglon = $nRenglon + 1 ;
         }        
 
-        dd($renglones);
+        //dd($renglones);
+
+        ///Numerar las piezas
 
 
+        $talonario = new Talonario;
+        $proximo_numero = $talonario->proximodocumento('PIEZA');       
 
+        foreach ($recibosr as &$recibos) {
+
+            $recibos->inventario = $proximo_numero++ ;
+ 
+        }  
+ 
+        //$talonario = new Talonario;
+        //$talonario->Actualizarproximodocumento('REC', $recibo->formulario );
        
+
+
 
 
         // APPEND FROM REGISTRO 
@@ -234,14 +246,57 @@ class ChequeController extends AppBaseController
  
        
 
+        $data['renglones'] = $renglones;     
 
  
 
 
+        
 
-
-        return view('cheques.show')->with('cheque', $cheque);
+        return view('cheques.rendicion',$data);
     }
+
+
+
+
+    /**
+     * Guardar recibo
+     *
+     * @param CreateReciboRequest $request
+     *
+     * @return Response
+     */
+    public function rendicion_guardar(Request $request)
+    {
+
+        try {
+
+                $input = $request->all();
+                dd($input);
+
+
+
+
+                return redirect(route('recibos.index'));
+
+
+        } catch(Exception $e){
+            
+            
+              
+
+
+                $mensaje_error= $e->getMessage(); 
+                Flash::error($mensaje_error );                    
+                return back()->withInput()
+                    ->withErrors([$mensaje_error]);
+        }                  
+    }
+
+
+
+
+
 
 
 

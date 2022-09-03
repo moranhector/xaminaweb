@@ -43,6 +43,8 @@ Route::resource('tipopiezas', App\Http\Controllers\TipopiezaController::class);
 Route::resource('cheques', App\Http\Controllers\ChequeController::class);
 Route::get('rendir_cheque/{id}','App\Http\Controllers\ChequeController@rendir')->name('cheques.rendir');   
 
+Route::post('rendicion_guardar','App\Http\Controllers\ChequeController@rendicion_guardar')->name('rendicion_guardar');   
+
 
 
 Route::resource('recibos', App\Http\Controllers\ReciboController::class);

@@ -637,3 +637,16 @@ Agrego campo rendido_at
 Voy por acá 
 Ya logré armar una colleccion de
 app\Http\Controllers\ChequeController.php
+
+
+
+Ya estoy mostrando la rendición en pantalla.
+
+Hay un problema con la numeración, porque me salen los elementos de la collection CLONADOS. El
+
+Ya estoy mandando a grabar pero falta
+
+    public function rendicion_guardar(Request $request)
+
+
+Próximo paso grabar la rendición.
