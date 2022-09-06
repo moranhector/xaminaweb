@@ -11,7 +11,15 @@ use Flash;
 use Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+use Carbon\Carbon;
+
+
 use App\Models\Talonario;
+use App\Models\Inventario;
+use App\Models\Rendicion;
 
 class ChequeController extends AppBaseController
 {
@@ -202,51 +210,42 @@ class ChequeController extends AppBaseController
         // https://www.youtube.com/watch?v=HWQv5WWojfg&list=PLBli5uT0LXytLdgsEzHqTKJCBjQAmXGkh&index=2
         // Refactorizar 
 
+        
+        
         // Multiplicar los renglones que tienen cantidad > 1
-
         $nRenglon = 0;
         foreach ($recibosr as $recibos) {
-
-            
+       
             for ($i = 1; $i <= $recibos->cantidad ; $i++) {
                 
-                $registro = $recibosr->at( $nRenglon ); // 1
-
-                $renglones = $renglones->push($registro);
-
-                
+                $registro = $recibosr[$nRenglon]; 
+                $renglones = $renglones->push(clone $registro);
             }
-        
             $nRenglon = $nRenglon + 1 ;
         }        
 
-        //dd($renglones);
+     
 
         ///Numerar las piezas
-
+        $reccount = $renglones->count();
+         
 
         $talonario = new Talonario;
         $proximo_numero = $talonario->proximodocumento('PIEZA');       
 
-        foreach ($recibosr as &$recibos) {
-
-            $recibos->inventario = $proximo_numero++ ;
+        foreach ($renglones as $renglon) {
+            
+            $renglon->inventario = $proximo_numero++ ;
  
         }  
- 
-        //$talonario = new Talonario;
-        //$talonario->Actualizarproximodocumento('REC', $recibo->formulario );
-       
 
+   
 
-
-
-        // APPEND FROM REGISTRO 
-        // $recibosr->push($registro2); Spatie Laravel Collection
  
        
 
         $data['renglones'] = $renglones;     
+        $data['cheque_id'] = $id;     
 
  
 
@@ -272,12 +271,66 @@ class ChequeController extends AppBaseController
         try {
 
                 $input = $request->all();
-                dd($input);
+                //dd($input);
+                $cheque_id = $request->cheque_id;
+                //dd($request->cheque_id);
+
+                    //GUARDAR RENGLONES DEL RECIBO
+                    $lineas_detalle = $request->inventario ; //Tomo el Id del Recibo insertado                
+                    $cont=0;
+
+                //Fecha
+                $mytime= Carbon::now('America/Argentina/Mendoza');
+                $mytime= $mytime->toDateString();
+
+  
+                while($cont < count($lineas_detalle)){
 
 
 
 
-                return redirect(route('recibos.index'));
+
+                    
+                    $inventario = new Inventario();
+                    // dd('hasta aqui 3',$inventario);
+                    $inventario->npieza       = $request->inventario[$cont];
+                    
+                    $inventario->namepieza    = $request->descrip[$cont];
+                    $inventario->codigo12     = $request->inventario[$cont];
+                    $inventario->tipopieza_id = 1;
+                    $inventario->comprob      = '1';
+                    $inventario->recibo_id      = '1';
+                    $inventario->costo      = '1';
+                    $inventario->recargo    = '1';
+                    $inventario->artesano_id    = '1';
+                    $inventario->comprado_at    = $mytime;
+                    $inventario->vendido_at     = $mytime;
+                    $inventario->precio     = 0;
+ 
+                    $inventario->save();
+
+                    $rendicion  = new Rendicion();
+                    $rendicion->cheque_id     = $cheque_id ;
+                    $rendicion->inventario_id = $inventario->id ;
+                    $rendicion->recibo_id     = 1 ;
+                    $rendicion->importe       = 1 ;
+                    $rendicion->save() ;
+
+
+                    $cont=$cont+1;
+                }
+
+                $mytime= Carbon::now('America/Argentina/Mendoza');
+                //dd($cheque_id);
+                $cheque = Cheque::find($cheque_id);
+                $cheque->rendido_at = $mytime;
+                $cheque->save();
+
+
+
+
+
+                return redirect(route('cheques.index'));
 
 
         } catch(Exception $e){

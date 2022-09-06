@@ -84,3 +84,22 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
 /vfp/*.tmp
 /vfp/log_sql.txt
 /vfp/*.err                               
+
+
+        $nRenglon = 0;
+        foreach ($recibosr as $recibos) {
+
+            
+            for ($i = 1; $i <= $recibos->cantidad ; $i++) {
+                
+                $registro = ($recibosr->at( $nRenglon ))  ; 
+      
+                Log::warning('renglones', ['renglon' => $registro ]);
+
+                $renglones = $renglones->push($registro);
+
+                
+            }
+        
+            $nRenglon = $nRenglon + 1 ;
+        }    

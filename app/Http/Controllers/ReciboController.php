@@ -108,7 +108,7 @@ class ReciboController extends AppBaseController
         try {
 
                 $input = $request->all();
-                dd($input);
+                //dd($input);
 
 
                 $rules = [

@@ -23,7 +23,8 @@
 
     <form method="POST" action="{{ route('rendicion_guardar') }}" accept-charset="UTF-8" id="rendicion_guardar" name="rendicion_guardar" class="form-horizontal">
         {{ csrf_field() }}     
-
+        
+        <input type="hidden" id="Cheque_Id" name="cheque_id" value="{{$cheque_id}}"
 
         <div class="card-body p-0">
 

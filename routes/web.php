@@ -68,3 +68,6 @@ Route::resource('inventarios', App\Http\Controllers\InventarioController::class)
 
 
 Route::resource('talonarios', App\Http\Controllers\TalonarioController::class);
+
+
+Route::resource('rendiciones', App\Http\Controllers\RendicionController::class);

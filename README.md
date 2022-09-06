@@ -649,4 +649,46 @@ Ya estoy mandando a grabar pero falta
     public function rendicion_guardar(Request $request)
 
 
+
 Próximo paso grabar la rendición.
+
+
+5/9/2022  
+
+Lunes
+
+Resuelto el tema de la Colleccion que se clonaba identicamente. 
+
+La solución es usar push(clone ...)
+
+        $nRenglon = 0;
+        foreach ($recibosr as $recibos) {
+       
+            for ($i = 1; $i <= $recibos->cantidad ; $i++) {
+                
+                $registro = $recibosr[$nRenglon]; 
+                $renglones = $renglones->push(clone $registro);
+            }
+            $nRenglon = $nRenglon + 1 ;
+        }        
+
+
+Ya estoy grabando piezas de la rendición........
+
+
+6/9/2022
+
+Rendiciones
+
+Grabar cabecera en Cheque
+Completar grabación de inventario
+Grabar renglones de Rendición
+
+Ya grabo la cabecera y los renglones.
+Hay que ver de grabar correctamente cada dato de inventario.
+Imprimir rendición. PDF
+
+
+
+
+

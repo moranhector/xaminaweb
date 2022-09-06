@@ -83,3 +83,11 @@
 </li>
 
 
+<li class="nav-item">
+    <a href="{{ route('rendiciones.index') }}"
+       class="nav-link {{ Request::is('rendiciones*') ? 'active' : '' }}">
+        <p>Rendiciones</p>
+    </a>
+</li>
+
+

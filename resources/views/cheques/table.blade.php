@@ -21,16 +21,22 @@
             <td>{{ $cheque->ncuenta }}</td>
             <td>{{ $cheque->depositado }}</td>
             <td>{{ $cheque->saldo }}</td>
-            <td>{{ $cheque->rendido_at }}</td>
+            <!-- <td>{ { $cheque->rendido_at } }</td> -->
+            <td>{{ $cheque->rendido_at ? \Carbon\Carbon::parse($cheque->rendido_at)->format('d/m/Y') : null }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['cheques.destroy', $cheque->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
 
-                    <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
-                        class="btn btn-sm btn-secondary float-right">Rendir</a>                       
+                    <!-- <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
+                        class="btn btn-sm btn-secondary float-right">Rendir</a>                        -->
 
-                        <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
-                        class="btn btn-sm btn-info float-left">Rendición</a>        
+                        @if (empty($cheque->rendido_at))
+                            <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
+                            class="btn btn-sm btn-info float-left">Rendir</a>                           
+                        @else
+                            <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
+                            class="btn btn-sm btn-info float-left">Imprim</a>   
+                        @endif
 
                         <a href="{{ route('cheques.show', [$cheque->id]) }}"
                            class='btn btn-default btn-xs'>
