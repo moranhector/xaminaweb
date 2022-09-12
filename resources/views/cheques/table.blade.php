@@ -2,12 +2,12 @@
     <table class="table" id="cheques-table">
         <thead>
         <tr>
-            <th>Numero</th>
+        <th>Cheque número</th>
         <th>Fecha</th>
-        <th>Importe</th>
-        <th>Ncuenta</th>
-        <th>Depositado</th>
-        <th>Saldo</th>
+        <th STYLE="text-align: right;" >Importe</th>
+        <th STYLE="text-align: right;" >Cuenta</th>
+        <!-- <th>Depositado</th> -->
+        <th STYLE="text-align: right;" >Saldo</th>
         <th>Rendido</th>
             <th colspan="3">Action</th>
         </tr>
@@ -15,12 +15,12 @@
         <tbody>
         @foreach($cheques as $cheque)
             <tr>
-                <td>{{ $cheque->numero }}</td>
-            <td>{{ $cheque->fecha }}</td>
-            <td>{{ $cheque->importe }}</td>
-            <td>{{ $cheque->ncuenta }}</td>
-            <td>{{ $cheque->depositado }}</td>
-            <td>{{ $cheque->saldo }}</td>
+                <td>{{ $cheque->numero  }}</td>
+            <td>{{ $cheque->fecha ? \Carbon\Carbon::parse($cheque->fecha)->format('d/m/Y') : null}}</td>
+            <td STYLE="text-align: right;" >{{ $cheque->importe }}</td>
+            <td STYLE="text-align: right;" >{{ $cheque->ncuenta }}</td>
+            <!-- <td>{{ $cheque->depositado }}</td> -->
+            <td STYLE="text-align: right;" >{{ $cheque->saldo }}</td>
             <!-- <td>{ { $cheque->rendido_at } }</td> -->
             <td>{{ $cheque->rendido_at ? \Carbon\Carbon::parse($cheque->rendido_at)->format('d/m/Y') : null }}</td>
                 <td width="120">

@@ -65,7 +65,7 @@ class Cheque extends Model
         'fecha' => 'required',
         'importe' => 'required',
         'ncuenta' => 'required',
-        'saldo' => 'required'
+        'saldo' => 'nullable'
     ];
 
 

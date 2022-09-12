@@ -1,7 +1,7 @@
 <!-- Numero Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('numero', 'Numero:') !!}
-    {!! Form::text('numero', null, ['class' => 'form-control']) !!}
+    {!! Form::text('numero', $proximo_numero, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Fecha Field -->
@@ -13,7 +13,7 @@
 @push('page_scripts')
     <script type="text/javascript">
         $('#fecha').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
+            format: 'DD/MM/YYYY',
             useCurrent: true,
             sideBySide: true
         })
@@ -28,22 +28,22 @@
 
 <!-- Ncuenta Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('ncuenta', 'Ncuenta:') !!}
-    {!! Form::text('ncuenta', null, ['class' => 'form-control']) !!}
+    {!! Form::label('ncuenta', 'Cuenta:') !!}
+    {!! Form::text('ncuenta', $cuenta_banco, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Depositado Field -->
-<div class="form-group col-sm-6">
+<!-- <div class="form-group col-sm-6">
     <div class="form-check">
         {!! Form::hidden('depositado', 0, ['class' => 'form-check-input']) !!}
         {!! Form::checkbox('depositado', '1', null, ['class' => 'form-check-input']) !!}
         {!! Form::label('depositado', 'Depositado', ['class' => 'form-check-label']) !!}
     </div>
-</div>
+</div> -->
 
 
 <!-- Saldo Field -->
-<div class="form-group col-sm-6">
+<!-- <div class="form-group col-sm-6">
     {!! Form::label('saldo', 'Saldo:') !!}
     {!! Form::text('saldo', null, ['class' => 'form-control']) !!}
-</div>
+</div> -->

@@ -688,7 +688,52 @@ Ya grabo la cabecera y los renglones.
 Hay que ver de grabar correctamente cada dato de inventario.
 Imprimir rendición. PDF
 
+12/9/2022 -
+
+Trabajo sobre los cheques
+
+Botón registrar cheques
+
+project://app\Http\Controllers\ChequeController.php
+project://resources\views\cheques\index.blade.php
+project://resources\views\cheques\index.blade.php
+
+
+AUTONUMERAR CHEQUES
+
+project://app\Http\Controllers\ChequeController.php
+
+        $proximo_numero = $talonario->proximodocumento('CHEQUE');    
+
+
+resources\views\cheques\fields.blade.php
+
+<div class="form-group col-sm-6">
+    {!! Form::label('numero', 'Numero:') !!}
+    {!! Form::text('numero', $proximo_numero, ['class' => 'form-control']) !!}
+</div>
+
+Cheque saved successfully. -> EN ESPAÑOL
+
+
+En Index cambiar formato de fecha
+
+2022-08-09 00:00:00
+
+Número de cuenta para los Cheques
 
 
 
+TALONARIOS -> ADD NEW, FORMATO DE CALENDARIO.
+
+
+Talonarios: mostrar ultima modificacion
+
+
+Mejoré el alta de Cheques
+Numeración automática
+Toma el valor de la cuenta bancaria automaticamente
+
+Mejoré la función de talonarios
+Función actualizar en Modelo talonarios
 

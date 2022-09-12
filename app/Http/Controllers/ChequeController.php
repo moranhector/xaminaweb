@@ -46,7 +46,22 @@ class ChequeController extends AppBaseController
      */
     public function create()
     {
-        return view('cheques.create');
+        // DECLARO OBJETO TALONARIO QUE SIRVE PARA NUMERAR CHEQUES, FACTURAS, RECIBOS, ETC
+        $talonario = new Talonario;
+
+        //acá tomo el próximo número de cheque
+
+        $proximo_numero = $talonario->proximodocumento('CHEQUE');      
+        $data['proximo_numero'] = $proximo_numero;     
+
+
+        //acá tomo el número de cuenta bancaria
+        $cuenta_banco = $talonario->proximodocumento('CUENTA BANCO');      
+        $data['cuenta_banco'] = $cuenta_banco;           
+        
+
+        
+        return view('cheques.create',$data);
     }
 
     /**
@@ -60,12 +75,43 @@ class ChequeController extends AppBaseController
     {
         $input = $request->all();
 
-        /** @var Cheque $cheque */
-        $cheque = Cheque::create($input);
+        try {        
 
-        Flash::success('Cheque saved successfully.');
+            $cheque = new Cheque();
+            $cheque->numero = $request->numero;
+            $cheque->fecha = $request->fecha;
+            $cheque->importe = $request->importe;
+            $cheque->ncuenta = $request->ncuenta;
+            //dd($input);
+            $cheque->saldo   = $request->importe;
+            $cheque->depositado   = 0;
 
-        return redirect(route('cheques.index'));
+            $cheque->save();
+
+
+            $talonario = new Talonario;
+            $talonario->Actualizar('CHEQUE', $cheque->numero );            
+
+
+            /** @var Cheque $cheque */
+            //$cheque = Cheque::create($input);
+
+            Flash::success('Cheque grabado correctamente.');
+
+            return redirect(route('cheques.index'));
+        
+
+        } catch(Exception $e){
+
+            $mensaje_error= $e->getMessage(); 
+            Flash::error($mensaje_error );                    
+            return back()->withInput()
+                ->withErrors([$mensaje_error]);
+        }            
+
+
+
+
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Carbon\Carbon;
 /**
  * Class Talonario
  * @package App\Models
@@ -78,7 +78,33 @@ class Talonario extends Model
 
     }
 
+    /**
+     * Actualizar Formularios
+     *
+     * @param int $id
+     * @param UpdateTalonarioRequest $request
+     *
+     * @return Response
+     */
+    public function Actualizar($tipo, $UltimoDoc)
+    {
+        /** @var Talonario $talonario */
 
+        //$talonario = Talonario::where('tipo', '==', $tipo)->firstOrFail();
+        $talonario = Talonario::where('tipo', $tipo)->first();
+
+        $nProximoDoc = strval($UltimoDoc) + 1  ;
+
+
+
+        $talonario->proximodoc = $nProximoDoc;
+        $talonario->updated_at = Carbon::now();
+        $talonario->save();
+
+        
+
+        return $nProximoDoc ;
+    }
 
         
 

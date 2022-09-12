@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Cheque</h1>
+                    <h1>Registrar nuevo cheque</h1>
                 </div>
             </div>
         </div>
@@ -21,15 +21,15 @@
 
             <div class="card-body">
 
-                <div class="row">
+                <div>
                     @include('cheques.fields')
                 </div>
 
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('cheques.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Grabar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('cheques.index') }}" class="btn btn-default">Salir</a>
             </div>
 
             {!! Form::close() !!}
