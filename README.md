@@ -737,3 +737,31 @@ Toma el valor de la cuenta bancaria automaticamente
 Mejoré la función de talonarios
 Función actualizar en Modelo talonarios
 
+___________________________________________________________
+
+15 de Septiembre
+Jueves
+
+Refinar reglas de validación de registro de cheques
+No se puede grabar importes incorrectos 
+
+    public static $rules = [
+        'numero' => 'unique:cheques,numero',
+        'fecha' => 'required',
+        'importe' => 'required|numeric|min:0.01|max:9999999',
+        'ncuenta' => 'required',
+        'saldo' => 'nullable'
+    ];
+
+
+Refactorización de Método destroy
+el programa advierte con ALERT + NUMERO DE CHEQUE
+despues de eliminado muestra el NÚMERO de cheque eliminado 
+Graba el nombre del usuario.
+
+        $cheque->delete();
+        $user = Auth::user();
+        $cheque->user_name = $user->name;
+        $cheque->save();
+        
+        Flash::success('Cheque '.$numero_cheque.' eliminado.');

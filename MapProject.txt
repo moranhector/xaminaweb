@@ -11,24 +11,18 @@ project://routes\web.php
 -C O N T R O L L E R S -
  
 
-historialoperacionesController
-project://app\Http\Controllers\historialoperacionesController.php
+ project://app\Http\Controllers\ChequeController.php
+ project://app\Http\Controllers\TalonarioController.php
+ 
 
-Consultas de tarjetas indicadores
-project://app\Http\Controllers\historialoperacionesController.php#227
 
-Controller GRAFICAR
-project://app\Http\Controllers\historialoperacionesController.php#166
 
+- V I S T A S -
 
 Layout App Principal
 
 project://resources\views\layouts\app.blade.php
 
-
-- V I S T A S -
-GRAFICOS
-project://resources\views\historialoperaciones\graficos.blade.php
 
 - M E N U -
 project://resources\views\layouts\menu.blade.php#0,0
@@ -36,3 +30,10 @@ project://resources\views\layouts\menu.blade.php#0,0
 Login
 
 project://resources\views\auth\login.blade.php
+
+- T R A D U C C I O N   -   L A N G U A G E
+
+project://resources\lang\en\validation.php 
+project://resources\lang\en\auth.php
+project://resources\lang\en\pagination.php
+project://resources\lang\en\passwords.php

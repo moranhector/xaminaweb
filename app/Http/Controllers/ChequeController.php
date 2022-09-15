@@ -75,11 +75,19 @@ class ChequeController extends AppBaseController
     {
         $input = $request->all();
 
+        $dfecha = substr($request->fecha,6,4).'-'.substr($request->fecha,3,2).'-'.substr($request->fecha,0,2);
+
+        //dd($dfecha);
+
+        
+
         try {        
 
             $cheque = new Cheque();
             $cheque->numero = $request->numero;
-            $cheque->fecha = $request->fecha;
+            $cheque->fecha = $dfecha;
+            
+            //$cheque->fecha = $request->fecha;
             $cheque->importe = $request->importe;
             $cheque->ncuenta = $request->ncuenta;
             //dd($input);
@@ -196,16 +204,31 @@ class ChequeController extends AppBaseController
     {
         /** @var Cheque $cheque */
         $cheque = Cheque::find($id);
+        $numero_cheque = $cheque->numero;
 
         if (empty($cheque)) {
-            Flash::error('Cheque not found');
+            Flash::error('Cheque no encontrado');
 
             return redirect(route('cheques.index'));
         }
 
+        // si está rendido, no se puede eliminar 
+        // Si tiene compras ya registradas no se puede eliminar 
+
+       
+
         $cheque->delete();
 
-        Flash::success('Cheque deleted successfully.');
+        $user = Auth::user();
+
+        $cheque->user_name = $user->name;
+
+ 
+        $cheque->save();
+
+
+        $cheque->save();
+        Flash::success('Cheque '.$numero_cheque.' eliminado.');
 
         return redirect(route('cheques.index'));
     }

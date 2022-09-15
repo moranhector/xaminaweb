@@ -38,7 +38,8 @@ class Cheque extends Model
         'ncuenta',
         'depositado',
         'saldo',
-        'rendido_at'
+        'rendido_at',
+        'user_name'
     ];
 
     /**
@@ -63,7 +64,7 @@ class Cheque extends Model
     public static $rules = [
         'numero' => 'unique:cheques,numero',
         'fecha' => 'required',
-        'importe' => 'required',
+        'importe' => 'required|numeric|min:0.01|max:9999999',
         'ncuenta' => 'required',
         'saldo' => 'nullable'
     ];
