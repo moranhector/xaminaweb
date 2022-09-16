@@ -108,7 +108,7 @@ class ReciboController extends AppBaseController
         try {
 
                 $input = $request->all();
-                //dd($input);
+                
 
 
                 $rules = [
@@ -119,6 +119,7 @@ class ReciboController extends AppBaseController
         
                 
                 $data = $request->validate($rules);
+                //dd('$request->documento',$request->documento);
 
                 //dd($data)    ;
 
@@ -129,9 +130,18 @@ class ReciboController extends AppBaseController
                 $mytime= $mytime->toDateString();
                 //dd($mytime);
 
-
+                //dd('$request->documento',$request->documento);
                 //Traer datos del Artesano
-                $artesano = Artesano::where('documento', $request->documento  )->first();     
+
+                //\DB::enableQueryLog(); // Enable query log
+
+                // Your Eloquent query executed by using get()
+                $artesano = Artesano::where('documento', $request->documento  )->first();                 
+                
+                //dd(\DB::getQueryLog()); // Show results of log
+
+
+                   
 
                 if ( !$artesano ) {
                     // Handle error here

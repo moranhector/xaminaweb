@@ -9,6 +9,7 @@ use App\Models\Tipopieza;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class TipopiezaController extends AppBaseController
 {
@@ -19,14 +20,43 @@ class TipopiezaController extends AppBaseController
      *
      * @return Response
      */
+    // public function index(Request $request)
+    // {
+    //     /** @var Tipopieza $tipopiezas */
+    //     $tipopiezas = Tipopieza::all();
+
+    //     return view('tipopiezas.index')
+    //         ->with('tipopiezas', $tipopiezas);
+    // }
+
     public function index(Request $request)
     {
-        /** @var Tipopieza $tipopiezas */
-        $tipopiezas = Tipopieza::all();
 
+        $descrip  = $request->get('descrip');
+
+        if($descrip)
+        {        
+            $tipopiezas = DB::table('tipopiezas')
+            ->where('descrip','like','%'.$descrip.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['tipopiezas'] = $tipopiezas;     
+            $data['descrip'] = $descrip;     
+
+            Flash::success('Filtrando '.$descrip);              
+
+            return view('tipopiezas.index',["tipopiezas"=>$tipopiezas,"descrip"=>$descrip]);            
+        } 
+        else
+        {
+            //$tipopiezas = Inventario::all()->paginate(25);
+            $tipopiezas = DB::table('tipopiezas')->paginate(25);
+        }
         return view('tipopiezas.index')
             ->with('tipopiezas', $tipopiezas);
     }
+
+
 
     /**
      * Show the form for creating a new Tipopieza.

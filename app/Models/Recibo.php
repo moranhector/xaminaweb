@@ -63,7 +63,7 @@ class Recibo extends Model
     public static $rules = [
         'formulario' => 'required',
         'fecha' => 'required',
-        'artesano_id' => 'required'
+        // 'artesano_id' => 'required'
     ];
 
     

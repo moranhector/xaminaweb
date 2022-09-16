@@ -765,3 +765,11 @@ Graba el nombre del usuario.
         $cheque->save();
         
         Flash::success('Cheque '.$numero_cheque.' eliminado.');
+
+16 de Septiembre.
+viernes
+
+
+Correcciones de Vistas index con Filtros
+
+Mañana, quitar los soft deletes

@@ -20,14 +20,44 @@ class ArtesanoController extends AppBaseController
      *
      * @return Response
      */
+    // public function index(Request $request)
+    // {
+    //     /** @var Artesano $artesanos */
+    //     $artesanos = Artesano::all();
+
+    //     return view('artesanos.index')
+    //         ->with('artesanos', $artesanos);
+    // }
+
     public function index(Request $request)
     {
-        /** @var Artesano $artesanos */
-        $artesanos = Artesano::all();
 
+        $nombre  = $request->get('nombre');
+
+        if($nombre)
+        {        
+            $artesanos = DB::table('artesanos')
+            ->where('nombre','like','%'.$nombre.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['artesanos'] = $artesanos;     
+            $data['nombre'] = $nombre;     
+
+            Flash::success('Filtrando '.$nombre);              
+
+            return view('artesanos.index',["artesanos"=>$artesanos,"nombre"=>$nombre]);            
+        } 
+        else
+        {
+            //$artesanos = Inventario::all()->paginate(25);
+            $artesanos = DB::table('artesanos')->paginate(25);
+        }
         return view('artesanos.index')
             ->with('artesanos', $artesanos);
     }
+    
+
+
 
     public function seleccionar(Request $request)
     {

@@ -30,14 +30,43 @@ class ChequeController extends AppBaseController
      *
      * @return Response
      */
+    // public function index(Request $request)
+    // {
+    //     /** @var Cheque $cheques */
+    //     $cheques = Cheque::all();
+
+    //     return view('cheques.index')
+    //         ->with('cheques', $cheques);
+    // }
+
     public function index(Request $request)
     {
-        /** @var Cheque $cheques */
-        $cheques = Cheque::all();
 
+        $numero  = $request->get('numero');
+
+        if($numero)
+        {        
+            $cheques = DB::table('cheques')
+            ->where('numero','like','%'.$numero.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['cheques'] = $cheques;     
+            $data['numero'] = $numero;     
+
+            Flash::success('Filtrando '.$numero);              
+
+            return view('cheques.index',["cheques"=>$cheques,"numero"=>$numero]);            
+        } 
+        else
+        {
+            //$cheques = Inventario::all()->paginate(25);
+            $cheques = DB::table('cheques')->paginate(25);
+        }
         return view('cheques.index')
             ->with('cheques', $cheques);
     }
+    
+
 
     /**
      * Show the form for creating a new Cheque.
@@ -364,7 +393,7 @@ class ChequeController extends AppBaseController
                     // dd('hasta aqui 3',$inventario);
                     $inventario->npieza       = $request->inventario[$cont];
                     
-                    $inventario->namepieza    = $request->descrip[$cont];
+                    $inventario->numero    = $request->descrip[$cont];
                     $inventario->codigo12     = $request->inventario[$cont];
                     $inventario->tipopieza_id = 1;
                     $inventario->comprob      = '1';

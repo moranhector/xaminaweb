@@ -23,7 +23,7 @@
 <li class="nav-item">
     <a href="{{ route('tipopiezas.index') }}"
        class="nav-link {{ Request::is('tipopiezas*') ? 'active' : '' }}">
-        <p>Tipopiezas</p>
+        <p>Tipos de piezas</p>
     </a>
 </li>
 
@@ -39,17 +39,12 @@
 <li class="nav-item">
     <a href="{{ route('recibos.index') }}"
        class="nav-link {{ Request::is('recibos*') ? 'active' : '' }}">
-        <p>Recibos</p>
+        <p>Recibos de Compra</p>
     </a>
 </li>
 
 
-<li class="nav-item">
-    <a href="{{ route('recibosLineas.index') }}"
-       class="nav-link {{ Request::is('recibosLineas*') ? 'active' : '' }}">
-        <p>Recibos Lineas</p>
-    </a>
-</li>
+
 
  
 
@@ -62,7 +57,7 @@
 <li class="nav-item">
     <a href="{{ route('depositos.index') }}"
        class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
-        <p>Depositos</p>
+        <p>Depósitos</p>
     </a>
 </li>
 

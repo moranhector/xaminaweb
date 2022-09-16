@@ -8,6 +8,7 @@ use App\Http\Controllers\AppBaseController;
 use App\Models\Rubro;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Response;
 
 class RubroController extends AppBaseController
@@ -19,14 +20,44 @@ class RubroController extends AppBaseController
      *
      * @return Response
      */
+    // public function index(Request $request)
+    // {
+    //     /** @var Rubro $rubros */
+    //     $rubros = Rubro::all();
+
+    //     return view('rubros.index')
+    //         ->with('rubros', $rubros);
+    // }
+
     public function index(Request $request)
     {
-        /** @var Rubro $rubros */
-        $rubros = Rubro::all();
 
+        $descrip  = $request->get('descrip');
+
+        if($descrip)
+        {        
+            $rubros = DB::table('rubros')
+            ->where('descrip','like','%'.$descrip.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['rubros'] = $rubros;     
+            $data['descrip'] = $descrip;     
+
+            Flash::success('Filtrando '.$descrip);              
+
+            return view('rubros.index',["rubros"=>$rubros,"descrip"=>$descrip]);            
+        } 
+        else
+        {
+            //$rubros = Inventario::all()->paginate(25);
+            $rubros = DB::table('rubros')->paginate(25);
+        }
         return view('rubros.index')
             ->with('rubros', $rubros);
     }
+    
+
+
 
     /**
      * Show the form for creating a new Rubro.

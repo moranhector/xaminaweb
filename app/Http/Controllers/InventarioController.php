@@ -34,6 +34,8 @@ class InventarioController extends AppBaseController
             $data['inventarios'] = $inventarios;     
             $data['namepieza'] = $namepieza;     
 
+            Flash::success('Filtrando '.$namepieza);            
+
             return view('inventarios.index',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
         } 
         else

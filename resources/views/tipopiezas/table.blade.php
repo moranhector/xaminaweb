@@ -3,8 +3,8 @@
         <thead>
         <tr>
             <th>Id</th>
-        <th>Descrip</th>
-        <th>Tecnica</th>
+        <th>Descripción</th>
+        <th>Técnica</th>
         <th>Rubro Id</th>
         <th>Insumo</th>
             <th colspan="3">Action</th>
