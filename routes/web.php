@@ -71,3 +71,14 @@ Route::resource('talonarios', App\Http\Controllers\TalonarioController::class);
 
 
 Route::resource('rendiciones', App\Http\Controllers\RendicionController::class);
+
+
+
+
+Route::resource('clientes', App\Http\Controllers\ClienteController::class);
+
+
+Route::resource('facturas', App\Http\Controllers\FacturaController::class);
+
+
+Route::resource('faclineas', App\Http\Controllers\FaclineaController::class);

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers;
+use App\Models\Cliente;
 use App\Models\Cheque;
 use App\Models\Artesano;
 use App\Models\Rubro;
@@ -27,6 +28,10 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(['facturas.fields'], function ($view) {
+            $clienteItems = Cliente::pluck('nombre','id')->toArray();
+            $view->with('clienteItems', $clienteItems);
+        });
         View::composer(['recibos.fields'], function ($view) {
             $chequeItems = Cheque::pluck('numero','id')->toArray();
             $view->with('chequeItems', $chequeItems);

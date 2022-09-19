@@ -10,7 +10,7 @@
                     <div class="col-sm">
                         <nav class="navbar navbar-light bg-light">
                         <form class="form-inline" method {{route('inventarios.index')}} >
-                            <input name='namepieza' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" value="{{ old('namepieza') }}" aria-label="Search">
+                            <input name='namepieza' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre o número" value="{{ old('namepieza') }}" aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" title="Filtrar / Quitar Filtro"  type="submit">Filtrar / Quitar Filtro</button>
                         </form>
                     </nav>                     

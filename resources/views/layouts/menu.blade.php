@@ -48,12 +48,12 @@
 
  
 
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a href="{{ route('preparar.recibo') }}"
        class="nav-link {{ Request::is('preparar.recibo*') ? 'active' : '' }}">
         <p>Registrar Recibo</p>
     </a>
-</li>
+</li> -->
 <li class="nav-item">
     <a href="{{ route('depositos.index') }}"
        class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
@@ -78,10 +78,35 @@
 </li>
 
 
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a href="{{ route('rendiciones.index') }}"
        class="nav-link {{ Request::is('rendiciones*') ? 'active' : '' }}">
         <p>Rendiciones</p>
+    </a>
+</li> -->
+
+
+
+<li class="nav-item">
+    <a href="{{ route('clientes.index') }}"
+       class="nav-link {{ Request::is('clientes*') ? 'active' : '' }}">
+        <p>Clientes</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('facturas.index') }}"
+       class="nav-link {{ Request::is('facturas*') ? 'active' : '' }}">
+        <p>Facturas</p>
+    </a>
+</li>
+
+
+<li class="nav-item">
+    <a href="{{ route('faclineas.index') }}"
+       class="nav-link {{ Request::is('faclineas*') ? 'active' : '' }}">
+        <p>Faclineas</p>
     </a>
 </li>
 

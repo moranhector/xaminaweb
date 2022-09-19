@@ -773,3 +773,74 @@ viernes
 Correcciones de Vistas index con Filtros
 
 Mañana, quitar los soft deletes
+
+
+
+17 de Septiembre.
+Sabado
+
+php artisan migrate --path='./database/migrations/2022_07_27_124824_create_cheques_table.php'
+php artisan migrate --path='./database/migrations/2022_07_27_143317_create_recibos_table.php'
+php artisan migrate --path='./database/migrations/2022_07_27_145153_create_recibos_lineas_table.php'
+php artisan migrate --path='./database/migrations/2022_08_29_221728_create_talonarios_table.php'
+php artisan migrate --path='./database/migrations/2022_08_03_133202_create_depositos_table.php'
+php artisan migrate --path='./database/migrations/2022_08_03_135409_create_inventarios_table.php'
+php artisan migrate --path='./database/migrations/2022_09_05_225228_create_rendicions_table.php'
+php artisan migrate --path='./database/migrations/2022_07_25_153123_create_artesanos_table.php'
+php artisan migrate --path='./database/migrations/2022_07_27_124824_create_cheques_table.php'
+database\migrations\2022_07_25_153123_create_artesanos_table.php
+
+
+
+
+19/9/2022.
+Lunes
+
+
+Generar Facturas y Faclineas
+
+Con infyomlabs
+
+Evitar el SoftDelete de
+
+project://config\infyom\laravel_generator.php#131
+
+Me gustaría probar la opción 
+
+        'tables_searchable_default' => true,
+
+
+https://infyom.com/open-source/laravelgenerator/docs/fields-input-guide
+
+
+
+
+php artisan infyom:scaffold Rubro
+
+php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESDE ARCHIVO JSON
+
+php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
+
+
+# crear entidad en singular
+php artisan infyom:scaffold Factura
+
+
+
+#primero crear entidad Clientes
+
+\resources\model_schemas\Cliente.json
+
+
+php artisan infyom:scaffold Cliente --fieldsFile Cliente.json
+
+
+Para ejecutar una sola migración de la
+php artisan migrate --path='./database/migrations/2022_09_19_214911_create_clientes_table.php'
+
+php artisan infyom:rollback Cliente scaffold
+
+
+#Facturas de
+
+php artisan infyom:scaffold Factura --fieldsFile Factura.json

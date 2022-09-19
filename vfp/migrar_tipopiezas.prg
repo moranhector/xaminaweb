@@ -2,13 +2,13 @@
 
  
 CLOSE ALL
-SET STEP ON 
+*SET STEP ON 
 DO proyecto 
 
 cCadena = 'select * from xamina.precios order by precio'
 oConexion.ejecutar(cCadena,'cur')
 SELECT cur
-BROWSE
+*BROWSE
 GO top
 
 DO WHILE !EOF()

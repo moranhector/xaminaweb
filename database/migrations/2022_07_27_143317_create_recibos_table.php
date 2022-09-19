@@ -23,6 +23,7 @@ class CreateRecibosTable extends Migration
             $table->integer('cheque_id');
             $table->boolean('rendido');
             $table->timestamps();
+            $table->string('user_name')->nullable();            
             $table->softDeletes();
         });
     }

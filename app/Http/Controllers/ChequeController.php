@@ -123,7 +123,14 @@ class ChequeController extends AppBaseController
             $cheque->saldo   = $request->importe;
             $cheque->depositado   = 0;
 
+            
+
+
+            //\DB::enableQueryLog(); // Enable query log
+
             $cheque->save();
+      
+            //dd(\DB::getQueryLog()); // Show results of log
 
 
             $talonario = new Talonario;
@@ -229,7 +236,7 @@ class ChequeController extends AppBaseController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function Olddestroy($id)
     {
         /** @var Cheque $cheque */
         $cheque = Cheque::find($id);
@@ -261,6 +268,27 @@ class ChequeController extends AppBaseController
 
         return redirect(route('cheques.index'));
     }
+
+
+    public function destroy($id)
+    {
+        /** @var Cheques $cheque */
+        $cheque = Cheque::find($id);
+
+        if (empty($cheque)) {
+            Flash::error('Cheques no encontrado');
+
+            return redirect(route('cheques.index'));
+        }
+
+        $cheque->delete();
+
+        Flash::success('Cheques borrado correctamente.');
+
+        return redirect(route('cheques.index'));
+    }
+    
+
 
 
     /**

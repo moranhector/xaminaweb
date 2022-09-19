@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Cheque extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
 
     use HasFactory;
 
@@ -76,6 +76,7 @@ class Cheque extends Model
     public function DescontarSaldo($idCheque,$MontoDescontar)
     {
         $cheque = Cheque::find($idCheque);
+        
         //$cheque = Cheque::where('id', $idCheque)->first();
 
         //dd($cheque->saldo);

@@ -22,6 +22,7 @@ class CreateChequesTable extends Migration
             $table->string('ncuenta');
             $table->boolean('depositado');
             $table->decimal('saldo');
+            $table->date('rendido_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

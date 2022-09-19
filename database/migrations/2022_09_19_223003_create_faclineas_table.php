@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRendicionsTable extends Migration
+class CreateFaclineasTable extends Migration
 {
 
     /**
@@ -14,14 +14,14 @@ class CreateRendicionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rendicions', function (Blueprint $table) {
+        Schema::create('faclineas', function (Blueprint $table) {
             $table->id('id');
-            $table->integer('cheque_id');
+            $table->integer('factura_id');
             $table->integer('inventario_id');
-            $table->integer('recibo_id');
+            $table->integer('cantidad');
+            $table->decimal('preciounit');
             $table->decimal('importe');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ class CreateRendicionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('rendicions');
+        Schema::drop('faclineas');
     }
 }

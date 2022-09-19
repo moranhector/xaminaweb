@@ -29,6 +29,7 @@ class InventarioController extends AppBaseController
         {        
             $inventarios = DB::table('inventarios')
             ->where('namepieza','like','%'.$namepieza.'%' ) 
+            ->orWhere('npieza','like','%'.$namepieza.'%' ) 
             ->paginate( 100 ) ;   
 
             $data['inventarios'] = $inventarios;     

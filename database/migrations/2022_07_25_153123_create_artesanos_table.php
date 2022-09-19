@@ -18,7 +18,11 @@ class CreateArtesanosTable extends Migration
             $table->id('id');
             $table->string('nombre');
             $table->string('documento');
-            $table->string('direccion');
+            $table->string('direccion')->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('departamento')->nullable();
+            $table->date('nacimiento_at')->nullable();
+            $table->string('sexo')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
