@@ -844,3 +844,9 @@ php artisan infyom:rollback Cliente scaffold
 #Facturas de
 
 php artisan infyom:scaffold Factura --fieldsFile Factura.json
+php artisan migrate --path='./database/migrations/2022_09_19_222411_create_facturas_table.php'
+
+Faclineas
+
+php artisan infyom:scaffold Faclinea --fieldsFile Faclineas.json
+php artisan migrate --path='./database/migrations/2022_09_19_223003_create_faclineas_table.php'

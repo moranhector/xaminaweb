@@ -37,3 +37,9 @@ project://resources\lang\en\validation.php
 project://resources\lang\en\auth.php
 project://resources\lang\en\pagination.php
 project://resources\lang\en\passwords.php
+
+
+- I N F Y O M 
+
+project://config\infyom\laravel_generator.php
+
