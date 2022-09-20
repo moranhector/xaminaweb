@@ -2,8 +2,15 @@
 
  
 CLOSE ALL
-*SET STEP ON 
+SET STEP ON 
 DO proyecto 
+
+cCadena = 'truncate table xaminaweb.inventarios'
+oConexion.ejecutar(cCadena,'buffer')
+
+cCadena = 'truncate table xaminaweb.existencias'
+oConexion.ejecutar(cCadena,'buffer')
+
 
 cCadena = 'select * from xamina.inventario order by precio'
 oConexion.ejecutar(cCadena,'cur')
@@ -38,7 +45,12 @@ DO WHILE !EOF()
         cprecio_at = fox2my(  cur.fechadesde  )
  
    
-      
+    IF   cur.fechahasta <= CTOD('31/12/2012')   && para piezas vendias hace mas de 10 años las salteo
+    
+    	SELECT cur
+    	SKIP
+    	loop
+    endif
 	  
 	  
 	  
@@ -78,12 +90,71 @@ cCadena = [ INSERT INTO xaminaweb.inventarios ]+;
        ['&cvendido_at', ]+;
        ['&cprecio', ]+;
        ['&cprecio_at', CURRENT_DATE ) ]
+       
+       
+       
 
  
-  
-  
+*!*			oConexion.ejecutar(cCadena, 'buffer')  
+*!*			
+*!*			
+*!*					&&& Obtener ultimo numero 
+*!*					oConexion.ejecutar("select LAST_INSERT_ID() as ultimo","ultimo")
+*!*					cInventario_id = ultimo.ultimo
+				
 
-oConexion.ejecutar(cCadena, 'buffer')  
+			
+
+ IF ISNULL(cur.fechahasta ) OR cur.fechahasta > CTOD('31/12/2012') && si es una pieza en existencia, le creo deposito		
+ 
+ 
+
+             cinventario_id= cid
+             ctipodoc = 'RECIBO'
+             cdocumento = Ccomprob
+             cdeposito_id = fox2my( 1 )
+             cfecha_desde = ccomprado_at
+             IF EMPTY( cur.factura )
+	             ctiposalida  = fox2my( null )
+	             cdocumento_sal	   = fox2my( null )
+	             cfecha_hasta	 = fox2my( null )
+	         else    
+	             ctiposalida  = 'FAC'	             
+    	         cdocumento_sal	= cur.factura	                          
+             	cfecha_hasta   = cvendido_at 	         
+	         endif    
+
+
+             cusuario_name = 'migracion'
+
+
+			cCadena = [ INSERT INTO xaminaweb.existencias ]+;
+			          [  (id, ]+;
+			          [   Inventario_id, ]+;
+			          [ tipodoc, ]+; 
+			          [ documento, ]+; 
+			          [ deposito_id, ]+; 			          
+			          [ fecha_desde,       ]+;
+			          [ tiposalida,]+;
+			          [ documento_sal,]+;
+			          [ fecha_hasta,]+;
+			          [ created_at )]+;
+				      [ VALUES ('&cid', ]+;
+				      [ '&cInventario_id',]+;
+     				  [ '&ctipodoc', ]+; 
+			          [ '&cdocumento', ]+; 
+			          [ '&cdeposito_id', ]+; 			          
+			          [ '&cfecha_desde', ]+;
+			          [ '&ctiposalida',]+;
+			          [ '&cdocumento_sal',]+;
+			          [ '&cfecha_hasta',]+;
+			          [ CURRENT_DATE )]			       
+		  
+
+			oConexion.ejecutar(cCadena, 'buffer')  
+			
+  endif
+
   
   
   
@@ -92,7 +163,7 @@ oConexion.ejecutar(cCadena, 'buffer')
 	skip
 endd 
 
-MESSAGEBOX('tipopiezas TERMINADO ')
+MESSAGEBOX('migracion inventario  TERMINADA ')
 CLOSE ALL
 
 

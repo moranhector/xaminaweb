@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Providers;
+namespace App\Providers;
+use App\Models\Deposito;
 use App\Models\Cliente;
 use App\Models\Cheque;
 use App\Models\Artesano;
@@ -28,6 +29,14 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(['existencias.fields'], function ($view) {
+            $depositoItems = Deposito::pluck('nombre','id')->toArray();
+            $view->with('depositoItems', $depositoItems);
+        });
+        View::composer(['existencias.fields'], function ($view) {
+            $depositoItems = Deposito::pluck('nombre','id')->toArray();
+            $view->with('depositoItems', $depositoItems);
+        });
         View::composer(['facturas.fields'], function ($view) {
             $clienteItems = Cliente::pluck('nombre','id')->toArray();
             $view->with('clienteItems', $clienteItems);

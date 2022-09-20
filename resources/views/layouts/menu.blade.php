@@ -111,3 +111,12 @@
 </li>
 
 
+
+<li class="nav-item">
+    <a href="{{ route('existencias.index') }}"
+       class="nav-link {{ Request::is('existencias*') ? 'active' : '' }}">
+        <p>Existencias</p>
+    </a>
+</li>
+
+

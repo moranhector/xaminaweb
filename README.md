@@ -850,3 +850,24 @@ Faclineas
 
 php artisan infyom:scaffold Faclinea --fieldsFile Faclineas.json
 php artisan migrate --path='./database/migrations/2022_09_19_223003_create_faclineas_table.php'
+
+
+
+
+
+20 de Septiembre.
+Martes
+
+Creé la entidad Existencia.json
+Modifiqué la importación de inventarios para que inserte las existencias de depositos.
+
+Existencia
+php artisan infyom:scaffold Existencia --fieldsFile Existencia.json
+
+Qué sigue?
+
+Hacer la transaccion de Factura
+Hacer la transaccion de Remito
+Modificar la rendicion para ingrese la pieza a existencia
+
+

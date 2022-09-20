@@ -82,3 +82,8 @@ Route::resource('facturas', App\Http\Controllers\FacturaController::class);
 
 
 Route::resource('faclineas', App\Http\Controllers\FaclineaController::class);
+
+
+
+
+Route::resource('existencias', App\Http\Controllers\ExistenciaController::class);
