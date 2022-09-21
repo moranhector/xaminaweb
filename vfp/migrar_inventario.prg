@@ -45,7 +45,7 @@ DO WHILE !EOF()
         cprecio_at = fox2my(  cur.fechadesde  )
  
    
-    IF   cur.fechahasta <= CTOD('31/12/2012')   && para piezas vendias hace mas de 10 años las salteo
+    IF   cur.fechahasta <= CTOD('31/12/2012')   && para piezas vendidas hace mas de 10 años las salteo
     
     	SELECT cur
     	SKIP
@@ -95,7 +95,7 @@ cCadena = [ INSERT INTO xaminaweb.inventarios ]+;
        
 
  
-*!*			oConexion.ejecutar(cCadena, 'buffer')  
+			oConexion.ejecutar(cCadena, 'buffer')  
 *!*			
 *!*			
 *!*					&&& Obtener ultimo numero 

@@ -6,9 +6,14 @@ use App\Http\Requests\CreateFacturaRequest;
 use App\Http\Requests\UpdateFacturaRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Factura;
+use App\Models\Cliente;
+use App\Models\Faclinea;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
+use App\Models\Talonario;
+use Carbon\Carbon;
 
 class FacturaController extends AppBaseController
 {
@@ -152,4 +157,207 @@ class FacturaController extends AppBaseController
 
         return redirect(route('facturas.index'));
     }
+
+    /**
+     * Show the form for creating a new factura.
+     *
+     * @return Illuminate\View\View
+     */
+    public function preparar()
+    {
+   
+
+             /*listar los artículos a vender*/
+
+             $cSelect = 
+             "SELECT i.id, i.codigo12, i.npieza,i.namepieza,i.precio FROM inventarios i
+             INNER JOIN existencias e
+             ON i.id = e.inventario_id
+             WHERE i.vendido_at IS NULL
+             AND e.deposito_id = 1";
+     
+     
+             //dd($cCuit);
+             $articulos = DB::select(DB::raw($cSelect));
+
+
+
+
+             /*listar las clientes en ventana modal*/
+             $clientes=DB::table('clientes')->get();     
+
+             //Factura Electrónica
+             $CUIT = "32999999999";
+
+             //PROXIMO NUMERO DE FORMULARIO
+             //$ultimo_formulario = Recibo::latest()->first();
+             $talonario = new Talonario;
+             $nueva_factura = $talonario->proximodocumento('FAC');      
+                          
+
+             //dd($ultimo_formulario);
+
+     
+
+            // Fecha por Default
+            $mytime= Carbon::now('America/Argentina/Mendoza');
+            $mytime= $mytime->toDateString();      
+
+
+
+
+        
+        return view('facturas.preparar',[
+            "clientes"=>$clientes,
+            "articulos"=>$articulos,
+            "nueva_factura"=>$nueva_factura,      
+            "fecha"=>$mytime     
+            ]);        
+
+    }
+
+  /**
+     * Guardar recibo
+     *
+     * @param CreateReciboRequest $request
+     *
+     * @return Response
+     */
+    public function guardar(Request $request)
+    {
+
+        try {
+
+                $input = $request->all();
+                //dd($input);
+
+
+                $rules = [
+                     'formulario' => 'required',
+                     'fecha' => 'required',
+                     //'artesano_id' => 'required'                                      
+                ];
+        
+                
+                $data = $request->validate($rules);
+                //dd('$request->documento',$request->documento);
+
+                //dd($data)    ;
+
+
+
+                //Fecha
+                $mytime= Carbon::now('America/Argentina/Mendoza');
+                $mytime= $mytime->toDateString();
+                //dd($mytime);
+
+                //dd('$request->documento',$request->documento);
+                //Traer datos del Artesano
+
+                //\DB::enableQueryLog(); // Enable query log
+
+                // Your Eloquent query executed by using get()
+                $cliente = Cliente::where('documento', $request->documento  )->first();                 
+                
+                //dd(\DB::getQueryLog()); // Show results of log
+
+
+                   
+
+                if ( !$cliente ) {
+                    // Handle error here
+                    Flash::error('Seleccione el cliente' );                    
+                    return back()->with('error', 'Seleccione el cliente');                    
+                }   
+
+
+                
+                //datos a guardar en Recibo
+                $factura = new Factura();
+                $factura->formulario =   $request->formulario; 
+                $factura->ptovta =  '1' ; 
+                $factura->tipo =  'FACB' ; 
+                $factura->fecha = $request->fecha ;
+                $factura->cliente_id = $cliente->id ;
+                $factura->total = $request->total_pagar;
+                
+                
+
+
+                
+
+
+            
+                //GUARDAR USUARIO
+                // $user = Auth::user();
+                // $recibo->user_name = $user->name ;
+                
+                $factura->save();
+
+                //GUARDAR RENGLONES DE LA FACTURA
+                $lineas_detalle = $request->_producto_id ; //Tomo el Id del Recibo insertado
+                $cont=0;
+
+                while($cont < count($lineas_detalle)){
+
+                    $detalle = new Faclinea();
+        
+                    $detalle->factura_id     = $factura->id;
+                    $detalle->inventario_id  = $request->_producto_id[$cont];
+                    $detalle->cantidad      = $request->_cantidad[$cont];
+                    $detalle->preciounit    = $request->_precio_venta[$cont];
+                    $detalle->importe       = $request->_subtotal[$cont];
+                    //$detalle->updated_at    = null ;
+                    //$detalle->created_at    = $mytime ;
+                    $detalle->save();
+                    $cont=$cont+1;
+                }
+
+ 
+
+
+
+
+                $talonario = new Talonario;
+                $talonario->Actualizarproximodocumento('FAC', $factura->formulario );
+   
+                //dd($ultimo_formulario);
+
+
+
+
+
+
+
+                // $tipo = 'REC';
+                // $talonario = Talonario::where('tipo', $tipo)->first();
+                // $UltimoDoc = $recibo->formulario;
+                // $nProximoDoc = strval($UltimoDoc) + 1  ;
+                // $talonario->proximodoc = $nProximoDoc;
+                // $talonario->save();
+                
+            
+                //** Grabar SAldo de cheque
+                //cCadena = [update cheques set saldo = saldo - '&cTotal' where cheque = '&cCheque' ]	
+                
+ 
+
+                Flash::success('Factura guardada: ' . $factura->formulario );
+
+                return redirect(route('facturas.index'));
+
+
+        } catch(Exception $e){
+            
+            
+              
+
+
+                $mensaje_error= $e->getMessage(); 
+                Flash::error($mensaje_error );                    
+                return back()->withInput()
+                    ->withErrors([$mensaje_error]);
+        }                  
+    }
+
 }

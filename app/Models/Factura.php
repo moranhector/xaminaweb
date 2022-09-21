@@ -40,6 +40,7 @@ class Factura extends Model
         'tipo',
         'fecha',
         'cliente_id',
+        'cliente_nombre',
         'total',
         'ivacond',
         'domicilio',
@@ -80,6 +81,7 @@ class Factura extends Model
         'tipo' => 'required',
         'fecha' => 'required',
         'cliente_id' => 'required',
+        'cliente_nombre' => 'nullable',
         'ivacond' => 'required',
         'tipodoc' => 'required',
         'documento' => 'required'

@@ -43,3 +43,9 @@ project://resources\lang\en\passwords.php
 
 project://config\infyom\laravel_generator.php
 
+
+
+- Facturas
+
+project://app\Http\Controllers\FacturaController.php#159
+

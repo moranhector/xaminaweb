@@ -9,6 +9,7 @@ use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use DB;
 
 class ClienteController extends AppBaseController
 {
@@ -152,4 +153,19 @@ class ClienteController extends AppBaseController
 
         return redirect(route('clientes.index'));
     }
+
+    public function seleccionar(Request $request)
+    {
+         if($request){
+
+            $sql=trim($request->get('buscarTexto'));
+            $clientes=DB::table('clientes')
+            ->where('nombre','LIKE','%'.$sql.'%')
+            ->orwhere('documento','LIKE','%'.$sql.'%')
+            ->orderBy('id','asc')
+            ->paginate(8);
+            return view('clientes.seleccionar',["clientes"=>$clientes,"buscarTexto"=>$sql]);
+             
+        }
+    }    
 }

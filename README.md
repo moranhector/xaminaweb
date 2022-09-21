@@ -870,4 +870,30 @@ Hacer la transaccion de Factura
 Hacer la transaccion de Remito
 Modificar la rendicion para ingrese la pieza a existencia
 
+21 de Septiembre
+Miércoles
+
+Como obtener el inventario de
+
+-- INVENTARIO ACTUAL
+SELECT * FROM inventarios i
+INNER JOIN existencias e
+ON i.id = e.inventario_id
+WHERE i.vendido_at IS NULL
+
+SELECT i.id, i.codigo12, i.npieza,i.namepieza FROM inventarios i
+INNER JOIN existencias e
+ON i.id = e.inventario_id
+WHERE i.vendido_at IS NULL
+AND e.deposito_id = 1
+
+
+Necesito la copia actual del inventario y del programa.
+
+
+
+
+Logré la primera factura de XaminaWeb
+
+
 
