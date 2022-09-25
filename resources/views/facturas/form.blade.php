@@ -107,13 +107,22 @@ function abre_buscador() {
 
             <input type="hidden"  id="id_inventario" name="id_inventario" class="form-control"   >
 
- 
+<!--  
+
+▄▀█ ░░█ ▄▀█ ▀▄▀
+█▀█ █▄█ █▀█ █░█
+
+insertar pieza en renglones
+ -->
 
     <div class="col-md-2">
             <label class="form-control-label" for="pieza">Pieza</label>
             
             <input type="text"  id="pieza" name="pieza" class="form-control" placeholder="pieza" >
+            <div id="success_message"></div>
     </div>  
+
+    
 
     <div class="col-md-2">
             <label class="form-control-label" for="descrip">Descrip</label>

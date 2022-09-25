@@ -356,11 +356,27 @@
                     url: "/fetch-pieza/"+nPieza,
                     dataType: "json",
                    success: function (response) {
-                        console.log(response);
-                        $("#precio_venta").val(response.piezas[0].precio);
-                        $("#descrip").val(response.piezas[0].namepieza);
+                        console.log(response.message);
 
-                        agregar_renglon_factura();
+
+
+                        if (response.message == 'NO') {
+
+                            $('#success_message').addClass('alert');                            
+                            $('#success_message').html(response.message);                           
+                        } else {
+                            $('#success_message').addClass('alert');
+                            $('#success_message').html(response.message); 
+
+                            $("#precio_venta").val(response.piezas[0].precio);
+                            $("#descrip").val(response.piezas[0].namepieza);
+
+                            agregar_renglon_factura();
+
+                        
+                        
+                    }
+
 
 
                     }

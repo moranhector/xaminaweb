@@ -47,5 +47,18 @@ project://config\infyom\laravel_generator.php
 
 - Facturas
 
+Funcion preparar y Guardar en Controladores
 project://app\Http\Controllers\FacturaController.php#159
+
+Funciones Jquery Ajax para insertar renglones
+project://resources\views\layouts\app.blade.php#350
+
+función fetch para ajax
+project://app\Http\Controllers\InventarioController.php#55
+
+formulario
+project://resources\views\facturas\form.blade.php
+
+
+
 

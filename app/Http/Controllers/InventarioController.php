@@ -51,6 +51,11 @@ class InventarioController extends AppBaseController
 
     // http://localhost:8000/fetch-pieza/090981
     // esto anda ok
+    /// AJAX JQUERY DESDE Facturas
+
+
+
+
 
     public function fetchpieza($pieza)
     {
@@ -62,9 +67,75 @@ class InventarioController extends AppBaseController
         ->where('npieza',$pieza ) 
         ->get( ) ;   
 
-        return response()->json([
-            'piezas'=>$inventario,
-        ]);
+        //dd($inventario[0]->factura);
+
+        $cantidadRegistros = $inventario->count();
+
+
+        if ($cantidadRegistros  > 1 ) 
+        {
+            return Response::json(array(
+                'code'      =>  200,
+                'message'   =>  'Error: Se ha encontrado más de una pieza con ese número'
+            ), 200);
+
+        }
+
+
+        switch ($cantidadRegistros) {
+            case 0:
+                return Response::json(array(
+                        'code'      =>  200,
+                        'message'   =>  'No se han encontrado piezas'
+                    ), 200);
+
+            case 1:
+                //dd( empty( $inventario[0]->factura ) ) ;
+                $vendida = empty( $inventario[0]->factura ) ? 'falso' : 'verdadero';
+                if ( empty( $inventario[0]->factura ) ) 
+                {
+
+                    return Response::json(array(    
+                        'code'      =>  200,
+                        'message'   =>  'Pieza recuperada correctamente',
+                        'vendida'   =>  $vendida,
+                        'piezas'=>$inventario,
+                    ), 200);  
+
+
+                }
+                else
+                {
+                return Response::json(array(    
+                    'code'      =>  200,
+                    'message'   =>  'Pieza vendida',
+                    'vendida'   =>  $vendida,
+                  ), 200);                  
+
+                }
+                 
+
+        }
+
+
+
+        // if $cantidadRegistros=1
+        // {
+        //     return response()->json([
+        //         'piezas'=>$inventario,
+        //     ]);
+        // }
+
+        // if $cantidadRegistros=0
+        // {
+        //     return response()->json([
+        //         'piezas'=>$inventario,
+        //     ]);
+        // }        
+
+
+
+
     }
 
 

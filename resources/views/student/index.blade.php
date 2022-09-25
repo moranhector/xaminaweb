@@ -157,18 +157,18 @@
                 dataType: "json",
                 success: function (response) {
                      console.log(response);
-                    // $('tbody').html("");
-                    // $.each(response.students, function (key, item) {
-                    //     $('tbody').append('<tr>\
-                    //         <td>' + item.id + '</td>\
-                    //         <td>' + item.name + '</td>\
-                    //         <td>' + item.course + '</td>\
-                    //         <td>' + item.email + '</td>\
-                    //         <td>' + item.phone + '</td>\
-                    //         <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button></td>\
-                    //         <td><button type="button" value="' + item.id + '" class="btn btn-danger deletebtn btn-sm">Delete</button></td>\
-                    //     \</tr>');
-                    // });
+                     $('tbody').html("");
+                     $.each(response.students, function (key, item) {
+                         $('tbody').append('<tr>\
+                             <td>' + item.id + '</td>\
+                             <td>' + item.name + '</td>\
+                             <td>' + item.course + '</td>\
+                             <td>' + item.email + '</td>\
+                             <td>' + item.phone + '</td>\
+                             <td><button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button></td>\
+                             <td><button type="button" value="' + item.id + '" class="btn btn-danger deletebtn btn-sm">Delete</button></td>\
+                         \</tr>');
+                     });
                 }
             });
         }
