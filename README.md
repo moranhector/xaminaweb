@@ -955,107 +955,6 @@ Controlador
 
  
 
-
-<script>
-     
-     $(document).ready(function(){
-        
-        $("#add_detail").click(function(){
-   
-           //window.alert("entro adddetail");
-            agregar_renglon_factura();
-        });
-   
-     });
-
-
-     $('#pieza').keydown(function(e) 
-     { console.log('keyup called');
-         var code = e.keyCode || e.which; 
-         if (code == '9') { 
-            
-
-            var nPieza = document.getElementById('pieza').value;
-             
-            //miurl = "/fetch-pieza/"+nPieza ;
-            //alert(miurl); 
-
-            $.ajax({
-                    type: "GET",
-                    url: "/fetch-pieza/"+nPieza,
-                    dataType: "json",
-                   success: function (response) {
-                        console.log(response);
-                        $("#precio_venta").val(response.piezas[0].precio);
-                        $("#descrip").val(response.piezas[0].namepieza);
-
-                        agregar_renglon_factura();
-
-
-                    }
-                });
-
-
-
-
-
-
-
-            return false;
-         } });
-
-
-
-       function agregar_renglon_factura(){
- 
-
-            producto_id = $("#producto_id").val();
-            descrip = $("#descrip").val();
-            precio_venta= $("#precio_venta").val();                        
-            pieza= $("#pieza").val();                        
-               
-            
-              
- 
-   
-                      
-   
-   
-                       subtotal[cont]=(  precio_venta);
-                       //_subtotal = subtotal[cont] ;
-                       total= total+subtotal[cont];
-   
-                       var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
-                       concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="_producto_id[]"   value="'+pieza+'" readonly ></td>',
-                               '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
-                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly ></td>',
-                               '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly   ></td></tr>');
-   
-                       limpiar();
-                       totales();
-                        
-                       evaluar();
-   
-   
-   
-                       $('#detalles').append(fila);
-             
-            
-        }
-
-
-        function limpiar(){
-           
-           $("#id_inventario").val("");
-           $("#precio_venta").val("");
-           $("#descrip").val("");
-           $("#pieza").val("");
-   
-        }
-
-
-
 25/9/2022.
 
 Qué sigue?
@@ -1083,3 +982,7 @@ Cargar datos de Cliente en Forma Rápída.
 
 Refinar Index de Facturas, filtro, paginado, etc.
 
+
+
+Ya validar si la pieza existe.
+Ya valida si fue vendida.
