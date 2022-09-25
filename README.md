@@ -895,5 +895,21 @@ Necesito la copia actual del inventario y del programa.
 
 Logré la primera factura de XaminaWeb
 
+Próximos pasos: 
+
+Refinar la grabación de la factura.
+Descontar del Inventario al vender.
+Tener en cuenta el depósito de venta.
+
+Ir a Mercado Artesanal y obtener una copia de la base y del programa.
+Pedir numero de expediente.
+Preguntar a Felipe si se implementa la CONSIGNACION.
 
 
+
+22/9/2022.
+
+Vamos a implementar un formulario Modal para insertar artículos.
+
+
+php artisan migrate --path='./database/migrations/2022_09_22_192913_create_students_table.php'

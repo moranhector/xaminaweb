@@ -160,6 +160,15 @@
 @stack('page_scripts')
 </body>
 
+<!-- 
+██████╗ ███████╗ ██████╗██╗██████╗  ██████╗ ███████╗
+██╔══██╗██╔════╝██╔════╝██║██╔══██╗██╔═══██╗██╔════╝
+██████╔╝█████╗  ██║     ██║██████╔╝██║   ██║███████╗
+██╔══██╗██╔══╝  ██║     ██║██╔══██╗██║   ██║╚════██║
+██║  ██║███████╗╚██████╗██║██████╔╝╚██████╔╝███████║
+╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═════╝  ╚═════╝ ╚══════╝ -->
+                                                    
+
 
 <script>
      
@@ -304,6 +313,17 @@
         
     </script>
 
+<!-- 
+███████╗ █████╗  ██████╗████████╗██╗   ██╗██████╗  █████╗ ███████╗
+██╔════╝██╔══██╗██╔════╝╚══██╔══╝██║   ██║██╔══██╗██╔══██╗██╔════╝
+█████╗  ███████║██║        ██║   ██║   ██║██████╔╝███████║███████╗
+██╔══╝  ██╔══██║██║        ██║   ██║   ██║██╔══██╗██╔══██║╚════██║
+██║     ██║  ██║╚██████╗   ██║   ╚██████╔╝██║  ██║██║  ██║███████║
+╚═╝     ╚═╝  ╚═╝ ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+                                                                  
+
+ -->
+
 
 
 
@@ -318,6 +338,47 @@
         });
    
      });
+
+
+     $('#pieza').keydown(function(e) 
+     { console.log('keyup called');
+         var code = e.keyCode || e.which; 
+         if (code == '9') { 
+            
+
+            var nPieza = document.getElementById('pieza').value;
+             
+            //miurl = "/fetch-pieza/"+nPieza ;
+            //alert(miurl); 
+
+            $.ajax({
+                    type: "GET",
+                    url: "/fetch-pieza/"+nPieza,
+                    dataType: "json",
+                   success: function (response) {
+                        console.log(response);
+                        $("#precio_venta").val(response.piezas[0].precio);
+                        $("#descrip").val(response.piezas[0].namepieza);
+
+                        agregar_renglon_factura();
+
+
+                    }
+                });
+
+
+
+
+
+
+
+            return false;
+         } });
+
+ 
+
+
+
    
       var cont=0;
       total=0;
@@ -336,41 +397,29 @@
         */
    
         function agregar_renglon_factura(){
-            //window.alert("agregar");
-            //datosProducto = document.getElementById('id_producto').value.split('_');
-   
-            //id_producto= datosProducto[0];
-            //producto= $("#id_producto option:selected").text();
+ 
 
-            cantidad= $("#cantidad").val();
-            //precio_venta= $("#precio_venta").val();            
-
-            articulos_data = $("#id_inventario").val();
-            articulos_data = articulos_data.split('_') ;
-            producto_id = articulos_data[0] ;
-
-            // _id_tipo_pieza = articulos_data[0];
-
-            descrip = articulos_data[2] ;
-            //precio_venta= articulos_data[1];            
-            precio_venta= $("#precio_venta").val();
+            producto_id = $("#producto_id").val();
+            descrip = $("#descrip").val();
+            precio_venta= $("#precio_venta").val();                        
+            pieza= $("#pieza").val();                        
+               
             
-            //console.log('_descrip',_descrip);         
+              
  
    
-             if(cantidad!="" && cantidad>0 ){            
+                      
    
    
-                       subtotal[cont]=( cantidad * precio_venta);
+                       subtotal[cont]=(  precio_venta);
                        //_subtotal = subtotal[cont] ;
                        total= total+subtotal[cont];
    
                        var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'" readonly ></td>',
+                               '<td><input type="text"   name="_producto_id[]"   value="'+pieza+'" readonly ></td>',
                                '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
                                '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly ></td>',
-                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly ></td>',
                                '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly   ></td></tr>');
    
                        limpiar();
@@ -381,8 +430,7 @@
    
    
                        $('#detalles').append(fila);
-              
-               }
+             
             
         }
    
@@ -390,18 +438,19 @@
         function limpiar(){
            
            $("#id_inventario").val("");
-           $("#cantidad").val("");
            $("#precio_venta").val("");
+           $("#descrip").val("");
+           $("#pieza").val("");
    
         }
    
         function totales(){
    
-           //$("#total").html("$ " + total.toFixed(2));
+           
            
    
-           $("#total_pagar_html").html("$ " + total.toFixed(2));
-           $("#total_pagar").val(total.toFixed(2));
+           //$("#total_pagar_html").html("$ " + total.toFixed(2));
+           //$("#total_pagar").val(total.toFixed(2));
          }
    
    

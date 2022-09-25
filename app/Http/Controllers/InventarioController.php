@@ -48,6 +48,27 @@ class InventarioController extends AppBaseController
             ->with('inventarios', $inventarios);
     }
 
+
+    // http://localhost:8000/fetch-pieza/090981
+    // esto anda ok
+
+    public function fetchpieza($pieza)
+    {
+        
+        
+        //dd($pieza);
+
+        $inventario = DB::table('inventarios')
+        ->where('npieza',$pieza ) 
+        ->get( ) ;   
+
+        return response()->json([
+            'piezas'=>$inventario,
+        ]);
+    }
+
+
+
     /**
      * Show the form for creating a new Inventario.
      *

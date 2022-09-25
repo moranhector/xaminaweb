@@ -102,44 +102,37 @@ function abre_buscador() {
 
 
 
-    <div class="col-md-3">
-            <label class="form-control-label" for="articulo">Pieza</label>
-
-        
-            <!--<input type="number" id="articulo" name="articulo" class="form-control" > -->
-
-            <select class="form-control selectpicker" name="id_inventario[]" id="id_inventario" data-live-search="true" >
-                                                                
-                <option value="0" selected>Seleccione pieza</option>
-                
-                                                                
-                @foreach($articulos as $artic)
-                                                                
-                    <option value="{{$artic->id}}_{{$artic->precio}}_{{$artic->namepieza}}">{{$artic->id}}-{{$artic->namepieza}}</option>
-                                                                        
-                @endforeach
-                                    
-            </select>
+ 
 
 
+            <input type="hidden"  id="id_inventario" name="id_inventario" class="form-control"   >
 
+ 
 
-    </div>
+    <div class="col-md-2">
+            <label class="form-control-label" for="pieza">Pieza</label>
+            
+            <input type="text"  id="pieza" name="pieza" class="form-control" placeholder="pieza" >
+    </div>  
+
+    <div class="col-md-2">
+            <label class="form-control-label" for="descrip">Descrip</label>
+            
+            <input type="text"  id="descrip" name="descrip" class="form-control"   >
+    </div>      
 
 
     <div class="col-md-2">
             <label class="form-control-label" for="precio_venta">Precio</label>
             
-            <input type="text"  id="precio_venta" name="precio_venta[]" class="form-control" placeholder="Precio de venta" >
+            <input type="text"  id="precio_venta" name="precio_venta" class="form-control"   >
     </div>
 
+  
 
 
-    <div class="col-md-2">
-            <label class="form-control-label" for="cantidad">Cantidad</label>
-            
-            <input type="text"   id="cantidad" name="cantidad[]" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}">
-    </div>
+
+
 
 
 </div>
@@ -165,10 +158,9 @@ function abre_buscador() {
   <thead>
       <tr class="bg-success">
           <th>Acción</th>
-          <th>Id</th>
+          <th>Pieza</th>
           <th>Descripción</th>
           <th>Precio $</th>
-          <th>Cantidad</th>
           <th>Subtotal $</th>
       </tr>
   </thead>
@@ -193,5 +185,4 @@ function abre_buscador() {
 </div>
 
 </div>
-
 
