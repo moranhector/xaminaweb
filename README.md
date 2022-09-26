@@ -986,3 +986,48 @@ Refinar Index de Facturas, filtro, paginado, etc.
 
 Ya validar si la pieza existe.
 Ya valida si fue vendida.
+
+26/6/2022.
+Lunes
+
+Reunion M.A. J.F: Lo de consignación va.
+
+
+Implementar con depósitosy piezas en consignación.
+Pedir CUIT del Artesano y Factura de Compra.
+
+Para mañana:
+
+Eduardo Barressi: 
+Pedir Lector, 
+Pedir copia de facturas de venta.
+Consultar cómo registra la factura en Afip.
+Posibilidad de Importar los archivos extraídos de Afip.
+Pedir número de Expediente.
+Copiar Base de Xamina y Programa.
+
+
+Hoy: -
+-Refinar la Factura de Venta.
+-Revisar la grabación de la factura.
+-Descargar pieza de Existencia.
+
+-Reporte de Inventario entre fecha.
+
+
+Incorporé la función inventario_fecha.
+
+Controller
+public function inventario_fecha(Request $request)
+
+
+Ruta:
+Route::get('inventario_fecha','App\Http\Controllers\InventarioController@inventario_fecha')->name('inventario_fecha');;
+
+Vista:
+resources\views\inventarios\inventario_fecha.blade.php
+C:\xampp\htdocs\xaminaweb\resources\views\inventarios\table_inventario_fecha.blade.php
+
+Para mañana ... Dar consistencia al informe de inventario a Fecha.
+Incorporar botones de Excel y PDF.
+

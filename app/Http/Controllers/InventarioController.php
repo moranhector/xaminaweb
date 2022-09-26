@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+include('funciones.php');
 
 class InventarioController extends AppBaseController
 {
@@ -264,4 +266,84 @@ class InventarioController extends AppBaseController
 
         return redirect(route('inventarios.index'));
     }
+
+
+    /**
+     * Display a listing of the Inventario.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function inventario_fecha(Request $request)
+    {
+
+      
+        
+
+        $fecha_hasta  = $request->get('fecha_hasta');
+        if($fecha_hasta)
+        {
+            //dd($fecha_hasta);
+        }
+        else
+        {       
+             //Si no viene la fecha la ponemos por defecto
+
+            $mytime= Carbon::now('America/Argentina/Mendoza');
+            $hoy= $mytime->toDateString();               
+            $fecha_hasta = $hoy;
+            //dd('fecha de hoy',$hoy );
+
+
+        }
+
+
+
+        $namepieza  = $request->get('namepieza');
+
+        if($namepieza)
+        {        
+
+
+            $cSelect =    
+            "SELECT * FROM inventarios 
+            WHERE 
+            namepieza like '%$namepieza%' 
+            and
+            comprado_at <= '2022-07-31'
+            AND ( vendido_at IS NULL OR vendido_at > '2022-07-31' )";
+            $inventarios = collect(  DB::select(DB::raw($cSelect)) ) ->paginate(100);                         
+
+
+
+            //  $inventarios = DB::table('inventarios')
+            //  ->where('namepieza','like','%'.$namepieza.'%' ) 
+            //  ->orWhere('npieza','like','%'.$namepieza.'%' ) 
+            //  ->paginate( 100 ) ;   
+
+            $data['inventarios'] = $inventarios;     
+            $data['namepieza'] = $namepieza;     
+
+            Flash::success('Filtrando '.$namepieza);            
+
+            return view('inventarios.inventario_fecha',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
+        } 
+        else
+        {
+            //$inventarios = Inventario::all()->paginate(25);
+            //$inventarios = DB::table('inventarios')->paginate(25);
+
+            $cSelect =    
+            "SELECT * FROM inventarios WHERE comprado_at <= '2022-07-31' AND ( vendido_at IS NULL OR vendido_at > '2022-07-31' )";
+            $inventarios = collect(  DB::select(DB::raw($cSelect)) )->paginate(15);               
+
+
+
+        }
+        return view('inventarios.inventario_fecha')
+            ->with('inventarios', $inventarios);
+    }    
+
+
 }

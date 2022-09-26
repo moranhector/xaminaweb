@@ -119,9 +119,9 @@
     </a>
 </li>
 
-<!-- <li class="nav-item">
-    <a href="{{ route('estudiantes') }}"
-       class="nav-link {{ Request::is('estudiantes*') ? 'active' : '' }}">
-        <p>Estudiantes</p>
+<li class="nav-item">
+    <a href="{{ route('inventario_fecha') }}"
+       class="nav-link {{ Request::is('Inventario_fecha') ? 'active' : '' }}">
+        <p>Inventario a fecha</p>
     </a>
-</li> -->
+</li>

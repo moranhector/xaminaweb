@@ -72,6 +72,12 @@ Route::resource('depositos', App\Http\Controllers\DepositoController::class);
 Route::resource('inventarios', App\Http\Controllers\InventarioController::class);
 
 
+//use App\Http\Controllers\InventarioController;
+
+Route::get('inventario_fecha','App\Http\Controllers\InventarioController@inventario_fecha')->name('inventario_fecha');;
+
+
+
 Route::resource('talonarios', App\Http\Controllers\TalonarioController::class);
 
 
