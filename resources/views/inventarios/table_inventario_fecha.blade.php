@@ -2,10 +2,10 @@
     <table class="table" id="inventarios-table">
         <thead>
         <tr>
-            <th>Codigo12</th>
+        <th>Pieza Nº</th>    
         <th>Tipopieza Id</th>
-        <th>Npieza</th>
-        <th>Namepieza</th>
+        <th>Tipopieza</th>
+        <th>Descripción</th>
         <!-- <th>Comprob</th> -->
         <!-- <th>Recibo Id</th>
         <th>Factura</th>
@@ -24,24 +24,25 @@
         <tbody>
         @foreach($inventarios as $inventario)
             <tr>
-                <td>{{ $inventario->codigo12 }}</td>
-            <td>{{ $inventario->tipopieza_id }}</td>
             <td>{{ $inventario->npieza }}</td>
+            <td>{{ $inventario->tipopieza_id }}</td>
+            <td>{{ $inventario->descrip }}</td>
+            
             <td>{{ $inventario->namepieza }}</td>
-            <!-- <td>{{ $inventario->comprob }}</td> -->
-            <!-- <td>{{ $inventario->recibo_id }}</td>
-            <td>{{ $inventario->factura }}</td>
-            <td>{{ $inventario->factura_id }}</td>
-            <td>{{ $inventario->costo }}</td>
+            <!-- <td>{ { $inventario->comprob } }</td> -->
+            <!-- <td>{ { $inventario->recibo_id } }</td>
+            <td>{ { $inventario->factura }}</td>
+            <td>{ { $inventario->factura_id }}</td>
+            <td>{ { $inventario->costo }}</td>
          
-            <td>{{ $inventario->artesano_id }}</td>
-            <td>{{ $inventario->comprado_at }}</td>
-            <td>{{ $inventario->vendido_at }}</td>
-            <td>{{ $inventario->precio }}</td>
-            <td>{{ $inventario->precio_at }}</td>
-            <td>{{ $inventario->foto }}</td> -->
+            <td>{ { $inventario->artesano_id }}</td>
+            <td>{ { $inventario->comprado_at }}</td>
+            <td>{ { $inventario->vendido_at }}</td>
+            <td>{ { $inventario->precio }}</td>
+            <td>{ { $inventario->precio_at }}</td>
+            <td>{ { $inventario->foto }}</td> -->
                 <td width="120">
-                    {!! Form::open(['route' => ['inventarios.destroy', $inventario->id], 'method' => 'delete']) !!}
+                   
                     <div class='btn-group'>
                         <a href="{{ route('inventarios.show', [$inventario->id]) }}"
                            class='btn btn-default btn-xs'>
@@ -51,9 +52,9 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+   
                     </div>
-                    {!! Form::close() !!}
+                   
                 </td>
             </tr>
         @endforeach

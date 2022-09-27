@@ -23,6 +23,14 @@ Layout App Principal
 
 project://resources\views\layouts\app.blade.php
 
+Pantalla Home 
+project://resources\views\welcome.blade.php
+
+clase con la imagen de background de fondo main-top
+project://public\css\w3style.css#509
+
+Pantalla Login
+project://resources\views\auth\login.blade.php
 
 - M E N U -
 project://resources\views\layouts\menu.blade.php#0,0

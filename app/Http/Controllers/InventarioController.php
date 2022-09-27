@@ -282,67 +282,61 @@ class InventarioController extends AppBaseController
         
 
         $fecha_hasta  = $request->get('fecha_hasta');
-        if($fecha_hasta)
-        {
-            //dd($fecha_hasta);
-        }
-        else
+
+
+        if( !$fecha_hasta )   //IF NOT FECHA_HASTA
         {       
              //Si no viene la fecha la ponemos por defecto
 
             $mytime= Carbon::now('America/Argentina/Mendoza');
             $hoy= $mytime->toDateString();               
             $fecha_hasta = $hoy;
-            //dd('fecha de hoy',$hoy );
+      
 
 
         }
-
-
-
+        // Paso la fecha a Frances
+        $fecha_hasta_french = american2frech( $fecha_hasta)  ; 
         $namepieza  = $request->get('namepieza');
 
-        if($namepieza)
-        {        
-
-
-            $cSelect =    
-            "SELECT * FROM inventarios 
-            WHERE 
-            namepieza like '%$namepieza%' 
-            and
-            comprado_at <= '2022-07-31'
-            AND ( vendido_at IS NULL OR vendido_at > '2022-07-31' )";
-            $inventarios = collect(  DB::select(DB::raw($cSelect)) ) ->paginate(100);                         
-
-
-
-            //  $inventarios = DB::table('inventarios')
-            //  ->where('namepieza','like','%'.$namepieza.'%' ) 
-            //  ->orWhere('npieza','like','%'.$namepieza.'%' ) 
-            //  ->paginate( 100 ) ;   
-
-            $data['inventarios'] = $inventarios;     
-            $data['namepieza'] = $namepieza;     
-
-            Flash::success('Filtrando '.$namepieza);            
-
-            return view('inventarios.inventario_fecha',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
-        } 
-        else
+        
+        if ($namepieza)
         {
-            //$inventarios = Inventario::all()->paginate(25);
-            //$inventarios = DB::table('inventarios')->paginate(25);
-
-            $cSelect =    
-            "SELECT * FROM inventarios WHERE comprado_at <= '2022-07-31' AND ( vendido_at IS NULL OR vendido_at > '2022-07-31' )";
-            $inventarios = collect(  DB::select(DB::raw($cSelect)) )->paginate(15);               
-
-
+            $filtroPorPieza = " namepieza like '%$namepieza%' and ";
 
         }
-        return view('inventarios.inventario_fecha')
-            ->with('inventarios', $inventarios);
+        else
+        {
+            $filtroPorPieza = ' ';
+            $namepieza ='';
+        }
+
+
+        $cSelect =    
+        "SELECT * FROM inventarios 
+        WHERE $filtroPorPieza      
+        comprado_at <= '$fecha_hasta'
+        AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' )";    
+        
+        $cSelect = 
+        "SELECT i.id,i.codigo12,i.npieza, i.namepieza,i.tipopieza_id,t.descrip FROM inventarios i     
+        INNER JOIN tipopiezas t
+        ON i.tipopieza_id = t.id 
+        WHERE $filtroPorPieza      
+        comprado_at <= '$fecha_hasta'
+        AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' )";  
+
+ 
+        $inventarios = collect(  DB::select(DB::raw($cSelect)) ) ->paginate(100);                         
+
+        $data['inventarios'] = $inventarios;     
+        $data['namepieza'] = $namepieza;     
+
+    
+        Flash::success('Inventario a fecha: '.$fecha_hasta_french.'  Piezas: '.$namepieza);             
+
+        return view('inventarios.inventario_fecha',["inventarios"=>$inventarios,"namepieza"=>$namepieza]);            
+ 
     }    
 
 

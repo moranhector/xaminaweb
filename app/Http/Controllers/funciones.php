@@ -37,3 +37,40 @@ function Val($cNumero)
 
 
 }
+
+
+ 
+
+//$americandate_venc = french2american( $request->date_venc ) ;
+// // DD/MM/AAAA    AAAA-MM-DD  
+function french2american( $frenchdate)
+{
+$dia = substr($frenchdate,0,2);
+$mes = substr($frenchdate,3,2);
+$ano = substr($frenchdate,6,4);
+
+//dd($ano.'-'.$mes.'-'.$dia) ;
+return $ano.'-'.$mes.'-'.$dia;
+
+}
+
+function american2frech( $americandate)
+{
+    //2022-12-31
+    $dia = substr($americandate,8,2);
+    $mes = substr($americandate,5,2);
+    $ano = substr($americandate,0,4);
+    
+    //dd($ano.'-'.$mes.'-'.$dia) ;
+    return $dia.'/'.$mes.'/'.$ano; 
+ 
+return $dtdate;
+
+}
+
+
+
+
+        //$dt2 = Carbon::createFromDate(1987, 4, 23);
+        //$dt = Carbon::createFromDate( $cYear, $cMonth, $day);
+        //$dtdate =$dt->format('Y-m-d');
