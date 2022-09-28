@@ -9,6 +9,7 @@ use App\Models\Existencia;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
 
 class ExistenciaController extends AppBaseController
 {
@@ -19,7 +20,7 @@ class ExistenciaController extends AppBaseController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index_old(Request $request)
     {
         /** @var Existencia $existencias */
         $existencias = Existencia::all();
@@ -27,6 +28,35 @@ class ExistenciaController extends AppBaseController
         return view('existencias.index')
             ->with('existencias', $existencias);
     }
+
+    public function index(Request $request)
+    {
+
+        $namepieza  = $request->get('namepieza');
+
+        if($namepieza)
+        {        
+            $existencias = DB::table('vw_existencias')
+            ->where('namepieza','like','%'.$namepieza.'%' ) 
+            ->orWhere('npieza','like','%'.$namepieza.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['existencias'] = $existencias;     
+            $data['namepieza'] = $namepieza;     
+
+            Flash::success('Filtrando '.$namepieza);            
+
+            return view('existencias.index',["existencias"=>$existencias,"namepieza"=>$namepieza]);            
+        } 
+        else
+        {
+            //$inventarios = Inventario::all()->paginate(25);
+            $existencias = DB::table('vw_existencias')->paginate(25);
+        }
+        return view('existencias.index')
+            ->with('existencias', $existencias);
+    }    
+
 
     /**
      * Show the form for creating a new Existencia.

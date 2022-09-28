@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Edit Tipopieza</h1>
+                    <h1>Editar Tipo de pieza</h1>
                 </div>
             </div>
         </div>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('tipopiezas.index') }}" class="btn btn-default">Cancel</a>
+                {!! Form::submit('Grabar', ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('tipopiezas.index') }}" class="btn btn-default">Cancelar</a>
             </div>
 
             {!! Form::close() !!}

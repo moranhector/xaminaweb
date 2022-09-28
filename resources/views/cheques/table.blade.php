@@ -9,7 +9,7 @@
         <!-- <th>Depositado</th> -->
         <th STYLE="text-align: right;" >Saldo</th>
         <th>Rendido</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>

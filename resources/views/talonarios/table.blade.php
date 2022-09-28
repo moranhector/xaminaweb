@@ -7,7 +7,7 @@
         <th>Próximo</th>
         <th>Fecha vencimiento</th>
         <th>Ultima Actualización</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

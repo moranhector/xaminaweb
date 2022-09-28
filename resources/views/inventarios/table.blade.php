@@ -18,7 +18,7 @@
         <th>Precio</th>
         <th>Precio At</th>
         <th>Foto</th> -->
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>

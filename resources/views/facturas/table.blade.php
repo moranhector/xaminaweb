@@ -9,7 +9,7 @@
         <th>Cliente Id</th>
         <th>Total</th>
         <th>Documento</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>

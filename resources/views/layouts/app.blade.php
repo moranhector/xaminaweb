@@ -100,8 +100,8 @@
         <div class="float-right d-none d-sm-block">
             <b>Version</b> 3.1.0
         </div>
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-        reserved.
+        <strong>Mercado Artesanal - 2022 <a href="https://www.mendoza.gov.ar/desarrollosocial/">Desarrollo Social </a>.</strong> Gobierno de Mendoza
+        
     </footer>
 </div>
 
@@ -371,7 +371,7 @@
                             $("#precio_venta").val(response.piezas[0].precio);
                             $("#descrip").val(response.piezas[0].namepieza);
 
-                            agregar_renglon_factura();
+                            //agregar_renglon_factura();
 
                         
                         
@@ -485,8 +485,9 @@
         function eliminar(index){
    
            total=total-subtotal[index];
-           total_impuesto= total*20/100;
-           total_pagar_html = total + total_impuesto;
+
+           //total_impuesto= total*20/100;
+           total_pagar_html = total ;
    
            $("#total").html("USD$" + total);
            $("#total_impuesto").html("USD$" + total_impuesto);

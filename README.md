@@ -1005,6 +1005,12 @@ Consultar cómo registra la factura en Afip.
 Posibilidad de Importar los archivos extraídos de Afip.
 Pedir número de Expediente.
 Copiar Base de Xamina y Programa.
+Sacar fotos a Facturas de Afip.
+fotos de recibos.
+Recibos en consignación fotos.
+Facturas en consignación fotos.
+
+
 
 
 Hoy: -
@@ -1030,4 +1036,46 @@ C:\xampp\htdocs\xaminaweb\resources\views\inventarios\table_inventario_fecha.bla
 
 Para mañana ... Dar consistencia al informe de inventario a Fecha.
 Incorporar botones de Excel y PDF.
+
+
+
+Factura:
+Permitir editar el número de documento y nombre del Cliente
+
+Al grabar, si no existe, dar de alta el cliente.
+En formulario: descrip
+
+No limpiar formulario.
+
+Botón de eliminar renglones.
+
+Ojo: Problema, al no seleccionar cliente, da el error y borra la grilla.
+
+ERROR No está increntando el total a pagar
+
+
+28 de septiembre.
+
+Mejoras en aspecto.
+Traducción de etiquetas en Inglés.
+Mejoras a Index de Existencias. Filtro en Existencias. Paginado.
+Creación de Vista vw_existencias.
+
+
+SELECT e.inventario_id,i.npieza, i.namepieza,i.tipopieza_id,t.descrip, e.deposito_id , d.nombre,
+e.documento, e.fecha_desde, e.documento_sal , e.fecha_hasta
+FROM existencias e
+INNER JOIN inventarios i
+ON e.inventario_id= i.id
+INNER JOIN tipopiezas t
+ON i.tipopieza_id= t.id
+INNER JOIN depositos d
+ON e.deposito_id = d.id ;
+
+SELECT * FROM vw_existencias
+
+
+
+Mejoras en Facturas.
+Puede registrar un cliente en línea.
 

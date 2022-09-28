@@ -217,14 +217,15 @@ class FacturaController extends AppBaseController
     }
 
   /**
-     * Guardar recibo
+     * Guardar Factura
      *
-     * @param CreateReciboRequest $request
-     *
-     * @return Response
+     *  
+     *  
      */
     public function guardar(Request $request)
     {
+
+        //dd($request);
 
         try {
 
@@ -258,19 +259,20 @@ class FacturaController extends AppBaseController
 
                 // Your Eloquent query executed by using get()
                 $cliente = Cliente::where('documento', $request->documento  )->first();                 
-                
-                //dd(\DB::getQueryLog()); // Show results of log
-
-
-                   
-
+                 
                 if ( !$cliente ) {
                     // Handle error here
-                    Flash::error('Seleccione el cliente' );                    
-                    return back()->with('error', 'Seleccione el cliente');                    
+                    //Flash::error('Seleccione el cliente' );                    
+                    //return back()->with('error', 'Seleccione el cliente');                    
+                    $cliente = new Cliente();
+                    $cliente->nombre    = $request->cliente_nombre;
+                    $cliente->documento = $request->documento;
+                    $cliente->ivacond   = "CONSUMIDOR FINAL";
+                    $cliente->save();
+                    
                 }   
 
-
+        
                 
                 //datos a guardar en Recibo
                 $factura = new Factura();
@@ -282,10 +284,6 @@ class FacturaController extends AppBaseController
                 $factura->total = $request->total_pagar;
                 
                 
-
-
-                
-
 
             
                 //GUARDAR USUARIO
@@ -304,7 +302,8 @@ class FacturaController extends AppBaseController
         
                     $detalle->factura_id     = $factura->id;
                     $detalle->inventario_id  = $request->_producto_id[$cont];
-                    $detalle->cantidad      = $request->_cantidad[$cont];
+                    //$detalle->cantidad      = $request->_cantidad[$cont];
+                    $detalle->cantidad      = 1 ;
                     $detalle->preciounit    = $request->_precio_venta[$cont];
                     $detalle->importe       = $request->_subtotal[$cont];
                     //$detalle->updated_at    = null ;

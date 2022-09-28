@@ -2,25 +2,31 @@
     <table class="table" id="existencias-table">
         <thead>
         <tr>
-            <th>Inventario Id</th>
-        <th>Tipodoc</th>
+        <th>Id</th>
+        <th>Número de Pieza</th>
+        <th>Descripción</th>
+        <th>Tipo de pieza</th>
+        <th>Depósito</th>
+ 
         <th>Documento</th>
-        <th>Deposito Id</th>
-        <th>Tiposalida</th>
-        <th>Documento Sal</th>
+ 
+        <th>Documento Salida</th>
         <th>Fecha Desde</th>
         <th>Fecha Hasta</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>
         @foreach($existencias as $existencia)
             <tr>
                 <td>{{ $existencia->inventario_id }}</td>
-            <td>{{ $existencia->tipodoc }}</td>
+                <td>{{ $existencia->npieza }}</td>
+                <td>{{ $existencia->namepieza }}</td>
+                <td>{{ $existencia->descrip }}</td>
+                <td>{{ $existencia->nombre }}</td>
+ 
             <td>{{ $existencia->documento }}</td>
-            <td>{{ $existencia->deposito_id }}</td>
-            <td>{{ $existencia->tiposalida }}</td>
+ 
             <td>{{ $existencia->documento_sal }}</td>
             <td>{{ $existencia->fecha_desde }}</td>
             <td>{{ $existencia->fecha_hasta }}</td>
@@ -35,7 +41,7 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

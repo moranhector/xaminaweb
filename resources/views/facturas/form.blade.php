@@ -23,9 +23,9 @@ function abre_buscador() {
         <!-- CELDA documento  -->
         <div class="col-md-2">
             <div class="{{ $errors->has('documento') ? 'has-error' : '' }}">
-                <label class="form-control-label" for="documento">Documento</label>                 
+                <label class="form-control-label" for="documento">Documento / CUIL</label>                 
                 <div>
-                    <input class="form-control" name="documento" type="text" id="documento" value="{{ old('documento', optional($factura)->documento) }}" minlength="1" maxlength="11" readonly >
+                    <input class="form-control" name="documento" type="text" id="documento" value="{{ old('documento', optional($factura)->documento) }}" minlength="1" maxlength="11"  >
                     {!! $errors->first('dni', '<p class="help-block">:message</p>') !!}
 
                     <input  type=button class="btn btn-primary" value="Selección de Clientes" onclick="abre_buscador()" >
@@ -42,7 +42,7 @@ function abre_buscador() {
             <div class="{{ $errors->has('cliente_nombre') ? 'has-error' : '' }}">
                 <label class="form-control-label" for="tipo">Nombre del Cliente</label>         
                 <div>
-                    <input class="form-control" name="cliente_nombre" type="text" id="cliente_nombre" value="{{ old('cliente_nombre', optional($factura)->cliente_nombre) }}" minlength="1" readonly>
+                    <input class="form-control" name="cliente_nombre" type="text" id="cliente_nombre" value="{{ old('cliente_nombre', optional($factura)->cliente_nombre) }}" minlength="1" >
                     {!! $errors->first('cliente_nombre', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -125,7 +125,7 @@ insertar pieza en renglones
     
 
     <div class="col-md-2">
-            <label class="form-control-label" for="descrip">Descrip</label>
+            <label class="form-control-label" for="descrip">Descripción</label>
             
             <input type="text"  id="descrip" name="descrip" class="form-control"   >
     </div>      

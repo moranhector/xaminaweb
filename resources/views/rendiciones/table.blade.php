@@ -6,7 +6,7 @@
         <th>Inventario Id</th>
         <th>Recibo Id</th>
         <th>Importe</th>
-            <th colspan="3">Action</th>
+            <th colspan="3">Acción</th>
         </tr>
         </thead>
         <tbody>
