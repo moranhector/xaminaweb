@@ -103,12 +103,12 @@
 </li>
 
 
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a href="{{ route('faclineas.index') }}"
        class="nav-link {{ Request::is('faclineas*') ? 'active' : '' }}">
         <p>Faclineas</p>
     </a>
-</li>
+</li> -->
 
 
 

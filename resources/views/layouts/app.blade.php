@@ -181,6 +181,21 @@
         });
    
      });
+
+        //TECLA ENTER DESHABILITADA
+        //LECTOR DE CODIGOS DE BARRAS
+
+            $("input").keydown(function (e){
+        // Capturamos qué tecla ha sido
+        var keyCode= e.which;
+        // Si la tecla es el Intro/Enter
+        if (keyCode == 13){
+            // Evitamos que se ejecute eventos
+            event.preventDefault();
+            // Devolvemos falso
+            return false;
+        }
+        });     
    
       var cont=0;
       total=0;

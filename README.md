@@ -1079,3 +1079,49 @@ SELECT * FROM vw_existencias
 Mejoras en Facturas.
 Puede registrar un cliente en línea.
 
+29 DE SEPTIEMBRE DE 2022
+Jueves
+Prueba con Lector de Código de Barras
+Al usarlo introduce un Enter.
+Para evitarlo en resources\views\layouts\app.blade.php
+
+        //TECLA ENTER DESHABILITADA
+
+            $("input").keydown(function (e){
+        // Capturamos qué tecla ha sido
+        var keyCode= e.which;
+        // Si la tecla es el Intro/Enter
+        if (keyCode == 13){
+            // Evitamos que se ejecute eventos
+            event.preventDefault();
+            // Devolvemos falso
+            return false;
+        }
+        });   
+
+
+Funciones que están faltando
+
+-Remitos / Renglones de Remitos / Movimiento de Piezas entre depósitos.
+            -Baja por Inventario Físico. ( Remito Especial)
+-Impresión de Obleas
+-Inventario Físico: Cierre, Conteo.
+-Planilla de Ventas entre Fechas.
+
+-Consignaciones: 
+    Recibo de Piezas, 
+    Informe de Piezas en Consignación, 
+    Venta de piezas en Consignación.
+
+
+-Usuarios y Roles.
+
+
+-Impresión PDF y EXCEL en Indexes.
+
+________________________________________________
+
+Remitos: id, Descripción, Fecha Remito, Depósito Desde , Depósito Hacia, user_name
+
+Remitos Renglones: id, npieza, inventario_id, 
+
