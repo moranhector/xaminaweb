@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ url('/home') }}" class="brand-link">
         <!-- SECCION LOGO -->
-        <img src="images/escudo.jpg"
+        <img src="{{asset('images/escudo.jpg')}}"
              alt="{{ config('app.name') }} Logo"
              class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">{{ config('app.name') }}</span>

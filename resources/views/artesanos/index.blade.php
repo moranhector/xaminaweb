@@ -12,56 +12,57 @@
 @endsection -->
 
 @section('content')
-    <section class="content-header">
-        <div class="container-fluid">
+<section class="content-header">
+    <div class="container-fluid">
 
         <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Artesanos</h1>
-                    <div class="col-sm">
-                        <nav class="navbar navbar-light bg-light">
-                        <form class="form-inline" method {{route('artesanos.index')}} >
-                            <input name='nombre' class="form-control mr-sm-2" type="search" placeholder="Buscar por nombre" value="{{ old('nombre') }}" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" title="Filtrar / Quitar Filtro"  type="submit">Filtrar / Quitar Filtro</button>
+            <div class="col-sm-6">
+                <h1>Artesanos</h1>
+                <div class="col-sm">
+                    <nav class="navbar navbar-light bg-light">
+                        <form class="form-inline" method {{route('artesanos.index')}}>
+                            <input name='nombre' class="form-control mr-sm-2" type="search"
+                                placeholder="Buscar por nombre" value="{{ old('nombre') }}" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" title="Filtrar / Quitar Filtro"
+                                type="submit">Filtrar / Quitar Filtro</button>
                         </form>
-                    </nav>                     
-                </div>
-            </div>
-        
-           
- 
-                <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
-                       href="{{ route('artesanos.create') }}">
-                        Registrar nuevo
-                    </a>
-                </div>
-         
-        </div>
-    </section>
-
-    <div class="content px-3">
-
-        @include('flash::message')
-
-        <div class="clearfix"></div>
-
-        <div class="card">
-            <div class="card-body p-0">
-                @include('artesanos.table')
-
-                <div class="card-footer clearfix">
-                    <div class="float-right">
-                        
-                    </div>
+                    </nav>
                 </div>
             </div>
 
+
+
+            <div class="col-sm-6">
+                <a class="btn btn-primary float-right" href="{{ route('artesanos.create') }}">
+                    Registrar nuevo
+                </a>
+            </div>
+
+        </div>
+</section>
+
+<div class="content px-3">
+
+    @include('flash::message')
+
+    <div class="clearfix"></div>
+
+    <div class="card">
+        <div class="card-body p-0">
+            @include('artesanos.table')
+
+            <div class="card-footer clearfix">
+                <div class="float-right">
+
+                </div>
+            </div>
         </div>
 
-
-        {{ $artesanos->links() }}         
     </div>
+
+
+    {{ $artesanos->links() }}
+</div>
 
 @endsection
 

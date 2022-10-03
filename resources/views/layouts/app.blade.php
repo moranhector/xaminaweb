@@ -54,14 +54,14 @@
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                  <!-- SECCION DE LOGO -->
-                    <img src="images/usuario.jpg" class="user-image elevation-4" alt="User Image">
+                    <img src="{{asset('images/usuario.jpg')}}"    class="user-image elevation-4" alt="User Image">
                      
                     <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <!-- IMAGEN DEL USUARIO -->
                     <li class="user-header">
-                        <img src="images/usuario.jpg"
+                        <img src="{{asset('images/usuario.jpg')}}"    
                              class="elevation-4"
                              alt="User Image">
                         <p>
@@ -351,6 +351,12 @@
            //window.alert("entro adddetail");
             agregar_renglon_factura();
         });
+
+        $("#add_remito").click(function(){
+   
+            //window.alert("entro adddetail");
+            agregar_renglon_remito();
+        });        
    
      });
 
@@ -464,6 +470,58 @@
              
             
         }
+
+
+
+// ██████╗ ███████╗███╗   ███╗██╗████████╗ ██████╗ 
+// ██╔══██╗██╔════╝████╗ ████║██║╚══██╔══╝██╔═══██╗
+// ██████╔╝█████╗  ██╔████╔██║██║   ██║   ██║   ██║
+// ██╔══██╗██╔══╝  ██║╚██╔╝██║██║   ██║   ██║   ██║
+// ██║  ██║███████╗██║ ╚═╝ ██║██║   ██║   ╚██████╔╝
+// ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝    ╚═════╝ 
+                                                
+
+
+
+
+
+
+
+
+        function agregar_renglon_remito(){
+ 
+
+        producto_id = $("#producto_id").val();
+        descrip = $("#descrip").val();
+        precio_venta= $("#precio_venta").val();                        
+        pieza= $("#pieza").val();                        
+    
+ 
+
+            subtotal[cont]=(  precio_venta);
+            //_subtotal = subtotal[cont] ;
+            total= total+subtotal[cont];
+
+            var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
+            concat('<i class="fa fa-times fa-2x"></i></button></td>',
+                    '<td><input type="text"   name="_producto_id[]"   value="'+pieza+'" readonly ></td>',
+                    '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
+                    '</tr>');
+
+            limpiar();
+            totales();
+             
+            evaluar();
+
+
+
+            $('#detalles').append(fila);
+  
+ 
+        }
+        
+
+
    
          
         function limpiar(){
@@ -534,7 +592,13 @@
 
 
 
-
+<script type="text/javascript">
+$('#fecha').datetimepicker({
+    format: 'YYYY-MM-DD HH:mm:ss',
+    useCurrent: true,
+    sideBySide: true
+})
+</script>
 
 
 

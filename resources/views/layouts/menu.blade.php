@@ -125,3 +125,14 @@
         <p>Inventario a fecha</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('remitos.index') }}"
+       class="nav-link {{ Request::is('remitos*') ? 'active' : '' }}">
+        <p>Remitos</p>
+    </a>
+</li>
+
+
+ 
+

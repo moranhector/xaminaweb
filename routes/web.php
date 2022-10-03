@@ -112,3 +112,11 @@ Route::delete('delete-student/{id}', [StudentController::class, 'destroy']);
 
 use App\Http\Controllers\InventarioController;
 Route::get('fetch-pieza/{pieza}', [InventarioController::class, 'fetchpieza']);
+
+
+
+
+Route::resource('remitos', App\Http\Controllers\RemitoController::class);
+
+
+Route::resource('remitoLineas', App\Http\Controllers\Remito_lineaController::class);

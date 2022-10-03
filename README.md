@@ -1119,9 +1119,37 @@ Funciones que están faltando
 
 -Impresión PDF y EXCEL en Indexes.
 
+-Corregir problema de logos css pisados?
+
+
+
 ________________________________________________
 
 Remitos: id, Descripción, Fecha Remito, Depósito Desde , Depósito Hacia, user_name
 
 Remitos Renglones: id, npieza, inventario_id, 
 
+2020-10-01 sabado.
+
+Remitos !
+
+Probar insertar javascript con
+
+@push('page_scripts')
+
+@endpush
+
+
+
+
+3/10/2022.
+
+Lunes
+
+Completar funcionalidad Remitos.
+
+Grabar la cantidad de renglones
+
+Avancé con la vista Index de Remitos.
+Corregí el problema de las imagenes de Logo y Side bar con Assets
+Agregué validación en Remito con Throw exception.

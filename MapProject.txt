@@ -39,6 +39,14 @@ Login
 
 project://resources\views\auth\login.blade.php
 
+
+IMAGENES LOGOS
+
+ESCUDO 
+
+project://resources\views\layouts\sidebar.blade.php
+
+
 - T R A D U C C I O N   -   L A N G U A G E
 
 project://resources\lang\en\validation.php 

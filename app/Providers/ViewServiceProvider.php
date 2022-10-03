@@ -29,6 +29,14 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        View::composer(['remitos.fields'], function ($view) {
+            $depositoItems = Deposito::pluck('nombre','id')->toArray();
+            $view->with('depositoItems', $depositoItems);
+        });
+        View::composer(['remitos.fields'], function ($view) {
+            $depositoItems = Deposito::pluck('nombre','id')->toArray();
+            $view->with('depositoItems', $depositoItems);
+        });
         View::composer(['existencias.fields'], function ($view) {
             $depositoItems = Deposito::pluck('nombre','id')->toArray();
             $view->with('depositoItems', $depositoItems);
