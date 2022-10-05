@@ -1153,3 +1153,27 @@ Grabar la cantidad de renglones
 Avancé con la vista Index de Remitos.
 Corregí el problema de las imagenes de Logo y Side bar con Assets
 Agregué validación en Remito con Throw exception.
+
+
+Miércoles 5
+
+En Remito
+
+Cantidad de Piezas
+
+Fecha: solo fecha
+
+Descripción Por favor describa.
+
+Grabar movimiento de pieza.
+
+
+CORREGI PROBLEMA DE TENER TODOS LOS SCRIP ALOJADOS EN LAYOUT.APP
+
+USE STACK(FORMULARIO) DENTRO DE LAYOUT.APP Y PUSH() @push('formularios') EN VISTA
+
+CORREGI PROBLEMAS DE DATEPICKER, USO EL DATEPICKER POR DEFECTO, COMENTE EL QUE VIENE EN APP.
+
+
+
+

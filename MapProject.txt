@@ -76,5 +76,17 @@ formulario
 project://resources\views\facturas\form.blade.php
 
 
+- R E M I T O S
+
+project://app\Http\Controllers\RemitoController.php
+project://app\Models\Remito.php
+project://resources\views\remitos\table.blade.php
+project://resources\views\remitos\index.blade.php
+
+project://resources\views\layouts\app.blade.php#482 JAVASCRIPT
+project://resources\views\remitos\create.blade.php  formulario de Remito
+project://resources\views\remitos\fields.blade.php
+
+
 
 

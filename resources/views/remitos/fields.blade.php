@@ -13,7 +13,7 @@
         <!-- Fecha Field -->
         <div class="col-sm-2">
             <label for="fecha">Fecha:</label>
-            <input class="form-control" id="fecha" name="fecha" type="text">
+            <input class="form-control" id="fecha" name="fecha" type="date">
         </div>
     </div>
 </div>
