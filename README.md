@@ -1176,4 +1176,168 @@ CORREGI PROBLEMAS DE DATEPICKER, USO EL DATEPICKER POR DEFECTO, COMENTE EL QUE V
 
 
 
+7/10/2022
 
+Proximos pasos: Mejorar aspecto de Inicio, wallpaper, dashboard.
+
+
+REMITOS
+Cantidad de piezas
+Consulta de Remito.
+Crear remito en base a devolución de Remito.
+Formato de Fecha de Remito en Index. Poner en French.
+Validar si es posible un movimiento de pieza.
+Fecha: solo fecha
+Descripción Por favor describa.
+Grabar movimiento de pieza.
+Cómo se consulta la posición de una pieza?
+
+Siempre tiene que haber al menos un registro de Existencia de las piezas con el depósito
+    y no puede haber más de uno abierto.
+
+En la migración de inventario dejar las fechas_hasta como NULL.
+    UPDATE existencias SET fecha_hasta = NULL  WHERE fecha_hasta = '0000-00-00 00:00:00'
+    en el campo fecha_vendido tambien dejar NULL
+
+
+En la consulta por INVENTARIO mostrar el historial de las piezas.
+
+Cada Factura o Remito debe fijar desde qué depósito realiza los movimientos. Agregar Campo.
+
+Existirá un depósito llamado Vendida, y otro llamado Baja por inventario físico.
+
+Esta será la consulta completa de una pieza
+
+SELECT i.id,i.npieza, i.namepieza,d.nombre AS deposito, 
+t.descrip AS tipopieza, t.tecnica, a.nombre, a.lugar,
+i.comprado_at, i.costo,i.precio, i.vendido_at
+ FROM existencias e
+INNER JOIN inventarios i 
+ON e.inventario_id = i.id
+INNER JOIN depositos d
+ON e.deposito_id = d.id
+INNER JOIN tipopiezas t
+ON i.tipopieza_id = t.id
+INNER JOIN artesanos a
+ON i.artesano_id = a.id
+WHERE i.id = 126523
+AND e.fecha_hasta IS NULL ;
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+REFINAMIENTO DE FUNCIONALIDADES OCTUBRE.
+________________________________________
+
+
+
+ARTESANOS: 
+CAMPO DE ARTESANO ACTIVO
+Alta de artesano: falta campo Lugar, campo activo.
+Consulta: Piezas compradas por Artesano.
+en Index falta campo Lugar. Filtro de Artesanos activos, 
+Permitir borrar solo si no tiene recibos, ni piezas a su nombre.
+Campos en Columna
+
+
+RUBROS:
+
+Consulta de Inventario por Rubros.
+Consulta de Tipo de Piezas por Rubro.
+Borrar: condición que no exista el rubro en ninguna pieza.
+
+TIPOPIEZAS:
+
+Index: Mostrar la descripción del Rubro NO EL ID
+Consulta: piezas por tipo pieza.
+Borrar: solo si el tipopieza no esta en uso.
+Alta en columna.
+
+
+CHEQUES:
+
+Migrar Cheques desde Xamina.
+
+RECIBOS:
+
+Index: Fecha en French.
+    Nombre artesano.
+
+Borrar: permitir solo si no está rendido. Y hay que devolver plata al cheque.
+Editar: no es válido.
+Consulta del Recibo con renglones.
+
+
+DEPOSITOS:
+
+Inventario por Depósito.
+Borrar: si no está en uso.
+Editar: solo la descripción.
+Index: quitar campo user name.
+Agregar VENDIDA, BAJA, 
+
+
+INVENTARIO / PIEZAS
+
+el id de la pieza será npieza PARA SIMPLIFICAR MANTENIMIENTO
+quito el AUTOINCREMENT DEL ID de la pieza
+
+Index, mostrar consulta maestra.
+borrar: no válido.
+Editar: solo descripciones.
+
+TALONARIOS:
+
+Quitar campo punto de venta.
+Index: fecha vencimiento en FRENCH
+
+Alta y Editado en columnas.
+Labels: corregir.
+
+CLIENTES:
+
+Consulta de facturas por Cliente, 
+
+Piezas vendidas por cliente.
+Ultima compra.
+
+Botón de Alta ADDNEW.
+BORRAR SI NO ESTA EN USO.
+
+Alta automática desde Factura.
+
+FACTURAS:
+
+index: fecha french.
+    Cliente, cuit, nombre.
+Consulta de Factura
+
+
+
+NOTAS DE CREDITO:
+    Para revertir facturas.
+
+
+
+REPORTES:
+
+Ventas entre fechas:
+Compras entre fechas: 
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+consulta de inventario
+
+SELECT i.id,i.npieza, i.namepieza,d.nombre AS deposito, 
+t.descrip AS tipopieza, t.tecnica, a.nombre, a.lugar,
+i.comprado_at, i.costo,i.precio, i.vendido_at, i.factura
+ FROM existencias e
+INNER JOIN inventarios i 
+ON e.inventario_id = i.id
+INNER JOIN depositos d
+ON e.deposito_id = d.id
+INNER JOIN tipopiezas t
+ON i.tipopieza_id = t.id
+INNER JOIN artesanos a
+ON i.artesano_id = a.id
+WHERE i.vendido_at IS NULL 

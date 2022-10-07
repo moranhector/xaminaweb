@@ -5,6 +5,9 @@ CLOSE ALL
 *SET STEP ON 
 DO proyecto 
 
+cCadena = 'truncate xaminaweb.tipopiezas'
+oConexion.ejecutar(cCadena,'buffer')
+
 cCadena = 'select * from xamina.precios order by precio'
 oConexion.ejecutar(cCadena,'cur')
 SELECT cur

@@ -14,22 +14,25 @@ oConexion.ejecutar(cCadena,'buffer')
 
 cCadena = 'select * from xamina.inventario order by precio'
 oConexion.ejecutar(cCadena,'cur')
+
+
 SELECT cur
+
+ 
 *BROWSE
 GO top
 
 DO WHILE !EOF()
 	SELECT cur
 	
-
-	
-	
-	
-
+ 
 	  
-	      cid = fox2my( cur.inventario )
+	    cid = fox2my( cur.npieza )
+	    
+
         ccodigo12 = fox2my(   cur.codigo12 )
         ctipopieza_id = fox2my( cur.codprecio   )
+        
         cnpieza = fox2my( cur.npieza   )
         cnamepieza = fox2my( cur.namepieza   )
         ccomprob = fox2my( cur.comprob    )
@@ -40,7 +43,22 @@ DO WHILE !EOF()
         crecargo = fox2my( cur.recargo )
         cartesano_id = fox2my( cur.nartesano   )
         ccomprado_at = fox2my( cur.fechadesde   )
+        
         cvendido_at = fox2my( cur.fechahasta   )
+        
+        *2604-12-03 000500000063 2019-08-03
+        * REEMPLAZO DE FECHAS INCORRECTAS
+        IF cvendido_at='9202-08-25' 
+        	cVendido_at = '2022-08-25' 
+        ENDIF
+        IF cvendido_at='2604-12-03' 
+        	cVendido_at = '2019-08-03' 
+        endif
+        
+        
+               *CFECHA_HASTA 
+       CFECHA_HASTA = iif( ISNULL( cur.fechahasta) , " NULL , " , "'&cvendido_at', " )
+               
         cprecio = fox2my( cur.precio )
         cprecio_at = fox2my(  cur.fechadesde  )
  
@@ -87,7 +105,7 @@ cCadena = [ INSERT INTO xaminaweb.inventarios ]+;
        ['&crecargo', ]+;
        ['&cartesano_id', ]+;
        ['&ccomprado_at', ]+;
-       ['&cvendido_at', ]+;
+       CFECHA_HASTA +;
        ['&cprecio', ]+;
        ['&cprecio_at', CURRENT_DATE ) ]
        
@@ -114,41 +132,64 @@ cCadena = [ INSERT INTO xaminaweb.inventarios ]+;
              cdocumento = Ccomprob
              cdeposito_id = fox2my( 1 )
              cfecha_desde = ccomprado_at
-             IF EMPTY( cur.factura )
+             IF EMPTY( cur.factura )   && SI NO ESTA VENDIDA NO GRABO LOS CAMPOS DE FACTURA, FECHA DE SALIDA, ETC.
+             
 	             ctiposalida  = fox2my( null )
 	             cdocumento_sal	   = fox2my( null )
 	             cfecha_hasta	 = fox2my( null )
+	             
+				cCadena = [ INSERT INTO xaminaweb.existencias ]+;
+				          [  (id, ]+;
+				          [   Inventario_id, ]+;
+				          [ tipodoc, ]+; 
+				          [ documento, ]+; 
+				          [ deposito_id, ]+; 			          
+				          [ fecha_desde,       ]+;
+				          [ created_at )]+;
+					      [ VALUES ('&cid', ]+;
+					      [ '&cInventario_id',]+;
+	     				  [ '&ctipodoc', ]+; 
+				          [ '&cdocumento', ]+; 
+				          [ '&cdeposito_id', ]+; 			          
+				          [ '&cfecha_desde', ]+;
+				          [ CURRENT_DATE )]			             
+	             
+	             
 	         else    
 	             ctiposalida  = 'FAC'	             
     	         cdocumento_sal	= cur.factura	                          
              	cfecha_hasta   = cvendido_at 	         
+             	
+
+				cCadena = [ INSERT INTO xaminaweb.existencias ]+;
+				          [  (id, ]+;
+				          [   Inventario_id, ]+;
+				          [ tipodoc, ]+; 
+				          [ documento, ]+; 
+				          [ deposito_id, ]+; 			          
+				          [ fecha_desde,       ]+;
+				          [ tiposalida,]+;
+				          [ documento_sal,]+;
+				          [ fecha_hasta,]+;
+				          [ created_at )]+;
+					      [ VALUES ('&cid', ]+;
+					      [ '&cInventario_id',]+;
+	     				  [ '&ctipodoc', ]+; 
+				          [ '&cdocumento', ]+; 
+				          [ '&cdeposito_id', ]+; 			          
+				          [ '&cfecha_desde', ]+;
+				          [ '&ctiposalida',]+;
+				          [ '&cdocumento_sal',]+;
+				          [ '&cfecha_hasta',]+;
+				          [ CURRENT_DATE )]		              	
+             	
 	         endif    
 
 
              cusuario_name = 'migracion'
 
 
-			cCadena = [ INSERT INTO xaminaweb.existencias ]+;
-			          [  (id, ]+;
-			          [   Inventario_id, ]+;
-			          [ tipodoc, ]+; 
-			          [ documento, ]+; 
-			          [ deposito_id, ]+; 			          
-			          [ fecha_desde,       ]+;
-			          [ tiposalida,]+;
-			          [ documento_sal,]+;
-			          [ fecha_hasta,]+;
-			          [ created_at )]+;
-				      [ VALUES ('&cid', ]+;
-				      [ '&cInventario_id',]+;
-     				  [ '&ctipodoc', ]+; 
-			          [ '&cdocumento', ]+; 
-			          [ '&cdeposito_id', ]+; 			          
-			          [ '&cfecha_desde', ]+;
-			          [ '&ctiposalida',]+;
-			          [ '&cdocumento_sal',]+;
-			          [ '&cfecha_hasta',]+;
-			          [ CURRENT_DATE )]			       
+	       
 		  
 
 			oConexion.ejecutar(cCadena, 'buffer')  
