@@ -7,12 +7,16 @@ use App\Http\Requests\UpdateRemitoRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Remito;
 use App\Models\Remito_linea;
+use App\Models\Existencia;
+use App\Models\Talonario;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Exception;
+
+include "funciones.php";
 
 class RemitoController extends AppBaseController
 {
@@ -79,27 +83,16 @@ class RemitoController extends AppBaseController
      */
     public function create()
     {
-        return view('remitos.create');
+        //$fecha_hoy = $date->format('d/m/Y');
+        $fecha_hoy = Carbon::now('America/Argentina/Mendoza');
+        $fecha_hoy= $fecha_hoy->format('d/m/Y');   
+        //dd($mytime);
+
+        return view('remitos.create',[
+            "fecha_hoy"=>$fecha_hoy     
+            ]);
     }
 
-    // /**
-    //  * Store a newly created Remito in storage.
-    //  *
-    //  * @param CreateRemitoRequest $request
-    //  *
-    //  * @return Response
-    //  */
-    // public function storeOriginal(CreateRemitoRequest $request)
-    // {
-    //     $input = $request->all();
-
-    //     /** @var Remito $remito */
-    //     $remito = Remito::create($input);
-
-    //     Flash::success('Remito saved successfully.');
-
-    //     return redirect(route('remitos.index'));
-    // }
 
 
     /**
@@ -116,7 +109,11 @@ class RemitoController extends AppBaseController
         try {
 
             $input = $request->all();
-            //dd($input);
+
+            //fecha al formato americano
+            $fecha_remito = french2american( $request->fecha )  ;          
+
+        
 
 
             $rules = [
@@ -138,43 +135,24 @@ class RemitoController extends AppBaseController
             }
             
 
-
-
-
-            //dd($data)    ;
-
-
-
-            //Fecha
-            $mytime= Carbon::now('America/Argentina/Mendoza');
-            $mytime= $mytime->toDateString();
-            //dd($mytime);
-
-            //dd('$request->documento',$request->documento);
-            //Traer datos del Artesano
-
-            //\DB::enableQueryLog(); // Enable query log
-
-            // Your Eloquent query executed by using get()
   
 
             $remito = new Remito();
-            $remito->fecha = $request->fecha ;
+            $remito->fecha = $fecha_remito ;
             $remito->deposito_id_from = $request->deposito_id_from ;
             $remito->deposito_id_to = $request->deposito_id_to ;
             $remito->descrip = $request->remito_descrip ;
 
-
-        
-            //GUARDAR USUARIO
-            // $user = Auth::user();
-            // $recibo->user_name = $user->name ;
+ 
             
             $remito->save();
+     
 
-            //GUARDAR RENGLONES DE LA FACTURA
-            $lineas_detalle = $request->_producto_id ; //Tomo el Id del Recibo insertado
+            //GUARDAR RENGLONES DEl REMITO
+            $lineas_detalle = $request->_producto_id ; //Tomo el Id del ReMITO insertado
             $cont=0;
+
+ 
 
             while($cont < count($lineas_detalle)){
 
@@ -187,8 +165,37 @@ class RemitoController extends AppBaseController
                 //$detalle->updated_at    = null ;
                 //$detalle->created_at    = $mytime ;
                 $detalle->save();
+
+                //Cerrar existencia anterior
+                $existencia = new Existencia();                
+                $existencia = Existencia::where('inventario_id', $detalle->inventario_id)
+                ->where('fecha_hasta',null)
+                ->first();
+                $existencia->fecha_hasta   = now();
+                $existencia->tiposalida    = "REMITO" ;                
+                $existencia->documento_sal = $remito->id  ;                
+
+                $existencia->save();
+
+                //Abrir existencia nueva
+
+                $existencia = new Existencia();
+                $existencia->inventario_id = $detalle->inventario_id ;
+                $existencia->tipodoc       = "REMITO" ;
+                $existencia->documento     = $remito->id ;
+                $existencia->deposito_id   = $remito->deposito_id_to ;
+                $existencia->fecha_desde   = now() ;
+                $existencia->save();
+
+
+
+
+
                 $cont=$cont+1;
             }
+
+
+ 
 
 
 

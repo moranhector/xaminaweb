@@ -14,6 +14,7 @@ use Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Talonario;
 use Carbon\Carbon;
+include "funciones.php";
 
 class FacturaController extends AppBaseController
 {
@@ -200,10 +201,11 @@ class FacturaController extends AppBaseController
      
 
             // Fecha por Default
-            $mytime= Carbon::now('America/Argentina/Mendoza');
-            $mytime= $mytime->toDateString();      
+ 
 
-
+            $fecha_hoy = Carbon::now('America/Argentina/Mendoza');
+            $fecha_hoy= $fecha_hoy->format('d/m/Y');   
+            //dd($mytime);
 
 
         
@@ -211,7 +213,7 @@ class FacturaController extends AppBaseController
             "clientes"=>$clientes,
             "articulos"=>$articulos,
             "nueva_factura"=>$nueva_factura,      
-            "fecha"=>$mytime     
+            "fecha"=>$fecha_hoy     
             ]);        
 
     }
@@ -279,7 +281,10 @@ class FacturaController extends AppBaseController
                 $factura->formulario =   $request->formulario; 
                 $factura->ptovta =  '1' ; 
                 $factura->tipo =  'FACB' ; 
-                $factura->fecha = $request->fecha ;
+
+                $fecha_factura = french2american( $request->fecha )  ;    
+
+                $factura->fecha = $fecha_factura ;
                 $factura->cliente_id = $cliente->id ;
                 $factura->total = $request->total_pagar;
                 

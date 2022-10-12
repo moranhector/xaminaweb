@@ -170,14 +170,17 @@
 
 
 
-<!-- <script type="text/javascript">
-$('#fecha').datetimepicker({
-    format: 'YYYY-MM-DD HH:mm:ss',
-    useCurrent: true,
-    sideBySide: true
-})
-</script> -->
+ 
 
+<script type="text/javascript">
+        $('#fecha').datetimepicker({
+            format: 'DD/MM/YYYY',
+            useCurrent: true,
+            sideBySide: true
+        })
+</script>
+
+ 
 
 
 

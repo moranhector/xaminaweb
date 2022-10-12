@@ -31,11 +31,11 @@
 
                 <!--  
 
-▄▀█ ░░█ ▄▀█ ▀▄▀
-█▀█ █▄█ █▀█ █░█
+                ▄▀█ ░░█ ▄▀█ ▀▄▀
+                █▀█ █▄█ █▀█ █░█
 
-insertar pieza en renglones
--->
+                insertar pieza en renglones
+                -->
 
                 <div class="col-md-2">
                     <label class="form-control-label" for="pieza">Pieza</label>
@@ -52,12 +52,6 @@ insertar pieza en renglones
                     <input type="text" id="descrip" name="descrip" class="form-control">
                 </div>
 
-
-                <!-- <div class="col-md-2">
-    <label class="form-control-label" for="precio_venta">Precio</label>
-
-    <input type="text" id="precio_venta" name="precio_venta" class="form-control">
-</div> -->
 
 
 
@@ -177,14 +171,15 @@ $('#pieza').keydown(function(e) {
     if (code == '9') {
 
 
-        var nPieza = document.getElementById('pieza').value;
+        var nPieza   = document.getElementById('pieza').value;
+        var deposito = document.getElementById('deposito_id_from').value;
 
         //miurl = "/fetch-pieza/"+nPieza ;
         //alert(miurl); 
 
         $.ajax({
             type: "GET",
-            url: "/fetch-pieza/" + nPieza,
+            url: "/ajax_pieza_deposito/" + nPieza + "/"+deposito,
             dataType: "json",
             success: function(response) {
                 console.log(response.message);

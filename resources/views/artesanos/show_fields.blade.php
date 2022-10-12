@@ -16,15 +16,11 @@
     <p>{{ $artesano->direccion }}</p>
 </div>
 
-<!-- Created At Field -->
+<!-- Direccion Field -->
 <div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $artesano->created_at }}</p>
+    {!! Form::label('lugar', 'Lugar:') !!}
+    <p>{{ $artesano->lugar }}</p>
 </div>
 
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $artesano->updated_at }}</p>
-</div>
+ 
 

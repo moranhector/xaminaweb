@@ -74,7 +74,8 @@ function abre_buscador() {
         <div class="{{ $errors->has('fecha') ? 'has-error' : '' }}">
             <label class="form-control-label" for="fecha">Fecha</label>  
             <div>
-                <input class="form-control" name="fecha" type="date" id="fecha" value="{{ $fecha }}" >
+
+                <input class="form-control" name="fecha" type="text" id="fecha" value={{ $fecha }} >
                 {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
             </div>
         </div>

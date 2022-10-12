@@ -5,6 +5,7 @@
             <th>Nombre</th>
         <th>Documento</th>
         <th>Direccion</th>
+        <th>Lugar</th>
             <th colspan="3">Acción</th>
         </tr>
         </thead>
@@ -14,6 +15,7 @@
                 <td>{{ $artesano->nombre }}</td>
             <td>{{ $artesano->documento }}</td>
             <td>{{ $artesano->direccion }}</td>
+            <td>{{ $artesano->lugar }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['artesanos.destroy', $artesano->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

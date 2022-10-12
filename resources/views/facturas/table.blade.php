@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th>Formulario</th>
-        <th>Ptovta</th>
+        <th>Punto venta</th>
         <th>Tipo</th>
         <th>Fecha</th>
         <th>Cliente Id</th>
@@ -18,7 +18,8 @@
                 <td>{{ $factura->formulario }}</td>
             <td>{{ $factura->ptovta }}</td>
             <td>{{ $factura->tipo }}</td>
-            <td>{{ $factura->fecha }}</td>
+            
+            <td>{{ \Carbon\Carbon::parse($factura->fecha)->format('d/m/Y') }}</td>                 
             <td>{{ $factura->cliente_id }}</td>
             <td>{{ $factura->total }}</td>
             <td>{{ $factura->documento }}</td>

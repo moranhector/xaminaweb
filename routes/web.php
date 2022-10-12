@@ -112,6 +112,7 @@ Route::delete('delete-student/{id}', [StudentController::class, 'destroy']);
 
 use App\Http\Controllers\InventarioController;
 Route::get('fetch-pieza/{pieza}', [InventarioController::class, 'fetchpieza']);
+Route::get('ajax_pieza_deposito/{pieza}/{deposito}', [InventarioController::class, 'ajax_pieza_deposito']);
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Requests\CreateArtesanoRequest;
 use App\Http\Requests\UpdateArtesanoRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Models\Artesano;
+use App\Models\Inventario;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -122,7 +123,12 @@ class ArtesanoController extends AppBaseController
             return redirect(route('artesanos.index'));
         }
 
-        return view('artesanos.show')->with('artesano', $artesano);
+        $inventarios = Inventario::where('inventarios.artesano_id', $id)
+        ->get();      
+
+        return view('artesanos.show', [
+            "artesano"=>$artesano,
+            "inventarios"=>$inventarios   ]);
     }
 
     /**

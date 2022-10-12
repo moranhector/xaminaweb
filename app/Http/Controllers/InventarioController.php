@@ -51,6 +51,121 @@ class InventarioController extends AppBaseController
     }
 
 
+
+
+    public function ajax_pieza_deposito($pieza,$deposito)
+    {
+        
+        
+        //dd($pieza,$deposito);
+        // http://localhost:8000/ajax_pieza_deposito/110484/1
+
+        // $inventario = DB::table('inventarios')
+        // ->where('npieza',$pieza ) 
+        // ->get( ) ;   
+
+        // SELECT * FROM inventarios  i 
+        // INNER JOIN existencias e
+        // ON i.id = e.inventario_id
+        // WHERE i.id = 110484
+        // AND e.fecha_hasta IS NULL
+
+
+        $inventario = Inventario::join('existencias', 'inventarios.id', '=', 'existencias.inventario_id')
+        ->where('inventarios.id', $pieza)
+        ->where('existencias.fecha_hasta',NULL)
+        ->get(['inventarios.*', 'existencias.deposito_id']);      
+
+
+        //dd($inventario[0]->factura);
+
+        $cantidadRegistros = $inventario->count();
+
+
+        if ($cantidadRegistros  > 1 ) 
+        {
+            return Response::json(array(
+                'code'      =>  200,
+                'message'   =>  'Error: Se ha encontrado más de una pieza con ese número'
+            ), 200);
+
+        }
+
+
+        switch ($cantidadRegistros) {
+            case 0:
+                return Response::json(array(
+                        'code'      =>  200,
+                        'message'   =>  'No se han encontrado piezas'
+                    ), 200);
+
+            case 1:
+                //dd( empty( $inventario[0]->factura ) ) ;
+                $vendida = empty( $inventario[0]->factura ) ? 'falso' : 'verdadero';
+
+                if ( empty( $inventario[0]->factura ) ) 
+                {
+
+                    if ( $inventario[0]->deposito_id <> $deposito)
+                    {
+                        //dd($inventario[0]->deposito_id,$deposito);
+                        return Response::json(array(    
+                            'code'      =>  200,
+                            'message'   =>  'Pieza en otro depósito: '.$inventario[0]->deposito_id,
+                            'vendida'   =>  $vendida,
+                          ), 200);                          
+
+                    }
+
+                    return Response::json(array(    
+                        'code'      =>  200,
+                        'message'   =>  'Pieza recuperada correctamente',
+                        'vendida'   =>  $vendida,
+                        'piezas'=>$inventario,
+                    ), 200);  
+
+
+                }
+                else
+                {
+                return Response::json(array(    
+                    'code'      =>  200,
+                    'message'   =>  'Pieza vendida',
+                    'vendida'   =>  $vendida,
+                  ), 200);                  
+
+                }
+                 
+
+        }
+
+
+
+        // if $cantidadRegistros=1
+        // {
+        //     return response()->json([
+        //         'piezas'=>$inventario,
+        //     ]);
+        // }
+
+        // if $cantidadRegistros=0
+        // {
+        //     return response()->json([
+        //         'piezas'=>$inventario,
+        //     ]);
+        // }        
+
+
+
+
+    }
+
+
+
+
+
+
+
     // http://localhost:8000/fetch-pieza/090981
     // esto anda ok
     /// AJAX JQUERY DESDE Facturas

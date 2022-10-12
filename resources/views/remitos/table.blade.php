@@ -16,9 +16,9 @@
         @foreach($remitos as $remito)
             <tr>
             <td>{{ $remito->id }}</td>
-                <td>{{ $remito->descrip }}</td>
-  
-            <td>{{ $remito->fecha }}</td>
+            <td>{{ $remito->descrip }}</td>
+             
+            <td>{{ \Carbon\Carbon::parse($remito->fecha)->format('d/m/Y') }}</td>            
             <td>{{ $remito->deposito_desde }}</td>
             <td>{{ $remito->deposito_hacia }}</td>
             <td>{{ $remito->cantidad }}</td>

@@ -5,6 +5,8 @@ CLOSE ALL
  
 DO proyecto 
 
+MESSAGEBOX('Atención correr esta migración después de migrar inventario')
+
 cCadena = 'truncate table xaminaweb.artesanos'
 oConexion.ejecutar(cCadena,'buffer')
 
@@ -30,31 +32,44 @@ DO WHILE !EOF()
   csexo	= fox2my( cur_artesanos.sexo )
   cid = fox2my( cur_artesanos.artesano )
   
-cCadena = [INSERT INTO xaminaweb.artesanos ]+;
-           [ (id, ]+;
-           [  nombre, ]+;
-           [  documento, ]+;
-           [  direccion, ]+;
-           [  lugar, ]+;     
-           [  departamento, ]+;                      
-           [  nacimiento_at, ]+;                                 
-           [  sexo, ]+;                                            
-           [  created_at, ]+;
-           [  updated_at, ]+;
-           [  deleted_at) ]+;
-[VALUES ( '&cid', ]+;
- 		   ['&Cnombre', ]+;
-		   ['&Cdocumento', ]+;
-           ['&Cdireccion', ]+;
-           ['&Clugar', ]+;   
-           ['&Cdepartamento', ]+;  
-           [ '&cnacimiento_at', ]+;   
-           [ '&csexo', ]+;                                   
-           [ CURRENT_DATE , ]+;
-		   [ NULL, ]+;
-           [ NULL ) ]  
+  	*** SI NO TIENE PIEZAS EN INVENTARIO QUE ESTEN AUN SIN VENDER NO DOY DE ALTA
+    cCadena = [ select * from inventarios where artesano_id = '&cid' and factura = ' ' ]
+	oConexion.ejecutar(cCadena, 'cur_inventarios')
+	IF oConexion.cantidadregistros = 0 
+		SELECT cur_artesanos
+		SKIP
+		loop
+	endif
+  
+  
+  
+		cCadena = [INSERT INTO xaminaweb.artesanos ]+;
+		           [ (id, ]+;
+		           [  nombre, ]+;
+		           [  documento, ]+;
+		           [  direccion, ]+;
+		           [  lugar, ]+;     
+		           [  departamento, ]+;                      
+		           [  nacimiento_at, ]+;                                 
+		           [  sexo, ]+;                                            
+		           [  created_at, ]+;
+		           [  updated_at, ]+;
+		           [  deleted_at) ]+;
+		[VALUES ( '&cid', ]+;
+		 		   ['&Cnombre', ]+;
+				   ['&Cdocumento', ]+;
+		           ['&Cdireccion', ]+;
+		           ['&Clugar', ]+;   
+		           ['&Cdepartamento', ]+;  
+		           [ '&cnacimiento_at', ]+;   
+		           [ '&csexo', ]+;                                   
+		           [ CURRENT_DATE , ]+;
+				   [ NULL, ]+;
+		           [ NULL ) ]  
 
-oConexion.ejecutar(cCadena, 'buffer')  
+		oConexion.ejecutar(cCadena, 'buffer')  
+		
+		
   
   
   

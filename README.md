@@ -1232,11 +1232,14 @@ ________________________________________
 
 ARTESANOS: 
 CAMPO DE ARTESANO ACTIVO
-Alta de artesano: falta campo Lugar, campo activo.
+Alta de artesano: falta campo Lugar, campo activo. ok
 Consulta: Piezas compradas por Artesano.
 en Index falta campo Lugar. Filtro de Artesanos activos, 
 Permitir borrar solo si no tiene recibos, ni piezas a su nombre.
 Campos en Columna
+
+NO INCORPORÉ EL CAMPO ACTIVO, EN SU LUGAR MODIFIQUE LA MIGRACIONES
+DE ARTESANOS PARA QUE DEPURE Y SOLO DEJE LOS ARTESANO CON PIEZAS SIN VENDER.
 
 
 RUBROS:
@@ -1284,6 +1287,7 @@ quito el AUTOINCREMENT DEL ID de la pieza
 Index, mostrar consulta maestra.
 borrar: no válido.
 Editar: solo descripciones.
+view: Mostrar movimientos 
 
 TALONARIOS:
 
@@ -1292,6 +1296,8 @@ Index: fecha vencimiento en FRENCH
 
 Alta y Editado en columnas.
 Labels: corregir.
+
+BUG: PERMITE GRABAR DOS VECES EL MISMO TIPO DE DOCUMENTO.
 
 CLIENTES:
 
@@ -1310,6 +1316,7 @@ FACTURAS:
 index: fecha french.
     Cliente, cuit, nombre.
 Consulta de Factura
+Validar existencia en deposito. ajax_pieza_deposito
 
 
 
@@ -1322,6 +1329,27 @@ REPORTES:
 
 Ventas entre fechas:
 Compras entre fechas: 
+
+Inventario: Cantidad de Piezas. 
+
+
+REMITOS
+
+Cantidad de Piezas
+
+Fecha: solo fecha OK
+
+Descripción Por favor describa. PLACEHOLDER
+
+Grabar movimiento de pieza.
+
+OJO, Si cambia deposito_from despues de haber cargado piezas, puede causar problemas.
+
+Poner una fecha por default OK
+
+bug Al tocar boton agregar renglon en vacio agrega un renglon.
+bug al grabar valida que los depositos no pueden ser iguales, pero se vació la grilla.
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -1341,3 +1369,22 @@ ON i.tipopieza_id = t.id
 INNER JOIN artesanos a
 ON i.artesano_id = a.id
 WHERE i.vendido_at IS NULL 
+
+
+8/10/2022
+Sábado
+
+Remito ahora graba movimientos de existencia
+
+Hay que modificar metodo ajax y pasar como parametro el deposito base para validar.
+
+12/10/2022
+Miércoles
+
+
+Artesanos: Show ahora muestra las piezas del artesano.
+
+Hice la depuración de artesanos con la existencia de inventarios.
+Mejoré la migración, solo va a migrar al artesano si tiene piezas en existencia.
+
+
