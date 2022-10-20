@@ -82,7 +82,7 @@ class TipopiezaController extends AppBaseController
         /** @var Tipopieza $tipopieza */
         $tipopieza = Tipopieza::create($input);
 
-        Flash::success('Tipopieza saved successfully.');
+        Flash::success('Tipo de pieza guardado correctamente.');
 
         return redirect(route('tipopiezas.index'));
     }
@@ -100,7 +100,7 @@ class TipopiezaController extends AppBaseController
         $tipopieza = Tipopieza::find($id);
 
         if (empty($tipopieza)) {
-            Flash::error('Tipopieza not found');
+            Flash::error('Tipo de pieza no encontrado');
 
             return redirect(route('tipopiezas.index'));
         }
@@ -121,7 +121,7 @@ class TipopiezaController extends AppBaseController
         $tipopieza = Tipopieza::find($id);
 
         if (empty($tipopieza)) {
-            Flash::error('Tipopieza not found');
+            Flash::error('Tipo de pieza no encontrado');
 
             return redirect(route('tipopiezas.index'));
         }
@@ -143,7 +143,7 @@ class TipopiezaController extends AppBaseController
         $tipopieza = Tipopieza::find($id);
 
         if (empty($tipopieza)) {
-            Flash::error('Tipopieza not found');
+            Flash::error('Tipo de pieza no encontrado');
 
             return redirect(route('tipopiezas.index'));
         }
@@ -151,7 +151,7 @@ class TipopiezaController extends AppBaseController
         $tipopieza->fill($request->all());
         $tipopieza->save();
 
-        Flash::success('Tipopieza updated successfully.');
+        Flash::success('Tipo de pieza guardado correctamente.');
 
         return redirect(route('tipopiezas.index'));
     }
@@ -171,14 +171,14 @@ class TipopiezaController extends AppBaseController
         $tipopieza = Tipopieza::find($id);
 
         if (empty($tipopieza)) {
-            Flash::error('Tipopieza not found');
+            Flash::error('Tipo de pieza no encontrado');
 
             return redirect(route('tipopiezas.index'));
         }
 
         $tipopieza->delete();
 
-        Flash::success('Tipopieza deleted successfully.');
+        Flash::success('Tipo de pieza ha sido eliminado.');
 
         return redirect(route('tipopiezas.index'));
     }

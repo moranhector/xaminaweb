@@ -52,7 +52,7 @@ class RendicionController extends AppBaseController
         /** @var Rendicion $rendicion */
         $rendicion = Rendicion::create($input);
 
-        Flash::success('Rendicion saved successfully.');
+        Flash::success('Existencia guardado correctamente.');
 
         return redirect(route('rendiciones.index'));
     }
@@ -121,7 +121,7 @@ class RendicionController extends AppBaseController
         $rendicion->fill($request->all());
         $rendicion->save();
 
-        Flash::success('Rendicion updated successfully.');
+        Flash::success('Existencia guardado correctamente.');
 
         return redirect(route('rendiciones.index'));
     }

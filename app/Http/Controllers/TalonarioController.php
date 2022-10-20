@@ -55,7 +55,7 @@ class TalonarioController extends AppBaseController
         /** @var Talonario $talonario */
         $talonario = Talonario::create($input);
 
-        Flash::success('Talonario saved successfully.');
+        Flash::success('Talonario guardado correctamente.');
 
         return redirect(route('talonarios.index'));
     }
@@ -73,7 +73,7 @@ class TalonarioController extends AppBaseController
         $talonario = Talonario::find($id);
 
         if (empty($talonario)) {
-            Flash::error('Talonario not found');
+            Flash::error('Talonario no encontrado');
 
             return redirect(route('talonarios.index'));
         }
@@ -94,7 +94,7 @@ class TalonarioController extends AppBaseController
         $talonario = Talonario::find($id);
 
         if (empty($talonario)) {
-            Flash::error('Talonario not found');
+            Flash::error('Talonario no encontrado');
 
             return redirect(route('talonarios.index'));
         }
@@ -116,7 +116,7 @@ class TalonarioController extends AppBaseController
         $talonario = Talonario::find($id);
 
         if (empty($talonario)) {
-            Flash::error('Talonario not found');
+            Flash::error('Talonario no encontrado');
 
             return redirect(route('talonarios.index'));
         }
@@ -124,7 +124,7 @@ class TalonarioController extends AppBaseController
         $talonario->fill($request->all());
         $talonario->save();
 
-        Flash::success('Talonario updated successfully.');
+        Flash::success('Talonario guardado correctamente.');
 
         return redirect(route('talonarios.index'));
     }
@@ -150,14 +150,14 @@ class TalonarioController extends AppBaseController
         $talonario = Talonario::find($id);
 
         if (empty($talonario)) {
-            Flash::error('Talonario not found');
+            Flash::error('Talonario no encontrado');
 
             return redirect(route('talonarios.index'));
         }
 
         $talonario->delete();
 
-        Flash::success('Talonario deleted successfully.');
+        Flash::success('Talonario ha sido eliminado.');
 
         return redirect(route('talonarios.index'));
     }

@@ -82,7 +82,7 @@ class ExistenciaController extends AppBaseController
         /** @var Existencia $existencia */
         $existencia = Existencia::create($input);
 
-        Flash::success('Existencia saved successfully.');
+        Flash::success('Existencia guardado correctamente.');
 
         return redirect(route('existencias.index'));
     }
@@ -151,7 +151,7 @@ class ExistenciaController extends AppBaseController
         $existencia->fill($request->all());
         $existencia->save();
 
-        Flash::success('Existencia updated successfully.');
+        Flash::success('Existencia guardado correctamente.');
 
         return redirect(route('existencias.index'));
     }

@@ -15,3 +15,10 @@
     {!! Form::label('direccion', 'Direccion:') !!}
     {!! Form::text('direccion', null, ['class' => 'form-control']) !!}
 </div>
+
+
+<!-- Direccion Field -->
+<div class="form-group col-sm-6">
+    {!! Form::label('lugar', 'Lugar:') !!}
+    {!! Form::text('lugar', null, ['class' => 'form-control']) !!}
+</div>

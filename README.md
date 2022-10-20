@@ -1233,6 +1233,7 @@ ________________________________________
 ARTESANOS: 
 CAMPO DE ARTESANO ACTIVO
 Alta de artesano: falta campo Lugar, campo activo. ok
+
 Consulta: Piezas compradas por Artesano.
 en Index falta campo Lugar. Filtro de Artesanos activos, 
 Permitir borrar solo si no tiene recibos, ni piezas a su nombre.
@@ -1387,4 +1388,22 @@ Artesanos: Show ahora muestra las piezas del artesano.
 Hice la depuración de artesanos con la existencia de inventarios.
 Mejoré la migración, solo va a migrar al artesano si tiene piezas en existencia.
 
+
+20/10/2022
+Jueves
+
+Pantalla Registrar usuarios login
+
+PERDIDA DE LA BASE DE DE DATOS !!
+
+Tuve que recuperar la base de datos a partir de las migraciones. 
+
+Moraleja: Hacer backup de las bd aunque sean en testing de proyecto.
+
+
+Hice correcciones a varios mensajes en INGLES de FLASH en varios controllers.
+
+Proximo paso:
+
+Artesano, agregar departamento, CUIT, fecha de nacimiento y sexo.
 

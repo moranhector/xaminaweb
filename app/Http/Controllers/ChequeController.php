@@ -171,7 +171,7 @@ class ChequeController extends AppBaseController
         $cheque = Cheque::find($id);
 
         if (empty($cheque)) {
-            Flash::error('Cheque not found');
+            Flash::error('Cheque no encontrado');
 
             return redirect(route('cheques.index'));
         }
@@ -192,7 +192,7 @@ class ChequeController extends AppBaseController
         $cheque = Cheque::find($id);
 
         if (empty($cheque)) {
-            Flash::error('Cheque not found');
+            Flash::error('Cheque no encontrado');
 
             return redirect(route('cheques.index'));
         }
@@ -214,7 +214,7 @@ class ChequeController extends AppBaseController
         $cheque = Cheque::find($id);
 
         if (empty($cheque)) {
-            Flash::error('Cheque not found');
+            Flash::error('Cheque no encontrado');
 
             return redirect(route('cheques.index'));
         }
@@ -222,7 +222,7 @@ class ChequeController extends AppBaseController
         $cheque->fill($request->all());
         $cheque->save();
 
-        Flash::success('Cheque updated successfully.');
+        Flash::success('Cheque actualizado correctamente.');
 
         return redirect(route('cheques.index'));
     }
@@ -307,7 +307,7 @@ class ChequeController extends AppBaseController
         $cheque = Cheque::find($id);
 
         if (empty($cheque)) {
-            Flash::error('Cheque not found');
+            Flash::error('Cheque no encontrado');
 
             return redirect(route('cheques.index'));
         }

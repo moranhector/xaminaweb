@@ -83,7 +83,7 @@ class RubroController extends AppBaseController
         /** @var Rubro $rubro */
         $rubro = Rubro::create($input);
 
-        Flash::success('Rubro saved successfully.');
+        Flash::success('Rubro guardada correctamente.');
 
         return redirect(route('rubros.index'));
     }
@@ -101,7 +101,7 @@ class RubroController extends AppBaseController
         $rubro = Rubro::find($id);
 
         if (empty($rubro)) {
-            Flash::error('Rubro not found');
+            Flash::error('Rubro no encontrado');
 
             return redirect(route('rubros.index'));
         }
@@ -122,7 +122,7 @@ class RubroController extends AppBaseController
         $rubro = Rubro::find($id);
 
         if (empty($rubro)) {
-            Flash::error('Rubro not found');
+            Flash::error('Rubro no encontrado');
 
             return redirect(route('rubros.index'));
         }
@@ -144,7 +144,7 @@ class RubroController extends AppBaseController
         $rubro = Rubro::find($id);
 
         if (empty($rubro)) {
-            Flash::error('Rubro not found');
+            Flash::error('Rubro no encontrado');
 
             return redirect(route('rubros.index'));
         }
@@ -152,7 +152,7 @@ class RubroController extends AppBaseController
         $rubro->fill($request->all());
         $rubro->save();
 
-        Flash::success('Rubro updated successfully.');
+        Flash::success('Rubro guardada correctamente.');
 
         return redirect(route('rubros.index'));
     }
@@ -172,14 +172,14 @@ class RubroController extends AppBaseController
         $rubro = Rubro::find($id);
 
         if (empty($rubro)) {
-            Flash::error('Rubro not found');
+            Flash::error('Rubro no encontrado');
 
             return redirect(route('rubros.index'));
         }
 
         $rubro->delete();
 
-        Flash::success('Rubro deleted successfully.');
+        Flash::success('Rubro ha sido eliminado.');
 
         return redirect(route('rubros.index'));
     }

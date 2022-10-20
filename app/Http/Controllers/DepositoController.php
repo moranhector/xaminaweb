@@ -52,7 +52,7 @@ class DepositoController extends AppBaseController
         /** @var Deposito $deposito */
         $deposito = Deposito::create($input);
 
-        Flash::success('Deposito saved successfully.');
+        Flash::success('Depósito guardado correctamente.');
 
         return redirect(route('depositos.index'));
     }
@@ -70,7 +70,7 @@ class DepositoController extends AppBaseController
         $deposito = Deposito::find($id);
 
         if (empty($deposito)) {
-            Flash::error('Deposito not found');
+            Flash::error('Depósito no encontrado');
 
             return redirect(route('depositos.index'));
         }
@@ -91,7 +91,7 @@ class DepositoController extends AppBaseController
         $deposito = Deposito::find($id);
 
         if (empty($deposito)) {
-            Flash::error('Deposito not found');
+            Flash::error('Depósito no encontrado');
 
             return redirect(route('depositos.index'));
         }
@@ -113,7 +113,7 @@ class DepositoController extends AppBaseController
         $deposito = Deposito::find($id);
 
         if (empty($deposito)) {
-            Flash::error('Deposito not found');
+            Flash::error('Depósito no encontrado');
 
             return redirect(route('depositos.index'));
         }
@@ -121,7 +121,7 @@ class DepositoController extends AppBaseController
         $deposito->fill($request->all());
         $deposito->save();
 
-        Flash::success('Deposito updated successfully.');
+        Flash::success('Depósito guardado correctamente.');
 
         return redirect(route('depositos.index'));
     }
@@ -141,14 +141,14 @@ class DepositoController extends AppBaseController
         $deposito = Deposito::find($id);
 
         if (empty($deposito)) {
-            Flash::error('Deposito not found');
+            Flash::error('Depósito no encontrado');
 
             return redirect(route('depositos.index'));
         }
 
         $deposito->delete();
 
-        Flash::success('Deposito deleted successfully.');
+        Flash::success('Depósito ha sido eliminado.');
 
         return redirect(route('depositos.index'));
     }

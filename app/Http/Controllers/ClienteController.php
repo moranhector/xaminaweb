@@ -53,7 +53,7 @@ class ClienteController extends AppBaseController
         /** @var Cliente $cliente */
         $cliente = Cliente::create($input);
 
-        Flash::success('Cliente saved successfully.');
+        Flash::success('Cliente guardado correctamente.');
 
         return redirect(route('clientes.index'));
     }
@@ -71,7 +71,7 @@ class ClienteController extends AppBaseController
         $cliente = Cliente::find($id);
 
         if (empty($cliente)) {
-            Flash::error('Cliente not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
@@ -92,7 +92,7 @@ class ClienteController extends AppBaseController
         $cliente = Cliente::find($id);
 
         if (empty($cliente)) {
-            Flash::error('Cliente not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
@@ -114,7 +114,7 @@ class ClienteController extends AppBaseController
         $cliente = Cliente::find($id);
 
         if (empty($cliente)) {
-            Flash::error('Cliente not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
@@ -122,7 +122,8 @@ class ClienteController extends AppBaseController
         $cliente->fill($request->all());
         $cliente->save();
 
-        Flash::success('Cliente updated successfully.');
+
+        Flash::success('Cliente guardado correctamente');        
 
         return redirect(route('clientes.index'));
     }
@@ -142,14 +143,14 @@ class ClienteController extends AppBaseController
         $cliente = Cliente::find($id);
 
         if (empty($cliente)) {
-            Flash::error('Cliente not found');
+            Flash::error('Cliente no encontrado');
 
             return redirect(route('clientes.index'));
         }
 
         $cliente->delete();
 
-        Flash::success('Cliente deleted successfully.');
+        Flash::success('Cliente ha sido eliminado.');
 
         return redirect(route('clientes.index'));
     }

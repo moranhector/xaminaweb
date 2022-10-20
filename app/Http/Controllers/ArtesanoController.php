@@ -100,7 +100,7 @@ class ArtesanoController extends AppBaseController
         /** @var Artesano $artesano */
         $artesano = Artesano::create($input);
 
-        Flash::success('Artesano saved successfully.');
+        Flash::success('Artesano guardado correctamente.');
 
         return redirect(route('artesanos.index'));
     }
@@ -118,7 +118,7 @@ class ArtesanoController extends AppBaseController
         $artesano = Artesano::find($id);
 
         if (empty($artesano)) {
-            Flash::error('Artesano not found');
+            Flash::error('Artesano no encontrado');
 
             return redirect(route('artesanos.index'));
         }
@@ -144,7 +144,7 @@ class ArtesanoController extends AppBaseController
         $artesano = Artesano::find($id);
 
         if (empty($artesano)) {
-            Flash::error('Artesano not found');
+            Flash::error('Artesano no encontrado');
 
             return redirect(route('artesanos.index'));
         }
@@ -166,7 +166,7 @@ class ArtesanoController extends AppBaseController
         $artesano = Artesano::find($id);
 
         if (empty($artesano)) {
-            Flash::error('Artesano not found');
+            Flash::error('Artesano no encontrado');
 
             return redirect(route('artesanos.index'));
         }
@@ -174,7 +174,7 @@ class ArtesanoController extends AppBaseController
         $artesano->fill($request->all());
         $artesano->save();
 
-        Flash::success('Artesano updated successfully.');
+        Flash::success('Artesano guardado correctamente.');
 
         return redirect(route('artesanos.index'));
     }
@@ -194,14 +194,14 @@ class ArtesanoController extends AppBaseController
         $artesano = Artesano::find($id);
 
         if (empty($artesano)) {
-            Flash::error('Artesano not found');
+            Flash::error('Artesano no encontrado');
 
             return redirect(route('artesanos.index'));
         }
 
         $artesano->delete();
 
-        Flash::success('Artesano deleted successfully.');
+        Flash::success('Artesano eliminado.');
 
         return redirect(route('artesanos.index'));
     }
