@@ -31,8 +31,12 @@ class Artesano extends Model
     public $fillable = [
         'nombre',
         'documento',
+        'cuit',
         'direccion',
-        'lugar'
+        'lugar',
+        'departamento',
+        'nacimiento_at',
+        'sexo',
     ];
 
     /**
@@ -52,9 +56,14 @@ class Artesano extends Model
      * @var array
      */
     public static $rules = [
-        'nombre' => 'required',
-        'documento' => 'required',
-        'direccion' => 'required'
+        // 'nombre' => 'required',
+        // 'documento' => 'required|unique:artesanos,documento',
+        // 'cuit' => 'nullable|size:11',
+        // 'direccion' => 'required',
+        // 'lugar' => 'required',
+        // 'departamento' => 'required',
+        // 'nacimiento_at' => 'required',
+        // 'sexo' => 'required',
     ];
 
     

@@ -95,7 +95,23 @@ class ArtesanoController extends AppBaseController
      */
     public function store(CreateArtesanoRequest $request)
     {
+
+        $request->validate([
+            
+                'nombre' => 'required',
+                'documento' => 'required|unique:artesanos,documento',
+                'cuit' => 'nullable|size:11',
+                'direccion' => 'required',
+                'lugar' => 'required',
+                'departamento' => 'required',
+                'nacimiento_at' => 'required',
+                'sexo' => 'required',            
+
+        ]);
+
+
         $input = $request->all();
+        //dd($input);
 
         /** @var Artesano $artesano */
         $artesano = Artesano::create($input);
@@ -162,6 +178,24 @@ class ArtesanoController extends AppBaseController
      */
     public function update($id, UpdateArtesanoRequest $request)
     {
+
+        $request->validate([
+            
+            'nombre' => 'required',
+            'documento' => 'required',
+            'cuit' => 'nullable|size:11',
+            'direccion' => 'required',
+            'lugar' => 'required',
+            'departamento' => 'required',
+            'nacimiento_at' => 'required',
+            'sexo' => 'required',            
+
+        ]);
+
+
+
+
+
         /** @var Artesano $artesano */
         $artesano = Artesano::find($id);
 

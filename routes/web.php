@@ -121,3 +121,8 @@ Route::resource('remitos', App\Http\Controllers\RemitoController::class);
 
 
 Route::resource('remitoLineas', App\Http\Controllers\Remito_lineaController::class);
+
+
+
+
+Route::resource('estudiantes', App\Http\Controllers\EstudianteController::class);

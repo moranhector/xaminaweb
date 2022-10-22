@@ -1407,3 +1407,33 @@ Proximo paso:
 
 Artesano, agregar departamento, CUIT, fecha de nacimiento y sexo.
 
+
+21/10/2022
+Viernes
+
+Dashboard ? 
+Artesanos , beneficiados este mes, $ invertidos
+Compras  $, piezas compradas artesanos, beneficiados
+Ventas $ Hoy, Ayer, Ultimos 30 dias, cantidad de ventas 
+Piezas vendidas $ Hoy, Ayer, Ultimos 30 dias, en existencia
+
+Admin
+
+Reinstalar el Admin de ejemplo
+Agregar Laravel Spatie en XaminaWeb
+
+
+
+7:59
+GITBASH
+php artisan migrate:fresh
+php artisan serve
+
+Despues de un migrate refresh hay que hacer un seed
+
+ARTESANO
+No admitir artesano con mismo número de documento.
+Corregir migracion de artesanos
+
+
+

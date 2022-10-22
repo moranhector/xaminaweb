@@ -136,3 +136,12 @@
 
  
 
+
+<li class="nav-item">
+    <a href="{{ route('estudiantes.index') }}"
+       class="nav-link {{ Request::is('estudiantes*') ? 'active' : '' }}">
+        <p>Estudiantes</p>
+    </a>
+</li>
+
+

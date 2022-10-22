@@ -103,3 +103,19 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
         
             $nRenglon = $nRenglon + 1 ;
         }    
+
+
+
+<div class="form-group">
+    <label>Sexo:</label>
+
+    <select class="form-control" name="sexo" id="sexo" value="{{ old('sexo') }}" >  
+        <!-- <option hidden selected>Seleccione ...</option>  -->
+        <option style="display:none;"></option>     
+        <option>F</option>
+        <option>M</option>
+        <option>X</option>
+ 
+    </select>
+</div>
+</div>        
