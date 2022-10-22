@@ -28,7 +28,7 @@ class CreateInventariosTable extends Migration
             $table->string('recargo');
             $table->integer('artesano_id');
             $table->date('comprado_at');
-            $table->date('vendido_at');
+            $table->date('vendido_at')->nullable();
             $table->decimal('precio');
             $table->date('precio_at');
             $table->string('foto');

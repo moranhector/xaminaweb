@@ -21,7 +21,7 @@ DEFINE CLASS conexion AS custom
 
 
 
-	PROCEDURE ejecutar
+		PROCEDURE ejecutar
 		PARAMETERS cCadena,cCursor
 		LOCAL cPrograma 
 		LOCAL nRegistros
@@ -32,10 +32,10 @@ DEFINE CLASS conexion AS custom
 			USE 
 		ENDIF 
 	
-		nRetardo = SECONDS()
+		*nRetardo = SECONDS()
 		this.nerror = SQLEXEC(this.handle,cCadena,cCursor)
 		*MESSAGEBOX('registros afectados: '+STR(this.nerror) )
-		nRetardo = SECONDS() - nRetardo
+		*nRetardo = SECONDS() - nRetardo
 
 		IF USED(ccursor) 
 			nRegistros = RECCOUNT(cCursor)
@@ -45,26 +45,20 @@ DEFINE CLASS conexion AS custom
 			this.CantidadRegistros = 0
 		ENDIF 
 
-		STORE 1 TO gnX
-		DO WHILE LEN(SYS(16,gnX)) != 0
-		   cPrograma=  SYS(16,gnX)
-		   STORE gnX+1 TO gnX
-		ENDDO
-		cPrograma=  SYS(16,gnX - 2)
-		cPrograma =   LEFT( STRTRAN(cPrograma,'PROCEDURE ','') + SPACE(70) , 70 )
+ 
 
 
 		IF this.nError <0
 			AERROR(aErrores)
 
 			MESSAGEBOX(aerrores[1,2])
-			STRTOFILE(cCadena,'log_sql.txt',.f.)
+			*STRTOFILE(cCadena,'log_sql.txt',.f.)
 			SET STEP ON 
 		endif
 		SET DATE FRENCH
 		SET CENTURY ON 
 
-			STRTOFILE(CHR(13)+CHR(10)+cPrograma +LEFT(DTOC(DATE()),5)+TIME()+'['+STR(nRetardo,5,2)+'] '+'['+STR(nregistros,5,0)+'] '+cCadena ,'log_sql.txt',1)
+			*STRTOFILE(CHR(13)+CHR(10)+cPrograma +LEFT(DTOC(DATE()),5)+TIME()+'['+STR(nRetardo,5,2)+'] '+'['+STR(nregistros,5,0)+'] '+cCadena ,'log_sql.txt',1)
 	ENDPROC
 
 

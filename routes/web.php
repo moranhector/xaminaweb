@@ -101,14 +101,7 @@ Route::resource('existencias', App\Http\Controllers\ExistenciaController::class)
 
 
 
-use App\Http\Controllers\StudentController;
-
-Route::get('students', [StudentController::class, 'index'])->name('estudiantes');;
-Route::post('students', [StudentController::class, 'store']);
-Route::get('fetch-students', [StudentController::class, 'fetchstudent']);
-Route::get('edit-student/{id}', [StudentController::class, 'edit']);
-Route::put('update-student/{id}', [StudentController::class, 'update']);
-Route::delete('delete-student/{id}', [StudentController::class, 'destroy']);
+ 
 
 use App\Http\Controllers\InventarioController;
 Route::get('fetch-pieza/{pieza}', [InventarioController::class, 'fetchpieza']);
@@ -123,6 +116,4 @@ Route::resource('remitos', App\Http\Controllers\RemitoController::class);
 Route::resource('remitoLineas', App\Http\Controllers\Remito_lineaController::class);
 
 
-
-
-Route::resource('estudiantes', App\Http\Controllers\EstudianteController::class);
+ 

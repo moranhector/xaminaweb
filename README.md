@@ -9,8 +9,10 @@
 php artisan infyom:scaffold Artesano SIN ARCHIVO JSON
 
 php artisan infyom:rollback Artesano scaffold  PARA DESHACER ULTIMA GENERACION
+php artisan infyom:rollback Estudiante scaffold  PARA DESHACER ULTIMA GENERACION
 
 php artisan infyom:scaffold Artesano --fieldsFile Artesano.json PARA GENERAR DESDE ARCHIVO JSON
+php artisan infyom:scaffold Estudiante --fieldsFile Estudiante.json PARA GENERAR DESDE ARCHIVO JSON
 
 
 TIPS
@@ -780,6 +782,11 @@ Mañana, quitar los soft deletes
 Sabado
 
 php artisan migrate --path='./database/migrations/2022_07_27_124824_create_cheques_table.php'
+php artisan migrate --path='./database/migrations/2022_10_21_230201_create_estudiantes_table.php'
+php artisan migrate --path='./database/migrations/2022_07_26_142920_create_tipopiezas_table.php'
+C:\xampp\htdocs\xaminaweb\database\migrations\2022_10_21_230201_create_estudiantes_table.php
+
+php artisan migrate --path='./database/migrations/2022_07_27_124824_create_cheques_table.php'
 php artisan migrate --path='./database/migrations/2022_07_27_143317_create_recibos_table.php'
 php artisan migrate --path='./database/migrations/2022_07_27_145153_create_recibos_lineas_table.php'
 php artisan migrate --path='./database/migrations/2022_08_29_221728_create_talonarios_table.php'
@@ -1437,3 +1444,6 @@ Corregir migracion de artesanos
 
 
 
+22/10/2022
+Resolví problemas en los select option para alta y edicion.
+Resolvi problemas con la validacion de unicidad de documento en Alta y Edicion.
