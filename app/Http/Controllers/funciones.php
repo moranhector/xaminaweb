@@ -74,3 +74,30 @@ return $dtdate;
         //$dt2 = Carbon::createFromDate(1987, 4, 23);
         //$dt = Carbon::createFromDate( $cYear, $cMonth, $day);
         //$dtdate =$dt->format('Y-m-d');
+
+
+
+///// FUNCIONES GENERALES FUERA DE LA CLASE
+
+function Fecha()
+{
+
+    $date = Carbon::today();
+    $fecha = $date->format('Ymd');   
+    // Esto debe devolver AAAAMMDD por ejemplo  "20190909"
+
+    //dd($fecha);
+
+    echo $fecha;
+    return $fecha;
+}
+
+function zeros($cadena,$longitud)
+{
+
+    $zeros =  substr("00000000".$cadena,-1 * $longitud ,$longitud);
+    //dd($zeros);
+    return $zeros;
+}
+
+////////////////////////////////////////////        

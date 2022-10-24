@@ -66,5 +66,11 @@ class Recibo extends Model
         // 'artesano_id' => 'required'
     ];
 
+
+    // public function artesano()
+    // {
+    //     return $this->hasOne(Artesano::class);
+    // }    
+
     
 }

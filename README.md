@@ -1452,3 +1452,8 @@ Corregir migracion de artesanos
 22/10/2022
 Resolví problemas en los select option para alta y edicion.
 Resolvi problemas con la validacion de unicidad de documento en Alta y Edicion.
+
+
+24/10/2022
+
+Continuar con Refinamiento de Rendiciones

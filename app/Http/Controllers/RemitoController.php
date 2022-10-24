@@ -142,6 +142,7 @@ class RemitoController extends AppBaseController
             $remito->deposito_id_from = $request->deposito_id_from ;
             $remito->deposito_id_to = $request->deposito_id_to ;
             $remito->descrip = $request->remito_descrip ;
+            $remito->user_name = "" ;
 
  
             

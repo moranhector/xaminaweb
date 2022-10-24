@@ -4,9 +4,11 @@
         <tr>
             <th>Formulario</th>
         <th>Fecha</th>
-        <th>Artesano Id</th>
-        <th>Total</th>
+        <!-- <th>Artesano Id</th> -->
+        <th>Artesano</th>
+        <th STYLE="text-align: right;" >Total</th>
         <th>Cheque Id</th>
+        <th>Cheque Número</th>
         <th>Rendido</th>
             <th colspan="3">Acción</th>
         </tr>
@@ -15,10 +17,13 @@
         @foreach($recibos as $recibo)
             <tr>
                 <td>{{ $recibo->formulario }}</td>
-            <td>{{ $recibo->fecha }}</td>
-            <td>{{ $recibo->artesano_id }}</td>
-            <td>{{ $recibo->total }}</td>
+           
+            <td>{{ \Carbon\Carbon::parse($recibo->fecha)->format('d/m/Y') }}</td>                 
+            <!-- <td>{{ $recibo->artesano_id }}</td> -->
+            <td>{{ $recibo->nombre }}</td>
+            <td STYLE="text-align: right;" >{{ $recibo->total }}</td>
             <td>{{ $recibo->cheque_id }}</td>
+            <td>{{ $recibo->numero }}</td>
             <td>{{ $recibo->rendido }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['recibos.destroy', $recibo->id], 'method' => 'delete']) !!}

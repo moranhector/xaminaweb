@@ -89,7 +89,34 @@ class Cheque extends Model
         
         return;
 
-    }    
+    } 
+    
+    
+    /**
+     * Display the specified Cheque.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function TieneSaldoSuficiente($id,$importe)
+    {
+        /** @var Cheque $cheque */
+        $cheque = Cheque::find($id);
+
+        if (empty($cheque)) {
+            Flash::error('Cheque no encontrado');
+
+            return (false);
+        }
+
+        if($cheque->saldo >= $importe) 
+        {
+            return true;
+        }
+
+        return false;
+    }        
 
 
 

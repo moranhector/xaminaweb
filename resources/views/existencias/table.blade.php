@@ -28,8 +28,11 @@
             <td>{{ $existencia->documento }}</td>
  
             <td>{{ $existencia->documento_sal }}</td>
-            <td>{{ $existencia->fecha_desde }}</td>
-            <td>{{ $existencia->fecha_hasta }}</td>
+             
+            <td>{{ \Carbon\Carbon::parse($existencia->fecha_desde)->format('d/m/Y') }}</td>             
+            
+          
+            <td>{{ \Carbon\Carbon::parse($existencia->fecha_hasta)->format('d/m/Y') }}</td>             
                 <td width="120">
                     {!! Form::open(['route' => ['existencias.destroy', $existencia->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

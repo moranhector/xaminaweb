@@ -30,7 +30,7 @@ class ReciboController extends AppBaseController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function indexOld(Request $request)
     {
         /** @var Recibo $recibos */
         $recibos = Recibo::all();
@@ -38,6 +38,35 @@ class ReciboController extends AppBaseController
         return view('recibos.index')
             ->with('recibos', $recibos);
     }
+
+
+
+    public function index(Request $request)
+    {
+
+        $formulario  = $request->get('formulario');
+
+        if($formulario)
+        {        
+            $recibos = DB::table('vw_recibos')
+            ->where('formulario','like','%'.$formulario.'%' ) 
+            ->paginate( 100 ) ;   
+
+            $data['recibos'] = $recibos;     
+            $data['formulario'] = $formulario;     
+
+            Flash::success('Filtrando '.$formulario);            
+
+            return view('recibos.index',["recibos"=>$recibos,"formulario"=>$formulario]);            
+        } 
+        else
+        {
+            //$inventarios = Inventario::all()->paginate(25);
+            $recibos = DB::table('vw_recibos')->paginate(25);
+        }
+        return view('recibos.index')
+            ->with('recibos', $recibos);
+    }    
 
 
 
@@ -55,11 +84,18 @@ class ReciboController extends AppBaseController
              ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
              ->get(); 
 
-             /*listar los cheques en ventana modal*/
-             $cheques=DB::table('cheques')
-             ->select(DB::raw('CONCAT(numero," ",fecha, saldo) AS chequedescrip'),'id')
-             ->get();              
+               /*listar los cheques en ventana modal*/
+               $cheques=DB::table('cheques')
+               ->select(DB::raw('CONCAT(numero," ->  ",  SUBSTR(fecha,9,2),"/",SUBSTR(fecha,6,2),"/",SUBSTR(fecha,1,4) ,"    Saldo -> $",saldo) AS chequedescrip'),'id')
+               ->where( 'rendido_at','=', null )
+               ->get();              
 
+            //  /*listar los cheques en ventana modal*/
+            //  $cheques=DB::table('cheques')
+            //  ->select(DB::raw('CONCAT(numero," ",fecha, saldo) AS chequedescrip'),'id')
+            //  ->get();    
+             
+           
 
 
              /*listar las clientes en ventana modal*/
@@ -110,6 +146,21 @@ class ReciboController extends AppBaseController
 
         //dd($request->fecha);
         $fecha_recibo = french2american( $request->fecha);
+
+        //dd($request->id_cheque);
+
+        //CONTROLAR EL SALDO DEL CHEQUE
+
+        
+        
+        if( ! Cheque::TieneSaldoSuficiente($request->id_cheque,$request->total_pagar) )
+        {
+            Flash::error(' El Cheque seleccionado no tiene saldo suficiente' );                    
+            return back()->withInput()
+            ->withErrors('Saldo Insuficiente');       
+        }
+
+
 
         try {
 
@@ -331,7 +382,7 @@ class ReciboController extends AppBaseController
         $recibo = Recibo::find($id);
 
         if (empty($recibo)) {
-            Flash::error('Recibo not found');
+            Flash::error('Recibo no encontrado');
 
             return redirect(route('recibos.index'));
         }
@@ -352,7 +403,7 @@ class ReciboController extends AppBaseController
         $recibo = Recibo::find($id);
 
         if (empty($recibo)) {
-            Flash::error('Recibo not found');
+            Flash::error('Recibo no encontrado');
 
             return redirect(route('recibos.index'));
         }
@@ -374,7 +425,7 @@ class ReciboController extends AppBaseController
         $recibo = Recibo::find($id);
 
         if (empty($recibo)) {
-            Flash::error('Recibo not found');
+            Flash::error('Recibo no encontrado');
 
             return redirect(route('recibos.index'));
         }
@@ -382,7 +433,7 @@ class ReciboController extends AppBaseController
         $recibo->fill($request->all());
         $recibo->save();
 
-        Flash::success('Recibo updated successfully.');
+        Flash::success('Recibo actualizado');
 
         return redirect(route('recibos.index'));
     }
@@ -402,40 +453,17 @@ class ReciboController extends AppBaseController
         $recibo = Recibo::find($id);
 
         if (empty($recibo)) {
-            Flash::error('Recibo not found');
+            Flash::error('Recibo no encontrado');
 
             return redirect(route('recibos.index'));
         }
 
         $recibo->delete();
 
-        Flash::success('Recibo deleted successfully.');
+        Flash::success('Recibo borrado.');
 
         return redirect(route('recibos.index'));
     }
 }
 
-///// FUNCIONES GENERALES FUERA DE LA CLASE
 
-function Fecha()
-{
-
-    $date = Carbon::today();
-    $fecha = $date->format('Ymd');   
-    // Esto debe devolver AAAAMMDD por ejemplo  "20190909"
-
-    //dd($fecha);
-
-    echo $fecha;
-    return $fecha;
-}
-
-function zeros($cadena,$longitud)
-{
-
-    $zeros =  substr("00000000".$cadena,-1 * $longitud ,$longitud);
-    //dd($zeros);
-    return $zeros;
-}
-
-////////////////////////////////////////////

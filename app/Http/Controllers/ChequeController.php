@@ -179,6 +179,9 @@ class ChequeController extends AppBaseController
         return view('cheques.show')->with('cheque', $cheque);
     }
 
+
+
+
     /**
      * Show the form for editing the specified Cheque.
      *
@@ -394,57 +397,144 @@ class ChequeController extends AppBaseController
     public function rendicion_guardar(Request $request)
     {
 
+
+
         try {
 
-                $input = $request->all();
+
+      $cheque_id = $request->cheque_id;
+
+      /** @var Cheque $cheque */
+      $cheque = Cheque::find($cheque_id);
+
+      if (empty($cheque)) {
+          dd('Cheque no encontrado');
+ 
+      }
+
+      /*listar las piezas a rendir*/
+
+      $recibosr = DB::table('recibos_lineas as rr')
+      ->join('recibos as r', 'rr.recibo_id', '=', 'r.id')
+      ->join('tipopiezas as p', 'rr.tipopieza_id', '=', 'p.id')
+      ->join('artesanos as a', 'r.artesano_id', '=', 'a.id')
+      ->select('r.id','r.cheque_id','r.formulario', 'r.artesano_id',  'rr.tipopieza_id', 'rr.cantidad', 'rr.preciounit', 
+      'rr.importe', 'p.descrip','p.tecnica','p.precio','a.nombre', 'rr.tipopieza_id as inventario','r.fecha' )
+      ->whereRaw('cheque_id = ?', $cheque_id) 
+      ->get();
+
+      //dd($recibosr);
+      //$reccount = $recibosr->count();
+
+      $renglones = collect($recibosr) ;
+
+      //dd($renglones);
+      
+      // Multiplicar los renglones que tienen cantidad > 1
+      $nRenglon = 0;
+      foreach ($recibosr as $recibos) {
+     
+          for ($i = 1; $i <= $recibos->cantidad ; $i++) {
+              
+              $registro = $recibosr[$nRenglon]; 
+              $renglones = $renglones->push(clone $registro);
+          }
+          $nRenglon = $nRenglon + 1 ;
+      }        
+
+      //dd($renglones);
+      ///Numerar las piezas
+      $reccount = $renglones->count();
+       
+
+      $talonario = new Talonario;
+    //   $proximo_numero = $talonario->proximodocumento('PIEZA');       
+
+      foreach ($renglones as $renglon) {
+          
+        //   $renglon->inventario = $proximo_numero++ ;
+
+
+               //Pedir número de pieza
+               $nueva_pieza = $talonario->proximodocumento('pieza');                       
+
+                     
+                     
+
+
+                    
+               $inventario = new Inventario();
+               // dd('hasta aqui 3',$inventario);
+               $inventario->npieza       = $nueva_pieza;
+               
+               //$inventario->numero    = $request->descrip[$cont];
+               $inventario->codigo12     = $nueva_pieza;
+               $inventario->tipopieza_id = $renglon->tipopieza_id;
+               $inventario->comprob      = '1';
+               $inventario->namepieza    = $renglon->descrip . $renglon->tecnica;
+               $inventario->recibo_id      = '1';
+               $inventario->costo      = $renglon->preciounit;
+               $inventario->recargo    = '1';
+               $inventario->artesano_id    = '1';
+               $inventario->comprado_at    = $renglon->fecha;
+               $inventario->precio     = $renglon->preciounit * 1.3 ;
+               $inventario->precio_at  = $renglon->fecha;
+               $inventario->foto       = ' ';
+
+               $inventario->save();
+
+               //Dejar grabado próximo número de pieza
+               $talonario->Actualizarproximodocumento('pieza',$nueva_pieza);
+
+
+               $rendicion  = new Rendicion();
+               $rendicion->cheque_id     = $cheque_id ;
+               $rendicion->inventario_id = $inventario->id ;
+               $rendicion->recibo_id     = 1 ;
+               $rendicion->importe       = 1 ;
+               $rendicion->save() ;
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+      }          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+               
                 //dd($input);
                 $cheque_id = $request->cheque_id;
                 //dd($request->cheque_id);
 
                     //GUARDAR RENGLONES DEL RECIBO
-                    $lineas_detalle = $request->inventario ; //Tomo el Id del Recibo insertado                
-                    $cont=0;
-
-                //Fecha
-                $mytime= Carbon::now('America/Argentina/Mendoza');
-                $mytime= $mytime->toDateString();
-
-  
-                while($cont < count($lineas_detalle)){
-
-
-
-
-
-                    
-                    $inventario = new Inventario();
-                    // dd('hasta aqui 3',$inventario);
-                    $inventario->npieza       = $request->inventario[$cont];
-                    
-                    $inventario->numero    = $request->descrip[$cont];
-                    $inventario->codigo12     = $request->inventario[$cont];
-                    $inventario->tipopieza_id = 1;
-                    $inventario->comprob      = '1';
-                    $inventario->recibo_id      = '1';
-                    $inventario->costo      = '1';
-                    $inventario->recargo    = '1';
-                    $inventario->artesano_id    = '1';
-                    $inventario->comprado_at    = $mytime;
-                    $inventario->vendido_at     = $mytime;
-                    $inventario->precio     = 0;
- 
-                    $inventario->save();
-
-                    $rendicion  = new Rendicion();
-                    $rendicion->cheque_id     = $cheque_id ;
-                    $rendicion->inventario_id = $inventario->id ;
-                    $rendicion->recibo_id     = 1 ;
-                    $rendicion->importe       = 1 ;
-                    $rendicion->save() ;
-
-
-                    $cont=$cont+1;
-                }
+               
 
                 $mytime= Carbon::now('America/Argentina/Mendoza');
                 //dd($cheque_id);
@@ -471,6 +561,8 @@ class ChequeController extends AppBaseController
                     ->withErrors([$mensaje_error]);
         }                  
     }
+
+
 
 
 
