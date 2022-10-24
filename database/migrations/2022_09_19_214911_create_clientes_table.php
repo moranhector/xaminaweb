@@ -17,13 +17,13 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id('id');
             $table->string('nombre');
-            $table->string('ivacond');
-            $table->string('domicilio');
-            $table->string('telefono');
-            $table->string('email');
-            $table->string('tipodoc');
+            $table->string('ivacond')->nullable();
+            $table->string('domicilio')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('email'->nullable());
+            $table->string('tipodoc')->nullable();
             $table->string('documento');
-            $table->string('user_name');
+            $table->string('user_name')->nullable();
             $table->timestamps();
         });
     }

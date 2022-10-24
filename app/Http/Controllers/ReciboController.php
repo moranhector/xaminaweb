@@ -18,6 +18,8 @@ use DB;
 use Carbon\Carbon;
 use Auth;
 
+include "funciones.php";
+
 
 class ReciboController extends AppBaseController
 {
@@ -104,6 +106,10 @@ class ReciboController extends AppBaseController
      */
     public function guardar(Request $request)
     {
+        //$request->fecha
+
+        //dd($request->fecha);
+        $fecha_recibo = french2american( $request->fecha);
 
         try {
 
@@ -154,7 +160,7 @@ class ReciboController extends AppBaseController
                 //datos a guardar en Recibo
                 $recibo = new Recibo();
                 $recibo->formulario =   $request->formulario; 
-                $recibo->fecha = $request->fecha ;
+                $recibo->fecha = $fecha_recibo ;
                 $recibo->artesano_id = $artesano->id ;
                 $recibo->total = $request->total_pagar;
                 //$recibo->cheque_id = 1 ;

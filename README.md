@@ -1060,6 +1060,9 @@ Ojo: Problema, al no seleccionar cliente, da el error y borra la grilla.
 
 ERROR No está increntando el total a pagar
 
+Alta de Cliente, no toma los datos del cliente on line.
+
+
 
 28 de septiembre.
 
@@ -1243,7 +1246,7 @@ Alta de artesano: falta campo Lugar, campo activo. ok
 
 Consulta: Piezas compradas por Artesano.
 en Index falta campo Lugar. Filtro de Artesanos activos, 
-Permitir borrar solo si no tiene recibos, ni piezas a su nombre.
+Permitir borrar solo si no tiene recibos, ni piezas a su nombre. PENDIENTE
 Campos en Columna
 
 NO INCORPORÉ EL CAMPO ACTIVO, EN SU LUGAR MODIFIQUE LA MIGRACIONES
@@ -1299,7 +1302,7 @@ view: Mostrar movimientos
 
 TALONARIOS:
 
-Quitar campo punto de venta.
+Quitar campo punto de venta. QUITAR FECHA VENCIMIENTO.
 Index: fecha vencimiento en FRENCH
 
 Alta y Editado en columnas.
@@ -1331,7 +1334,9 @@ Validar existencia en deposito. ajax_pieza_deposito
 NOTAS DE CREDITO:
     Para revertir facturas.
 
+RECIBOS
 
+-en formulario alta esta mostrando dos calendarios BUG
 
 REPORTES:
 

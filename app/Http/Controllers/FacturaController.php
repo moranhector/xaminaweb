@@ -281,6 +281,12 @@ class FacturaController extends AppBaseController
                 $factura->formulario =   $request->formulario; 
                 $factura->ptovta =  '1' ; 
                 $factura->tipo =  'FACB' ; 
+                $factura->ivacond=  "CONSUMIDOR FINAL" ; 
+                $factura->domicilio=  " " ; 
+                $factura->telefono=  " " ; 
+                $factura->email=  " " ; 
+                $factura->tipodoc=  " " ; 
+                $factura->documento=  " " ; 
 
                 $fecha_factura = french2american( $request->fecha )  ;    
 

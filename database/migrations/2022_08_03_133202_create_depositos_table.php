@@ -17,7 +17,7 @@ class CreateDepositosTable extends Migration
         Schema::create('depositos', function (Blueprint $table) {
             $table->id('id');
             $table->string('nombre');
-            $table->string('user_name');
+            $table->string('user_name')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
