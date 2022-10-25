@@ -1457,3 +1457,36 @@ Resolvi problemas con la validacion de unicidad de documento en Alta y Edicion.
 24/10/2022
 
 Continuar con Refinamiento de Rendiciones
+
+
+25/10/2022
+
+Cheques:
+
+No se puede rendir un cheque que no tiene compras realizadas. Solo se puede Anular.
+
+Anulación de Cheque.
+
+
+-
++ Ahora Xw puede anular cheques. Condición, que no tenga compras pendientes.
+
+
+- Al Rendir, mostrar las piezas ingresadas.
+
+- Instalar mPdf
+
+https://github.com/mccarlosen/laravel-mpdf
+
+composer require carlos-meneses/laravel-mpdf
+
+'providers' => [
+  // ...
+  Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class
+]
+
+'aliases' => [
+  // ...
+  'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
+]
+

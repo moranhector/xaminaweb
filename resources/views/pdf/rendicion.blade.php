@@ -1,138 +1,3 @@
-RECORTE.TXT
-
- php artisan infyom:scaffold Artesano
-
-Specify fields for the model (skip id & timestamp fields, we will add it automat
-ically)
-Read docs carefully to specify field inputs)
-Enter "exit" to finish
-
- Field: (name db_type html_type options) []:
- > nombre string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > documento
-
-Invalid Input. Try again
-
- Field: (name db_type html_type options) []:
- > documento string numeric
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > direccion string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > exit
-
-php artisan infyom:scaffold Artesano SIN ARCHIVO JSON
-
-php artisan infyom:rollback Artesano scaffold  PARA DESHACER ULTIMA GENERACION
-
-php artisan infyom:scaffold Artesano --fieldsFile Artesano.json PARA GENERAR DESDE ARCHIVO JSON
-
-
-TIPS
-https://bestofphp.com/repo/InfyOmLabs-laravel-generator-php-developer-tools
-
-input value onkeyup="this.value = this.value.toUpperCase();"
-
-Como generar los Select Options
-https://labs.infyom.com/laravelgenerator/docs/5.8/fields-input-guide
-
-
--
-php artisan infyom:scaffold Rubro
-
-php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESDE ARCHIVO JSON
-
-php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
-
-
-<div class="col-md-4">        
-        
-        <div class="{{ $errors->has('fecha') ? 'has-error' : '' }}">
-            <label class="form-control-label" for="fecha">Fecha</label>  
-            <div>
-                <input class="form-control" name="fecha" type="fecha" id="fecha" value="{{ $fecha }}" >
-                {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
-            </div>
-        </div>
-
-</div>
-
-
-                       var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
-                       concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="producto_id"></td>',
-                               '<td><input type="text"   name="descrip"  ></td>',
-                               '<td><input type="text"   name="precio_venta"   ></td>',
-                               '<td><input type="text"   name="cantidad" value="'+cantidad+'"   ></td>',
-                               '<td><input type="text"   name="subtotal"  ></td></tr>');
-
-
-/vfp/*.bak
-/vfp/*.fxp
-/vfp/*.tmp
-/vfp/log_sql.txt
-/vfp/*.err                               
-
-
-        $nRenglon = 0;
-        foreach ($recibosr as $recibos) {
-
-            
-            for ($i = 1; $i <= $recibos->cantidad ; $i++) {
-                
-                $registro = ($recibosr->at( $nRenglon ))  ; 
-      
-                Log::warning('renglones', ['renglon' => $registro ]);
-
-                $renglones = $renglones->push($registro);
-
-                
-            }
-        
-            $nRenglon = $nRenglon + 1 ;
-        }    
-
-
-
-<div class="form-group">
-    <label>Sexo:</label>
-
-    <select class="form-control" name="sexo" id="sexo" value="{{ old('sexo') }}" >  
-        <!-- <option hidden selected>Seleccione ...</option>  -->
-        <option style="display:none;"></option>     
-        <option>F</option>
-        <option>M</option>
-        <option>X</option>
- 
-    </select>
-</div>
-</div>        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -238,7 +103,7 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
 
             <tr>
                 <td width="100%" align="center">
-                <B>  ORIGINAL  </B>  
+                <B>  RENDICION  </B>  
                 
                 </td>
             </tr>
@@ -249,9 +114,7 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
                 <td style="border:0;" width="40%" align="center">
                           <B> {{$numero}}   </B>
                 </td>
-                <td style="border:1px solid"  width="20%" align="center" >
-                         <h1><B>  C </B></h1>   <h5><B>  COD.011 </B></h5>  
-                </td>
+  
                 <td style="border:0;" width="40%" align="center">
                 <B>  CHEQUE  </B>  
                 
@@ -365,19 +228,19 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
 
 
         
-<!-- 
 
 
-            @ for ($ i = 0; $i < 6; $ i++)
-            @ if (array_key_exists($ i, $ renglones))
+
+            @for ($i = 0; $i < 6; $i++)
+            @if (array_key_exists($i, $renglones))
             <tr>
-                <td width="9%" align="center"><span class="text">{ { $ renglones[$i]['inventario_id'] } }</span></td>            
-                <td width="48%"><span class="text">{ { $renglones[$i]['cheque_id'] }}</span></td>                
-                <td width="9%" align="center"><span class="text">{ { $renglones[$i]['recibo_id'] } }</span></td>
+                <td width="9%" align="center"><span class="text">{{ $renglones[$i]['inventario_id'] }}</span></td>            
+                <td width="48%"><span class="text">{{ $renglones[$i]['cheque_id'] }}</span></td>                
+                <td width="9%" align="center"><span class="text">{{ $renglones[$i]['recibo_id'] }}</span></td>
 
-                <td width="18%" align="right"><span class="text">{ { $renglones[$i]['importe'] } }</span></td>
+                <td width="18%" align="right"><span class="text">{{ $renglones[$i]['importe'] }}</span></td>
             </tr>
-            @ else
+            @else
             <tr>
                 <td width="9%">&nbsp;</td>
                 <td width="48%">&nbsp;</td>
@@ -385,8 +248,8 @@ php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
                 <td width="16%">&nbsp;</td>
                 <td width="18%" align="left">&nbsp;</td>
             </tr>
-            @ endif
-            @ endfor -->
+            @endif
+            @endfor
 
 
 

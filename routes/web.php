@@ -45,6 +45,9 @@ Route::get('rendir_cheque/{id}','App\Http\Controllers\ChequeController@rendir')-
 
 Route::post('rendicion_guardar','App\Http\Controllers\ChequeController@rendicion_guardar')->name('rendicion_guardar');   
 
+// IMPRIMIR RENDICION
+Route::get('cheques/imprimir_rendicion/{id}','App\Http\Controllers\ChequeController@imprimir')->name('imprimir_rendicion');   
+
 
 
 Route::resource('recibos', App\Http\Controllers\ReciboController::class);

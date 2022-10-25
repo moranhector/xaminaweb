@@ -45,7 +45,7 @@
 
 
 
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Está seguro de eliminar cheque $cheque->numero?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Está seguro de anular cheque $cheque->numero?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

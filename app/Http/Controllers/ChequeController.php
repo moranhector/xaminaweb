@@ -20,6 +20,7 @@ use Carbon\Carbon;
 use App\Models\Talonario;
 use App\Models\Inventario;
 use App\Models\Rendicion;
+use Mpdf\Mpdf;
 
 class ChequeController extends AppBaseController
 {
@@ -284,6 +285,26 @@ class ChequeController extends AppBaseController
             return redirect(route('cheques.index'));
         }
 
+
+        $recibosr = DB::table('recibos_lineas as rr')
+        ->join('recibos as r', 'rr.recibo_id', '=', 'r.id')
+        ->join('tipopiezas as p', 'rr.tipopieza_id', '=', 'p.id')
+        ->join('artesanos as a', 'r.artesano_id', '=', 'a.id')
+        ->select('r.id','r.cheque_id','r.formulario', 'r.artesano_id',  'rr.tipopieza_id', 'rr.cantidad', 'rr.preciounit', 
+        'rr.importe', 'p.descrip','p.tecnica','p.precio','a.nombre', 'rr.tipopieza_id as inventario' )
+        ->whereRaw('cheque_id = ?', $id) 
+        ->get();        
+
+        $reccount = $recibosr->count();
+
+        if( $reccount > 0 )
+        {
+            Flash::error('Cheques no puede anularse. Tiene compras pendientes de rendición');
+
+            return redirect(route('cheques.index'));
+
+        }
+
         $cheque->delete();
 
         Flash::success('Cheques borrado correctamente.');
@@ -495,38 +516,9 @@ class ChequeController extends AppBaseController
                $rendicion->save() ;
 
 
-        
-
-
-
-
-
-
-
-
-
-
 
       }          
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
                
                 //dd($input);
@@ -543,10 +535,21 @@ class ChequeController extends AppBaseController
                 $cheque->save();
 
 
+            // Aqui construyo el link de impresion que va en el botón de la barra de herramientas
+            $link_impresion = url('/cheques/imprimir_rendicion/'.$cheque_id);
+
+
+            ////////////////////////////////////////////
+            //return redirect()->route('facturas.factura.index')
+            // Devuelvo elementos para la barra de herramientas, y el link para imprimir la factura recién hecha
+
+            return back()->withInput()
+            ->with('success_message', 'Rendición grabada: '.$cheque_id )            
+            ->with('link_impresion',$link_impresion );    
 
 
 
-                return redirect(route('cheques.index'));
+ 
 
 
         } catch(Exception $e){
@@ -563,9 +566,133 @@ class ChequeController extends AppBaseController
     }
 
 
+    /**
+     * Imprime en PDF LA rendicion.
+     *
+     * @param int $id
+     *
+     * @return Illuminate\View\View
+     */
+    public function imprimir($id)
+    {
+        $cheque = Cheque::findOrFail($id);
+
+ 
+        $renglones = Rendicion::where('cheque_id', $id)->get()->toArray();
+
+        //dd($renglones);
+
+        $this->pdf($cheque,$renglones);
+        
+
+        return view('cheques.show', compact('cheque'));
+    }
+
+
+    public function pdf($cheque,$renglones,$accion='ver',$tipo='digital')
+    {
+
+        //dd($cheque);
+
+        //$sistema = Sistema::findOrFail(1);
+
+        //$cuit_cliente = $factura->cuit;        
+        //$ruc = "10072486893";
+ 
+        $dia = "09";
+        $mes = "04";
+        $ayo = "17";
+
+   
+
+        $dni = "23918745";
+        $total = 0;
+
+        //print_r($detalle);
+        //die();
 
 
 
+        //$total = number_format($total,2,'.',' ');
+ 
+         
+        $data['numero'] = $cheque->numero;
+        
+        $data['dia'] = $dia;
+        $data['mes'] = $mes;
+        $data['ayo'] = $ayo;
+        
+        
+
+        
+        $data['total'] = '$10000';
+        $data['renglones'] = $renglones;
+        //dd( $renglones ) ;
+        
+ 
+        //AQUI VA LA VISTA PDF DE LA FACTURA
+
+        if($accion=='html'){
+            return view('pdf.rendicion',$data);
+        }else{
+            $html = view('pdf.rendicion',$data)->render();
+        }
+
+
+        $namefile = 'boleta_de_venta_'.time().'.pdf';
+ 
+        $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir'];
+
+        $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata'];
+        // CORRECCIONES DE FUENTES 20220627 POR PROBLEMAS CON FONT ARIAL
+        $mpdf = new Mpdf([
+            // 'fontDir' => array_merge($fontDirs, [
+            //     public_path() . '/fonts',
+            // ]),
+            // 'fontdata' => $fontData + [
+            //     'arial' => [
+            //         'R' => 'FreeSans.ttf',
+            //         'B' => 'FreeSansBold.ttf',
+            //     ],
+            // ],
+            'default_font' => 'arial',
+            "format" => "A4",
+            //"format" => [264.8,188.9],
+        ]);
+
+        
+        // $mpdf->SetTopMargin(5);
+     
+        //PIE DE PAGINA    
+        // $mpdf->SetHTMLFooter('
+        // <table width="100%">
+        //     <tr>
+
+        //      <td width="73%" align="left"><img id="logo" src="images/logoafip.jpg" alt="" width="150" height="57"></td> 
+
+
+        //     </tr>
+        //     <tr>
+        //         <td width="33%">{DATE j/m/Y}</td>
+        //         <td width="33%" align="center">{PAGENO}/{nbpg}</td>
+        //         <td width="33%" style="text-align: right;">Factura Electrónica</td>
+        //     </tr>            
+        // </table>');
+
+        //dd('aa');
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($html);
+        //dd($namefile);
+        $mpdf->Output($namefile,"I");
+
+        if($accion=='ver'){
+            $mpdf->Output($namefile,"I");
+        }elseif($accion=='descargar'){
+            $mpdf->Output($namefile,"D");
+        }
+    }    
 
 
 
