@@ -21,6 +21,7 @@ use App\Models\Talonario;
 use App\Models\Inventario;
 use App\Models\Rendicion;
 use Mpdf\Mpdf;
+include 'funciones.php';
 
 class ChequeController extends AppBaseController
 {
@@ -389,7 +390,7 @@ class ChequeController extends AppBaseController
  
         }  
 
-   
+        //dd($renglones);
 
  
        
@@ -482,6 +483,25 @@ class ChequeController extends AppBaseController
                      
                      
 
+                //dd($renglon);
+
+
+                // // {#1663 ▼
+                // //     +"id": 10
+                // //     +"cheque_id": 9
+                // //     +"formulario": "00000010"
+                // //     +"artesano_id": 72
+                // //     +"tipopieza_id": 72
+                // //     +"cantidad": 5
+                // //     +"preciounit": "390.00"
+                // //     +"importe": "1950.00"
+                // //     +"descrip": "LAZO"
+                // //     +"tecnica": "TRENZA DE 8 T."
+                // //     +"precio": "390.00"
+                // //     +"nombre": "DIAZ, NIEVES OSVALDO"
+                // //     +"inventario": 72
+                // //     +"fecha": "2022-10-26"
+                // //   }
 
                     
                $inventario = new Inventario();
@@ -491,12 +511,12 @@ class ChequeController extends AppBaseController
                //$inventario->numero    = $request->descrip[$cont];
                $inventario->codigo12     = $nueva_pieza;
                $inventario->tipopieza_id = $renglon->tipopieza_id;
-               $inventario->comprob      = '1';
-               $inventario->namepieza    = $renglon->descrip . $renglon->tecnica;
-               $inventario->recibo_id      = '1';
+               $inventario->comprob      = $renglon->formulario;
+               $inventario->namepieza    = $renglon->descrip .' '.$renglon->tecnica;
+               $inventario->recibo_id      = $renglon->id ;
                $inventario->costo      = $renglon->preciounit;
-               $inventario->recargo    = '1';
-               $inventario->artesano_id    = '1';
+               $inventario->recargo    = '0';
+               $inventario->artesano_id    = $renglon->artesano_id;
                $inventario->comprado_at    = $renglon->fecha;
                $inventario->precio     = $renglon->preciounit * 1.3 ;
                $inventario->precio_at  = $renglon->fecha;
@@ -511,8 +531,8 @@ class ChequeController extends AppBaseController
                $rendicion  = new Rendicion();
                $rendicion->cheque_id     = $cheque_id ;
                $rendicion->inventario_id = $inventario->id ;
-               $rendicion->recibo_id     = 1 ;
-               $rendicion->importe       = 1 ;
+               $rendicion->recibo_id     = $renglon->id ;
+               $rendicion->importe       = $renglon->preciounit;
                $rendicion->save() ;
 
 
@@ -578,7 +598,18 @@ class ChequeController extends AppBaseController
         $cheque = Cheque::findOrFail($id);
 
  
-        $renglones = Rendicion::where('cheque_id', $id)->get()->toArray();
+   
+
+        $renglones= DB::table('rendiciones as r')
+        ->join('cheques as ch', 'r.cheque_id', '=', 'ch.id')
+        ->join('inventarios as i', 'r.inventario_id', '=', 'i.id')
+        ->join('recibos as rr', 'r.recibo_id', '=', 'rr.id')
+        ->select('r.id','r.cheque_id','rr.formulario', 'r.inventario_id' ,'i.npieza','i.namepieza',
+        'rr.formulario','r.importe' )
+        ->whereRaw('r.cheque_id = ?', $id) 
+        ->get();
+ 
+        //->get()->toArray();
 
         //dd($renglones);
 
@@ -627,6 +658,7 @@ class ChequeController extends AppBaseController
         
         $data['total'] = '$10000';
         $data['renglones'] = $renglones;
+        $data['cheque'] = $cheque;
         //dd( $renglones ) ;
         
  

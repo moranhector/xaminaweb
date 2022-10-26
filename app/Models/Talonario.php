@@ -31,9 +31,9 @@ class Talonario extends Model
 
     public $fillable = [
         'tipo',
-        'ptoventa',
+        // 'ptoventa',
         'proximodoc',
-        'fechavto'
+        // 'fechavto'
     ];
 
     /**
@@ -43,9 +43,9 @@ class Talonario extends Model
      */
     protected $casts = [
         'tipo' => 'string',
-        'ptoventa' => 'string',
+        // 'ptoventa' => 'string',
         'proximodoc' => 'string',
-        'fechavto' => 'date'
+        // 'fechavto' => 'date'
     ];
 
     /**

@@ -17,9 +17,9 @@ class CreateTalonariosTable extends Migration
         Schema::create('talonarios', function (Blueprint $table) {
             $table->id('id');
             $table->string('tipo');
-            $table->string('ptoventa');
+            $table->string('ptoventa')->nullable();
             $table->string('proximodoc');
-            $table->date('fechavto');
+            $table->date('fechavto')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

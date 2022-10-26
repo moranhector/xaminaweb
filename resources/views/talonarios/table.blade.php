@@ -3,9 +3,9 @@
         <thead>
         <tr>
             <th>Tipo Documento</th>
-        <th>Ptoventa</th>
+        <!-- <th>Ptoventa</th> -->
         <th>Próximo</th>
-        <th>Fecha vencimiento</th>
+        <!-- <th>Fecha vencimiento</th> -->
         <th>Ultima Actualización</th>
             <th colspan="3">Acción</th>
         </tr>
@@ -14,10 +14,11 @@
         @foreach($talonarios as $talonario)
             <tr>
                 <td>{{ $talonario->tipo }}</td>
-            <td>{{ $talonario->ptoventa }}</td>
+            <!-- <td>{{ $talonario->ptoventa }}</td> -->
             <td>{{ $talonario->proximodoc }}</td>
-            <td>{{ $talonario->fechavto }}</td>
-            <td>{{ $talonario->updated_at }}</td>
+            <!-- <td>{{ $talonario->fechavto }}</td> -->
+             
+            <td>{{ american2frech( $talonario->updated_at ) }}<b> {{\Carbon\Carbon::parse( $talonario->updated_at   )->diffForHumans() }}</b></td> 
                 <td width="120">
                     {!! Form::open(['route' => ['talonarios.destroy', $talonario->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

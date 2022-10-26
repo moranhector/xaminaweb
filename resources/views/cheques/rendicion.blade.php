@@ -42,6 +42,7 @@
                     <thead>
                         <tr>
                             <th style="text-align: center">Inventario</th>
+                            <th style="text-align: center">Recibo</th>
                             <th style="text-align: center;">Precio Unitario</th>
 
                             <th style="text-align: center;">Descripción</th>
@@ -59,6 +60,10 @@
                             <td><input type="text" id="inventario" name="inventario[]"
                                     value="{{ $renglon->inventario }}" readonly style="border: 0; text-align: right;">
                             </td>
+                            <td><input type="text" id="inventario" name="formulario[]"
+                                    value="{{ $renglon->formulario }}" readonly style="border: 0; text-align: right;">
+                            </td>                            
+
                             <td><input type="text" id="preciounit" name="preciounit[]"
                                     value="{{ $renglon->preciounit }}" readonly style="border: 0; text-align: right;">
                             </td>

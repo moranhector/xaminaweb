@@ -1490,3 +1490,30 @@ composer require carlos-meneses/laravel-mpdf
   'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
 ]
 
+
+
+26/10/2022
+Miércoles
+
+Talonario para piezas 127199
+
+
+- Talonarios Quitar campos punto de venta y fecha de vencimiento.
+
+- BUG Permite rendir cheques que no tienen compras.
+
+- Recibo compras - Seleccion de Artesanos anda mal paginado.
+
+- Recibo - grilla - Alinear numeros a la derecha, precio, cantidad y subtotal.
+
+- Recibos Index, no  muestra si está rendido o no.
+
+- Rendicion: no numera con el talonario al rendir. 
+- Rendicion: Graba la descripcion pegada a la Tecnica.
+- Rendicion: Muestra incorrecamente el recibo de compra. µ
+- Rendicion: Recibo de compra sigue mal y el costo esta mal. OK µ
+
+µ 230 þ 231 Þ 232 ß 225 ¦ 221 ┌┘ 218 217 ¤ 207 ╬ 206 ╠ 204 ╩ 202 
+╔ 201 ╚ 200 ┼ 197 ├ 195 ┬ 194 ┴ 193 └ 192 ┐ 191 ╝ 188 ╗ 187 ║ 186
+╣ 185 © 184 │ 179 ▓ 178 ▒ 177 ► 176 → 26 ► 16 ◄ 17 ↑ 24 ↓ 25 
+

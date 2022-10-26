@@ -34,7 +34,7 @@
                             <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
                             class="btn btn-sm btn-info float-left">Rendir</a>                           
                         @else
-                            <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
+                            <a href="{{ route('imprimir_rendicion', [$cheque->id]) }}"  
                             class="btn btn-sm btn-info float-left">Imprim</a>   
                         @endif
 

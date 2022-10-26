@@ -21,7 +21,7 @@
 
             <div class="card-body">
 
-                <div class="row">
+                <div>
                     @include('talonarios.fields')
                 </div>
 

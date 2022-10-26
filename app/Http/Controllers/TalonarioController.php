@@ -9,7 +9,7 @@ use App\Models\Talonario;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
-
+include 'funciones.php';
 class TalonarioController extends AppBaseController
 {
     /**

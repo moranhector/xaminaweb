@@ -1,26 +1,26 @@
 <!-- Tipo Field -->
-<div class="form-group col-sm-6">
+<div class="form-group col-sm-4">
     {!! Form::label('tipo', 'Tipo:') !!}
     {!! Form::text('tipo', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Ptoventa Field -->
-<div class="form-group col-sm-6">
+<!-- <div class="form-group col-sm-6">
     {!! Form::label('ptoventa', 'Ptoventa:') !!}
     {!! Form::text('ptoventa', null, ['class' => 'form-control']) !!}
-</div>
+</div> -->
 
 <!-- Proximodoc Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('proximodoc', 'Proximodoc:') !!}
+<div class="form-group col-sm-4">
+    {!! Form::label('proximodoc', 'Próximo documento:') !!}
     {!! Form::text('proximodoc', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Fechavto Field -->
-<div class="form-group col-sm-6">
+<!-- <div class="form-group col-sm-6">
     {!! Form::label('fechavto', 'Fechavto:') !!}
     {!! Form::text('fechavto', null, ['class' => 'form-control','id'=>'fechavto']) !!}
-</div>
+</div> -->
 
 @push('page_scripts')
     <script type="text/javascript">
