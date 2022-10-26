@@ -20,7 +20,10 @@ use Carbon\Carbon;
 use App\Models\Talonario;
 use App\Models\Inventario;
 use App\Models\Rendicion;
+use App\Models\Existencia;
 use Mpdf\Mpdf;
+
+
 include 'funciones.php';
 
 class ChequeController extends AppBaseController
@@ -528,11 +531,27 @@ class ChequeController extends AppBaseController
                $talonario->Actualizarproximodocumento('pieza',$nueva_pieza);
 
 
+               //Crear Existencia  
+               
+               //$existencia = Existencia::create($input);
+               $existencia = new Existencia();
+               $existencia->inventario_id = $inventario->id;
+               $existencia->tipodoc       = "RECIBO";
+               $existencia->documento     = $inventario->comprob ;
+               $existencia->deposito_id     = '1' ; //Deposito Central por Default
+               $existencia->fecha_desde     = $inventario->comprado_at ; // 
+               $existencia->user_name       = Auth::user()->name;;
+               $existencia->save();
+
+               
+            
+
                $rendicion  = new Rendicion();
                $rendicion->cheque_id     = $cheque_id ;
                $rendicion->inventario_id = $inventario->id ;
                $rendicion->recibo_id     = $renglon->id ;
                $rendicion->importe       = $renglon->preciounit;
+               
                $rendicion->save() ;
 
 
