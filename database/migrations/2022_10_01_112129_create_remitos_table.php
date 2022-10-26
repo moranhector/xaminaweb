@@ -20,6 +20,7 @@ class CreateRemitosTable extends Migration
             $table->date('fecha');
             $table->integer('deposito_id_from');
             $table->integer('deposito_id_to');
+            $table->integer('cantidad');
             $table->string('user_name');
             $table->timestamps();
         });

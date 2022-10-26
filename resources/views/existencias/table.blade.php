@@ -4,6 +4,7 @@
         <tr>
         <th>Id</th>
         <th>Número de Pieza</th>
+        <th>Ean13</th>
         <th>Descripción</th>
         <th>Tipo de pieza</th>
         <th>Depósito</th>
@@ -21,6 +22,7 @@
             <tr>
                 <td>{{ $existencia->inventario_id }}</td>
                 <td>{{ $existencia->npieza }}</td>
+                <td>{!! DNS1D::getBarcodeHTML( $existencia->codigo12 , 'EAN13') !!}</td>
                 <td>{{ $existencia->namepieza }}</td>
                 <td>{{ $existencia->descrip }}</td>
                 <td>{{ $existencia->nombre }}</td>

@@ -4,6 +4,8 @@
     {!! Form::text('codigo12', null, ['class' => 'form-control']) !!}
 </div>
 
+
+
 <!-- Tipopieza Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('tipopieza_id', 'Tipopieza Id:') !!}

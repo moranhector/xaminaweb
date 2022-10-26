@@ -1517,3 +1517,31 @@ Talonario para piezas 127199
 ╔ 201 ╚ 200 ┼ 197 ├ 195 ┬ 194 ┴ 193 └ 192 ┐ 191 ╝ 188 ╗ 187 ║ 186
 ╣ 185 © 184 │ 179 ▓ 178 ▒ 177 ► 176 → 26 ► 16 ◄ 17 ↑ 24 ↓ 25 
 
+-CODIGOS DE BARRAS
+
+Usar Milon Barcode.
+https://github.com/milon/barcode
+
+composer require milon/barcode
+
+
+'providers' => array(
+    // ...
+    'Milon\Barcode\BarcodeServiceProvider',
+)
+
+php artisan vendor:publish      ->  Elegir 15 Barcode
+
+    Copied File [\vendor\milon\barcode\src\config\config.php] To [\config\barcode.php]
+    Publishing complete.
+
+'aliases' => [
+    // ...
+    'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+    'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+]
+
+
+
+
+

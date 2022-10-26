@@ -3,6 +3,7 @@
         <thead>
         <tr>
             <th>Codigo12</th>
+            <th>Ean13</th>
         <th>Tipopieza Id</th>
         <th>Npieza</th>
         <th>Namepieza</th>
@@ -25,6 +26,10 @@
         @foreach($inventarios as $inventario)
             <tr>
                 <td>{{ $inventario->codigo12 }}</td>
+                <!-- CODIGO DE BARRAS -->
+                <!-- <td>{!! DNS1D::getBarcodeHTML((string) time(), 'EAN13') !!}</td> -->
+                <td>{!! DNS1D::getBarcodeHTML( $inventario->codigo12 , 'EAN13') !!}</td>
+
             <td>{{ $inventario->tipopieza_id }}</td>
             <td>{{ $inventario->npieza }}</td>
             <td>{{ $inventario->namepieza }}</td>

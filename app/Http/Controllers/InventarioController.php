@@ -70,14 +70,21 @@ class InventarioController extends AppBaseController
         // WHERE i.id = 110484
         // AND e.fecha_hasta IS NULL
 
+         
+        //DB::enableQueryLog();
 
         $inventario = Inventario::join('existencias', 'inventarios.id', '=', 'existencias.inventario_id')
         ->where('inventarios.id', $pieza)
         ->where('existencias.fecha_hasta',NULL)
-        ->get(['inventarios.*', 'existencias.deposito_id']);      
+        ->get(['inventarios.*', 'existencias.deposito_id']);    
+        
+        //$query = DB::getQueryLog();
 
+        //dd($query);
 
-        //dd($inventario[0]->factura);
+        
+
+        //dd($inventario);
 
         $cantidadRegistros = $inventario->count();
 
