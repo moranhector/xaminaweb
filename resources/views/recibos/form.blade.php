@@ -152,7 +152,7 @@ function abre_buscador() {
     <div class="col-md-2">
             <label class="form-control-label" for="precio_venta">Precio</label>
             
-            <input type="text"  id="precio_venta" name="precio_venta[]" class="form-control" placeholder="Precio de compra" >
+            <input type="text"  id="precio_venta" name="precio_venta[]" class="form-control" placeholder="Precio de compra"  STYLE="text-align: right;"  >
     </div>
 
 
@@ -160,7 +160,7 @@ function abre_buscador() {
     <div class="col-md-2">
             <label class="form-control-label" for="cantidad">Cantidad</label>
             
-            <input type="text"   id="cantidad" name="cantidad[]" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}">
+            <input type="text"   id="cantidad" name="cantidad[]" class="form-control" placeholder="Cantidad" pattern="[0-9]{0,15}" STYLE="text-align: right;"  >
     </div>
 
 

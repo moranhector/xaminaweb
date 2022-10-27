@@ -82,6 +82,7 @@ class ReciboController extends AppBaseController
              /*listar los productos en ventana modal*/
              $articulos=DB::table('tipopiezas as ar')
              ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
+             ->orderBy('ar.descrip')
              ->get(); 
 
                /*listar los cheques en ventana modal*/
@@ -106,6 +107,8 @@ class ReciboController extends AppBaseController
 
              $talonario = new Talonario;
              $proximo_recibo = $talonario->proximodocumento('REC');
+
+             
 
              //dd($ultimo_formulario);
 

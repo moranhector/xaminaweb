@@ -93,7 +93,7 @@ class ChequeController extends AppBaseController
         $cuenta_banco = $talonario->proximodocumento('CUENTA BANCO');      
         $data['cuenta_banco'] = $cuenta_banco;           
         
-
+        //dd($cuenta_banco);
         
         return view('cheques.create',$data);
     }

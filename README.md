@@ -1541,7 +1541,24 @@ php artisan vendor:publish      ->  Elegir 15 Barcode
     'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 ]
 
+https://diegooo.com/codigos-qr-genere-codigos-laravel-framework/
 
+https://edinsoncs.com/generar-barcode-en-laravel.html
+
+
+
+
+27/10/2022
+Jueves
+
+PARA ARREGLAR EL FORMULARIO DE RECIBO TOME EL EJEMPLO DEL CURSO DE UDEMY
+C:\xampp\htdocs\proyectolaravel\resources\views\compra\create.blade.php
+
++Resuelto los problemas encontrados:
++En el Select tener ordenados los tipos de pieza
++Alinear a la derecha los campos numéricos
++Ahora funciona la eliminación ( REVISAR LA ELIMINACION DE RENGLONES EN FACTURA Y REMITOS)
+-Falta Consulta de Recibo de Compra
 
 
 

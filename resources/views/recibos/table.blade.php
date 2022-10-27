@@ -7,9 +7,9 @@
         <!-- <th>Artesano Id</th> -->
         <th>Artesano</th>
         <th STYLE="text-align: right;" >Total</th>
-        <th>Cheque Id</th>
+        <!-- <th>Cheque Id</th> -->
         <th>Cheque Número</th>
-        <th>Rendido</th>
+        <!-- <th>Rendido</th> -->
             <th colspan="3">Acción</th>
         </tr>
         </thead>
@@ -22,9 +22,9 @@
             <!-- <td>{{ $recibo->artesano_id }}</td> -->
             <td>{{ $recibo->nombre }}</td>
             <td STYLE="text-align: right;" >{{ $recibo->total }}</td>
-            <td>{{ $recibo->cheque_id }}</td>
+            <!-- <td>{{ $recibo->cheque_id }}</td> -->
             <td>{{ $recibo->numero }}</td>
-            <td>{{ $recibo->rendido }}</td>
+            <!-- <td>{{ $recibo->rendido }}</td> -->
                 <td width="120">
                     {!! Form::open(['route' => ['recibos.destroy', $recibo->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

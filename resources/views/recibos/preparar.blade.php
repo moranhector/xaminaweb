@@ -130,13 +130,15 @@
                        //_subtotal = subtotal[cont] ;
                        total= total+subtotal[cont];
    
-                       var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
+                       var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm"  onclick="eliminar('+cont+');" >'.
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
                                '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'" readonly ></td>',
                                '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
-                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly ></td>',
-                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly ></td>',
-                               '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly   ></td></tr>');
+                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly   STYLE="text-align: right;" ></td>',
+                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly  STYLE="text-align: right;"  ></td>',
+                               '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly  STYLE="text-align: right;"   ></td></tr>');
+
+                        cont++;                               
    
                        limpiar();
                        totales();
@@ -183,15 +185,17 @@
         }
    
         function eliminar(index){
+            console.log("total antes de eliminar", total);
+            total=total-subtotal[index];
+            console.log("total despues de eliminar", total);
+            //total_impuesto= total*20/100;
+            total_pagar_html = total ;
    
-           total=total-subtotal[index];
-           total_impuesto= total*20/100;
-           total_pagar_html = total + total_impuesto;
-   
-           $("#total").html("USD$" + total);
-           $("#total_impuesto").html("USD$" + total_impuesto);
-           $("#total_pagar_html").html("USD$" + total_pagar_html);
-           $("#total_pagar").val(total_pagar_html.toFixed(2));
+            //$("#total").html("USD$" + total);
+            // $("#total_impuesto").html("USD$" + total_impuesto);
+            // $("#total_pagar_html").html("USD$" + total_pagar_html);
+            $("#total_pagar_html").html("$ " + total.toFixed(2));
+            $("#total_pagar").val(total_pagar_html.toFixed(2));
            
            $("#fila" + index).remove();
            evaluar();
