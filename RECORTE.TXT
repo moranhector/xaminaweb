@@ -1,421 +1,132 @@
-RECORTE.TXT
+@extends('layouts.app')
 
- php artisan infyom:scaffold Artesano
-
-Specify fields for the model (skip id & timestamp fields, we will add it automat
-ically)
-Read docs carefully to specify field inputs)
-Enter "exit" to finish
-
- Field: (name db_type html_type options) []:
- > nombre string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > documento
-
-Invalid Input. Try again
-
- Field: (name db_type html_type options) []:
- > documento string numeric
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > direccion string text
-
- Enter validations:  []:
- > required
-
- Field: (name db_type html_type options) []:
- > exit
-
-php artisan infyom:scaffold Artesano SIN ARCHIVO JSON
-
-php artisan infyom:rollback Artesano scaffold  PARA DESHACER ULTIMA GENERACION
-
-php artisan infyom:scaffold Artesano --fieldsFile Artesano.json PARA GENERAR DESDE ARCHIVO JSON
-
-
-TIPS
-https://bestofphp.com/repo/InfyOmLabs-laravel-generator-php-developer-tools
-
-input value onkeyup="this.value = this.value.toUpperCase();"
-
-Como generar los Select Options
-https://labs.infyom.com/laravelgenerator/docs/5.8/fields-input-guide
-
-
--
-php artisan infyom:scaffold Rubro
-
-php artisan infyom:scaffold Rubro --fieldsFile Rubro.json      PARA GENERAR DESDE ARCHIVO JSON
-
-php artisan infyom:rollback Tipopieza scaffold  PARA DESHACER ULTIMA GENERACION
-
-
-<div class="col-md-4">        
-        
-        <div class="{{ $errors->has('fecha') ? 'has-error' : '' }}">
-            <label class="form-control-label" for="fecha">Fecha</label>  
-            <div>
-                <input class="form-control" name="fecha" type="fecha" id="fecha" value="{{ $fecha }}" >
-                {!! $errors->first('fecha', '<p class="help-block">:message</p>') !!}
+@section('content')
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Rendición</h1>
             </div>
+
         </div>
-
-</div>
-
-
-                       var fila= '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
-                       concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="producto_id"></td>',
-                               '<td><input type="text"   name="descrip"  ></td>',
-                               '<td><input type="text"   name="precio_venta"   ></td>',
-                               '<td><input type="text"   name="cantidad" value="'+cantidad+'"   ></td>',
-                               '<td><input type="text"   name="subtotal"  ></td></tr>');
-
-
-/vfp/*.bak
-/vfp/*.fxp
-/vfp/*.tmp
-/vfp/log_sql.txt
-/vfp/*.err                               
-
-
-        $nRenglon = 0;
-        foreach ($recibosr as $recibos) {
-
-            
-            for ($i = 1; $i <= $recibos->cantidad ; $i++) {
-                
-                $registro = ($recibosr->at( $nRenglon ))  ; 
-      
-                Log::warning('renglones', ['renglon' => $registro ]);
-
-                $renglones = $renglones->push($registro);
-
-                
-            }
-        
-            $nRenglon = $nRenglon + 1 ;
-        }    
-
-
-
-<div class="form-group">
-    <label>Sexo:</label>
-
-    <select class="form-control" name="sexo" id="sexo" value="{{ old('sexo') }}" >  
-        <!-- <option hidden selected>Seleccione ...</option>  -->
-        <option style="display:none;"></option>     
-        <option>F</option>
-        <option>M</option>
-        <option>X</option>
- 
-    </select>
-</div>
-</div>        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>RENDICION</title>
-    <style type="text/css">
-    body{
-        font-size: 16px;
-        font-family: "Arial";
-    }
-    table{
-        border-collapse: collapse;
-    }
-    td{
-        padding: 6px 5px;
-        font-size: 15px;
-    }
-    .h1{
-        font-size: 21px;
-        font-weight: bold;
-    }
-    .h2{
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-
-
-    .contorno{
-        margin-top: 00px;
-        border: 1px;
-    }
-
-
-    .tabla1{
-        margin-bottom: 20px;
-    }
-    .tabla2 {
-        margin-bottom: 20px;
-    }
-
-
-    .tabla3{
-        margin-top: 15px;
-    }
-    .tabla3 td{
-        border: 1px solid #000;
-    }
-    .tabla3 .cancelado{
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-        border-top: 1px dotted #000;
-        width: 200px;
-    }
-    .emisor{
-        color: red;
-    }
-    .linea{
-        border-bottom: 1px dotted #000;
-    }
-    .border{
-        border: 1px solid #000;
-    }
-    .fondo{
-        background-color: #dfdfdf;
-    }
-    .fisico{
-        color: #000;
-    }
-    .fisico td{
-        color: #fff;
-    }
-    .fisico .border{
-        border: 1px solid #fff;
-    }
-    .fisico .tabla3 td{
-        border: 1px solid #fff;
-    }
-    .fisico .linea{
-        border-bottom: 1px dotted #fff;
-    }
-    .fisico .emisor{
-        color: #fff;
-    }
-    .fisico .tabla3 .cancelado{
-        border-top: 1px dotted #fff;
-    }
-    .fisico .text{
-        color: #000;
-    }
-    .fisico .fondo{
-        background-color: #fff;
-    }
-
-</style>
-</head>
-<body>
-    <div>
-
-        <table style="border:1px solid" width="100%"  >
-
-  
-
-            <tr>
-                <td width="100%" align="center">
-                <B>  ORIGINAL  </B>  
-                
-                </td>
-            </tr>
-        </table>     
-
-        <table width="100%"  >
-            <tr>
-                <td style="border:0;" width="40%" align="center">
-                          <B> {{$numero}}   </B>
-                </td>
-                <td style="border:1px solid"  width="20%" align="center" >
-                         <h1><B>  C </B></h1>   <h5><B>  COD.011 </B></h5>  
-                </td>
-                <td style="border:0;" width="40%" align="center">
-                <B>  CHEQUE  </B>  
-                
-                
-                </td>
-            </tr>
-        </table> 
-
-        <table  width="100%"  >
-        <tr>
-        <td>
-        <table>
-            <tr>
-                <td width="50%" align="left" style="border:0;" >
-                <B>   Rendición:  </B>  {{ $numero }} 
-                </td>
-                <td width="50%" align="left" style="border:0;"  >
-                <B>         Punto de Venta: </B>  0001 <b> Comp.Nro:</b> {{ $numero }}  
-                </td>
-            </tr>
-
-            <tr>
-                <td width="50%" align="left"  style="border:0;"  >
-                <B>      Condición IVA:  </B> Responsable Monotributo
-                </td>
-                <td width="50%" align="left"  style="border:0;"  >
-                <B>      CUIT:  </B> 18083471
-                </td>
-            </tr>
-
-            <tr>
-                <td width="50%" align="left"  style="border:0;"  >
-                 
-                </td>
-                <td width="50%" align="left" style="border:0;"  >
-                <B>  Ingresos Brutos: </B>  
-                </td>
-            </tr>            
-
-            <tr>
-                <td width="50%" align="left"  style="border:0;"  >
-                 
-                </td>
-                <td width="50%" align="left"  style="border:0;"  >
-                <B>     Fecha de Inicio de Actividades:  </B>  
-                </td>
-            </tr>   
-
-
-        </table>
-        </td>
-        </tr>
-        </table>
-
-
-        <table width="100%" class="tabla3">
-            <tr>
-                <td width="100%"> 
-                <B>Período facturado desde: </B>01/09/2019 <B>Hasta:</B> 30/09/2019 <B>Fecha de Vto. para el pago: </B>03/10/2019</td>
-            </tr>
-        </table>     
-
-        <table  width="100%" class="tabla3" >
-            <tr>
-                <td style="border:0;" width="30%" align="left">
-                <B>   numero:  </B>   {{ $numero }}
-                </td>                            
-
-                <td width="70%" align="left" style="border:0;" >
-                <B>            Apellido y Nombre / Razón Social:   </B>  
-                </td>
-
-            </tr>
-
-            <tr>
-                <td style="border:0;" width="50%" align="left">
-                <B>       Condición IVA:   </B>  IVA Responsable Inscripto
-                </td>                            
-
-                <td width="50%" align="left" style="border:0;" >
-                <B>       Domicilio: </B>  
-                </td>
-
-            </tr>
-
-            <tr>
-                <td style="border:0;" width="50%" align="left">
-                <B>    Condición de venta:  </B> Contado
-                </td>                            
-
-                <td width="50%" align="left" style="border:0;" >
-                        
-                </td>
-
-            </tr>
-
-
-
-
-        </table> 
-
-
-        <table width="100%" class="tabla3">
-            <tr>
-                <td align="center" class="fondo"><strong>Código</strong></td>
-                <td align="center" class="fondo"><strong>Producto / Servicio</strong></td>
-                <td align="center" class="fondo"><strong>Cantidad</strong></td>                
-                <td align="center" class="fondo"><strong>Precio Unit.</strong></td>
-                <td align="center" class="fondo"><strong>Subtotal</strong></td>
-            </tr>
-
-
-        
-<!-- 
-
-
-            @ for ($ i = 0; $i < 6; $ i++)
-            @ if (array_key_exists($ i, $ renglones))
-            <tr>
-                <td width="9%" align="center"><span class="text">{ { $ renglones[$i]['inventario_id'] } }</span></td>            
-                <td width="48%"><span class="text">{ { $renglones[$i]['cheque_id'] }}</span></td>                
-                <td width="9%" align="center"><span class="text">{ { $renglones[$i]['recibo_id'] } }</span></td>
-
-                <td width="18%" align="right"><span class="text">{ { $renglones[$i]['importe'] } }</span></td>
-            </tr>
-            @ else
-            <tr>
-                <td width="9%">&nbsp;</td>
-                <td width="48%">&nbsp;</td>
-                <td width="9%">&nbsp;</td>                
-                <td width="16%">&nbsp;</td>
-                <td width="18%" align="left">&nbsp;</td>
-            </tr>
-            @ endif
-            @ endfor -->
-
-
-
-            <tr>
-                <td style="border:0;">&nbsp;</td>
-                <td style="border:0;">&nbsp;</td>
-                <td style="border:0;">&nbsp;</td>                
-                <td align="right"><strong>TOTAL $</strong></td>
-                <td align="right"><span class="text">{{ " $ t o t  a l" }}</span></td>
-            </tr>
-            <!--
-            <tr>
-                <td style="border:0;">&nbsp;</td>
-                <td align="center" style="border:0;">
-                    <table width="200" border="0" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td align="center" class="cancelado">CANCELADO</td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="border:0;">&nbsp;</td>
-                <td align="center" style="border:0;" class="emisor"><strong>EMISOR</strong></td>
-            </tr>
-            -->
-        </table>
-
-
-
-        
     </div>
-</body>
-</html>
+</section>
+
+<div class="content px-3">
+
+    @include('flash::message')
+
+    <div class="clearfix"></div>
+
+    <div class="card">
+
+
+        <form method="POST" action="{{ route('rendicion_guardar') }}" accept-charset="UTF-8" id="rendicion_guardar"
+            name="rendicion_guardar" class="form-horizontal">
+            {{ csrf_field() }}
+
+            <input type="hidden" id="Cheque_Id" name="cheque_id" value="{{$cheque_id}}" <div class="card-body p-0">
+
+
+
+
+
+            <div class="table-responsive">
+                <table class="table" id="rendicion-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center">Inventario</th>
+                            <th style="text-align: center">Recibo</th>
+                            <th style="text-align: center;">Precio Unitario</th>
+
+                            <th style="text-align: center;">Descripción</th>
+                            <th style="text-align: center;">Técnica</th>
+                            <th style="text-align: center;">Precio</th>
+                            <th style="text-align: center;">Artesano</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($renglones as $renglon)
+                        <tr>
+
+                            <td><input type="text" id="inventario" name="inventario[]"
+                                    value="{{ $renglon->inventario }}" readonly style="border: 0; text-align: right;">
+                            </td>
+                            <td><input type="text" id="inventario" name="formulario[]"
+                                    value="{{ $renglon->formulario }}" readonly style="border: 0; text-align: right;">
+                            </td>
+
+                            <td><input type="text" id="preciounit" name="preciounit[]"
+                                    value="{{ $renglon->preciounit }}" readonly style="border: 0; text-align: right;">
+                            </td>
+
+                            <td><input type="text" id="descrip" name="descrip[]" value="{{ $renglon->descrip }}"
+                                    readonly style="border: 0; text-align: right;"> </td>
+                            <td><input type="text" id="tecnica" name="tecnica[]" value="{{ $renglon->tecnica }}"
+                                    readonly style="border: 0; text-align: right;"> </td>
+                            <td><input type="text" id="precio" name="precio[]" value="{{ $renglon->precio  }}" readonly
+                                    style="border: 0; text-align: right;"> </td>
+                            <td><input type="text" id="nombre" name="nombre[]" value="{{ $renglon->nombre  }}" readonly
+                                    style="border: 0; text-align: right;"> </td>
+
+
+
+
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="card-footer clearfix">
+                <div class="float-right">
+
+                </div>
+            </div>
+    </div>
+
+
+
+    @empty( $rendido_at )
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="guardar_rendicion" class="btn btn-primary" type="submit" value="Grabar Rendición">
+        </div>
+    </div>
+    @endif
+
+    @if( $rendido_at )
+    <button class="btn btn-success" type="button" >Imprimir Rendición
+
+        <a href="{!! session('link_impresion') !!}" class="btn btn-success" title="Imprimir Rendición">
+             
+        </a>
+
+    </button>
+    @endif
+
+    </form>
+</div>
+
+
+
+
+</div>
+</div>
+
+@endsection

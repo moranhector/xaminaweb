@@ -1562,3 +1562,17 @@ C:\xampp\htdocs\proyectolaravel\resources\views\compra\create.blade.php
 
 
 
+
+14/11/2022
+Lunes
+
+
+Rendición: Botón de Imprimir Rendición se ve mal.
+Con una rendición vacía intenta rendir. Y lo rinde en vacío. 
+-Bug Rendición de Cheque impedir que se rinda un cheque sin compras.
+
+-Permitir consultar Recibo.
+
+- Recibos.show
+
+

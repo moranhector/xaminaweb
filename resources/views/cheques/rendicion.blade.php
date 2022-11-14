@@ -7,13 +7,7 @@
             <div class="col-sm-6">
                 <h1>Rendición</h1>
             </div>
-            <button type="button">
 
-                <a href="{!! session('link_impresion') !!}" class="btn btn-success" title="Imprimir Rendición">
-                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-                </a>
-
-            </button>
         </div>
     </div>
 </section>
@@ -62,7 +56,7 @@
                             </td>
                             <td><input type="text" id="inventario" name="formulario[]"
                                     value="{{ $renglon->formulario }}" readonly style="border: 0; text-align: right;">
-                            </td>                            
+                            </td>
 
                             <td><input type="text" id="preciounit" name="preciounit[]"
                                     value="{{ $renglon->preciounit }}" readonly style="border: 0; text-align: right;">
@@ -107,21 +101,42 @@
 
 
 
-
+    @empty( $rendido_at )
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input id="guardar_rendicion" class="btn btn-primary" type="submit" value="Grabar Rendición">
         </div>
     </div>
+    @endif
+
+ 
 
     </form>
+ 
+
+    @if( $rendido_at )
+    <button class="btn btn-success" type="button"> 
+
+        <a href="{!! url('/cheques/imprimir_rendicion/'.$cheque_id) !!}" class="btn btn-success" title="Imprimir Rendición">
+        Imprimir Rendición
+        </a>
+
+    </button>
+
+    @endif
+
+
+
+
+
+
+
 </div>
 
 
 
 
-</div>
-</div>
+ 
 
 @endsection

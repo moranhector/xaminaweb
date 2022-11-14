@@ -1,3 +1,47 @@
+
+    <style type="text/css">
+
+
+    .clock .display {
+        font-size: 14px;
+        color: white;
+        letter-spacing: 1px;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    .tabla_head {
+
+        background:#FE6602;
+        border-right:1px solid #ddd; 
+        border-bottom:1px solid #ddd;"
+    }
+
+
+
+    /*EL MEDIA ES PARA PC*/
+    @media (min-width: 768px) {
+
+        #titulo {
+            font-family: "Open Sans";
+            font-weight: bold;
+            text-align: center;
+            font-size: 45px;
+            color: #8A1538;
+            padding-top: 20px;
+        }
+
+
+
+        .leyendas {
+            font-size: 40px;
+        }
+
+
+
+    }
+    </style>
+
+
 <script language="JavaScript">
 
 function abre_buscador() { 
@@ -186,12 +230,12 @@ function abre_buscador() {
   <table id="detalles" class="table table-bordered table-striped table-sm">
   <thead>
       <tr class="bg-success">
-          <th>Acción</th>
-          <th>Id</th>
-          <th>Tipo Pieza</th>
-          <th>Precio $</th>
-          <th>Cantidad</th>
-          <th>Subtotal $</th>
+          <th class="tabla_head">Acción</th>
+          <th class="tabla_head">Id</th>
+          <th class="tabla_head">Tipo Pieza</th>
+          <th class="tabla_head">Precio $</th>
+          <th class="tabla_head">Cantidad</th>
+          <th class="tabla_head">Sub total $</th>
       </tr>
   </thead>
    

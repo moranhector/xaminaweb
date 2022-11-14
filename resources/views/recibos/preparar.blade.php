@@ -132,11 +132,11 @@
    
                        var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm"  onclick="eliminar('+cont+');" >'.
                        concat('<i class="fa fa-times fa-2x"></i></button></td>',
-                               '<td><input type="text"   name="_producto_id[]"   value="'+producto_id+'" readonly ></td>',
-                               '<td><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly ></td>',
-                               '<td><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly   STYLE="text-align: right;" ></td>',
-                               '<td><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly  STYLE="text-align: right;"  ></td>',
-                               '<td><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly  STYLE="text-align: right;"   ></td></tr>');
+                               '<td ><input type="text"   name="_producto_id[]"   value="'+producto_id+'" readonly  size="5" ></td>',
+                               '<td ><input type="text"   name="_descrip[]"       value="'+descrip+'"   readonly  size="30" ></td>',
+                               '<td ><input type="text"   name="_precio_venta[]"  value="'+precio_venta+'"  readonly   size="8"  STYLE="text-align: right;" ></td>',
+                               '<td ><input type="text"   name="_cantidad[]"      value="'+cantidad+'"   readonly  size="8"  STYLE="text-align: right;"  ></td>',
+                               '<td ><input type="text"   name="_subtotal[]"      value="'+subtotal[cont]+'"     readonly  size="8"  STYLE="text-align: right;"   ></td></tr>');
 
                         cont++;                               
    

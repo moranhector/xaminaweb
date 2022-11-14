@@ -390,6 +390,31 @@ class ReciboController extends AppBaseController
             return redirect(route('recibos.index'));
         }
 
+
+             /*listar los artículos a vender*/
+
+             $cSelect = 
+             "SELECT r.id, r.formulario, r.fecha, r.total, r.rendido, r.created_at, r.user_name, r.artesano_id, a.nombre,
+             l.tipopieza_id, l.cantidad, l.preciounit, t.descrip,r.cheque_id, ch.numero  FROM recibos r
+             INNER JOIN artesanos a 
+             ON r.artesano_id = a.id
+             INNER JOIN recibos_lineas l
+             ON r.id = l.recibo_id
+             INNER JOIN tipopiezas t
+             ON l.tipopieza_id = t.id 
+             INNER JOIN cheques ch
+             ON r.cheque_id = ch.id 
+             where r.id = :param_recibo_id";
+     
+     
+             //dd($cCuit);
+             $recibo = collect( DB::select(DB::raw($cSelect),array('param_recibo_id'=>$id)) );
+
+
+            //dd( $recibo );
+
+
+
         return view('recibos.show')->with('recibo', $recibo);
     }
 

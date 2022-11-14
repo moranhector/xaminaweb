@@ -1,48 +1,114 @@
-<!-- Formulario Field -->
-<div class="col-sm-12">
-    {!! Form::label('formulario', 'Formulario:') !!}
-    <p>{{ $recibo->formulario }}</p>
-</div>
+<div class="container">
+    <div class="card">
+        <!-- Formulario Field -->
+        <div class="row">
+            <div class="col-12 col-md-3">
+                {!! Form::label('formulario', 'Formulario:') !!}
+                <p>{{ $recibo[0]->formulario }}</p>
+            </div>
+            <div class="col-6 col-md-6">
+                {!! Form::label('nombre', 'Nombre:') !!}
+                <p>{{ $recibo[0]->nombre }}</p>
+            </div>
 
-<!-- Fecha Field -->
-<div class="col-sm-12">
-    {!! Form::label('fecha', 'Fecha:') !!}
-    <p>{{ $recibo->fecha }}</p>
-</div>
+            <!-- Fecha Field -->
+            <div class="col-6 col-md-3">
+                {!! Form::label('fecha', 'Fecha:') !!}
+                <p>{{   \Carbon\Carbon::parse($recibo[0]->fecha)->format('d/m/Y') }}</p>
 
-<!-- Artesano Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('artesano_id', 'Artesano Id:') !!}
-    <p>{{ $recibo->artesano_id }}</p>
-</div>
 
-<!-- Total Field -->
-<div class="col-sm-12">
-    {!! Form::label('total', 'Total:') !!}
-    <p>{{ $recibo->total }}</p>
-</div>
+            </div>
+        </div>
 
-<!-- Cheque Id Field -->
-<div class="col-sm-12">
-    {!! Form::label('cheque_id', 'Cheque Id:') !!}
-    <p>{{ $recibo->cheque_id }}</p>
-</div>
+    </div>
 
-<!-- Rendido Field -->
-<div class="col-sm-12">
-    {!! Form::label('rendido', 'Rendido:') !!}
-    <p>{{ $recibo->rendido }}</p>
-</div>
 
-<!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $recibo->created_at }}</p>
-</div>
 
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $recibo->updated_at }}</p>
-</div>
 
+
+
+    <div class="card">
+
+        <div class="row">
+
+
+            <!-- Cheque Id Field -->
+
+            <!-- Cheque Id Field -->
+            <div class="col-12 col-md-6">
+                {!! Form::label('cheque_id', 'Cheque nº:') !!}
+                <p>{{ $recibo[0]->numero }}</p>
+            </div>
+
+ 
+
+
+            @if( $recibo[0]->rendido )
+            <b>RENDIDO</b>
+            @else
+            <p class="bg-warning text-white p-1">NO RENDIDO</p>
+            @endempty
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo Pieza</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Precio Unit.</th>
+                <th scope="col">Subtotal</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach($recibo as $renglon)
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ $renglon->tipopieza_id  }}</td>
+                <td>{{ $renglon->descrip  }}</td>
+                <td>{{ $renglon->cantidad  }}</td>
+                <td>{{ $renglon->preciounit  }}</td>
+                <td>{{ $renglon->preciounit *  $renglon->cantidad  }}</td>
+
+
+            </tr>
+
+
+            @endforeach
+        <tfoot>
+            <th scope="col">#</th>
+            <th scope="col"> </th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">{{ $recibo[0]->total }}</th>
+
+
+        </tfoot>
+
+
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+</div>

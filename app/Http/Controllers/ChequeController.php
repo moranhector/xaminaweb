@@ -21,6 +21,7 @@ use App\Models\Talonario;
 use App\Models\Inventario;
 use App\Models\Rendicion;
 use App\Models\Existencia;
+use App\Models\Recibo;
 use Mpdf\Mpdf;
 
 
@@ -355,6 +356,14 @@ class ChequeController extends AppBaseController
 
         $reccount = $recibosr->count();
 
+        if ($reccount == 0) {
+            Flash::error('Cheque no ha sido utilizado para ninguna compra');
+
+            return redirect(route('cheques.index'));
+        }        
+
+        
+
  
 
         $renglones = collect() ;
@@ -400,6 +409,7 @@ class ChequeController extends AppBaseController
 
         $data['renglones'] = $renglones;     
         $data['cheque_id'] = $id;     
+        $data['rendido_at'] = $cheque->rendido_at ;     
 
  
 
@@ -436,6 +446,16 @@ class ChequeController extends AppBaseController
           dd('Cheque no encontrado');
  
       }
+
+
+    //   $recibo = Recibo::find($cheque_id);
+    //   $recibo->rendido = 1;
+    //   $recibo->save();
+
+      Recibo::where('cheque_id', $cheque_id)
+       ->update(['rendido' => 1]);      
+
+
 
       /*listar las piezas a rendir*/
 
@@ -572,6 +592,10 @@ class ChequeController extends AppBaseController
                 $cheque = Cheque::find($cheque_id);
                 $cheque->rendido_at = $mytime;
                 $cheque->save();
+
+
+
+
 
 
             // Aqui construyo el link de impresion que va en el botón de la barra de herramientas
