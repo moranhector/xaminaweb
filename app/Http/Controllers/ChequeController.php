@@ -532,7 +532,7 @@ class ChequeController extends AppBaseController
                $inventario->npieza       = $nueva_pieza;
                
                //$inventario->numero    = $request->descrip[$cont];
-               $inventario->codigo12     = $nueva_pieza;
+               $inventario->codigo12     = ean13( zeros( $nueva_pieza, 12 ) ); //Guarda codificado en 13 el código function zeros($cadena,$longitud)
                $inventario->tipopieza_id = $renglon->tipopieza_id;
                $inventario->comprob      = $renglon->formulario;
                $inventario->namepieza    = $renglon->descrip .' '.$renglon->tecnica;

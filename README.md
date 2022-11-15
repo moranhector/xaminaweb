@@ -1576,3 +1576,12 @@ Con una rendición vacía intenta rendir. Y lo rinde en vacío.
 - Recibos.show
 
 
+15/11/2022
+Martes
+
+
+Función Inventario: 
+- No se puede agregar una pieza, quitar botón de alta. OK
+- Código Ean13 Revisar Xamina : barras.prg
+
+
