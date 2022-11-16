@@ -149,10 +149,19 @@ class ReciboController extends AppBaseController
 
         //dd($request->fecha);
         $fecha_recibo = french2american( $request->fecha);
+        $cheque_id = $request->id_cheque ;
 
         //dd($request->id_cheque);
 
         //CONTROLAR EL SALDO DEL CHEQUE
+
+
+         if( $cheque_id == 0  or $cheque_id == "0" )
+         {
+             Flash::error("No se ha registrado un cheque válido" ); 
+             return back()->withInput();            
+
+         }        
 
         
         

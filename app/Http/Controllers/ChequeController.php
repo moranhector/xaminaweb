@@ -432,6 +432,13 @@ class ChequeController extends AppBaseController
     public function rendicion_guardar(Request $request)
     {
 
+        // if( $cheque_id == 0)
+        // {
+        //     Flash::error("No se ha registrado un cheque válido" ); 
+        //     return back()->withInput();            
+
+        // }
+
 
 
         try {
@@ -479,7 +486,7 @@ class ChequeController extends AppBaseController
       $nRenglon = 0;
       foreach ($recibosr as $recibos) {
      
-          for ($i = 1; $i <= $recibos->cantidad ; $i++) {
+          for ($i = 1; $i < $recibos->cantidad ; $i++) {
               
               $registro = $recibosr[$nRenglon]; 
               $renglones = $renglones->push(clone $registro);

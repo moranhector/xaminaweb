@@ -32,7 +32,7 @@ class InventarioController extends AppBaseController
             $inventarios = DB::table('inventarios')
             ->where('namepieza','like','%'.$namepieza.'%' ) 
             ->orWhere('npieza','like','%'.$namepieza.'%' ) 
-            ->paginate( 100 ) ;   
+            ->paginate( 25 ) ;   
 
             $data['inventarios'] = $inventarios;     
             $data['namepieza'] = $namepieza;     
@@ -441,7 +441,7 @@ class InventarioController extends AppBaseController
         AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' )";    
         
         $cSelect = 
-        "SELECT i.id,i.codigo12,i.npieza, i.namepieza,i.tipopieza_id,t.descrip FROM inventarios i     
+        "SELECT i.id,i.codigo12,i.npieza, i.namepieza,i.tipopieza_id,t.descrip,i.precio,i.costo, i.comprado_at FROM inventarios i     
         INNER JOIN tipopiezas t
         ON i.tipopieza_id = t.id 
         WHERE $filtroPorPieza      

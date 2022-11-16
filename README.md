@@ -1583,5 +1583,20 @@ Martes
 Función Inventario: 
 - No se puede agregar una pieza, quitar botón de alta. OK
 - Código Ean13 Revisar Xamina : barras.prg
+- Ya generar correctamente los códigos de barra ean13. 
+- Falta función de imprimir etiquetas con rangos desde hasta. 
+
+- Bug: Al rendir duplicó las cantidades. CORREGIDO
+- Bug: Al registrar recibo error: Flash: Cheque no encontrado. REPRODUCIR
+
+- Bug: Graba el precio por valor inferior al costo. GRABA OK
+
+- Req: Permitir cambiar precio de venta de Piezas.
+
+- Bug: Existencias: Muestra Fecha Hasta con una fecha, debería estar vacía. En la base está vacía.
+- Req: Menú Inventario cambiar por Piezas. 
+- Req: Reporte de Inventario falta valorizar el costo. OK
+- Req: Reporte de Inventario: Enviar a Excel y PDF.
+- Bug: Al mostrar la Preview de la Rendición muestra el precio original y no con el 30%
 
 
