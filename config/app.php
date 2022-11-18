@@ -177,6 +177,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        App\Providers\Debug::class,        
 
     ],
 

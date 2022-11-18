@@ -79,13 +79,13 @@ class ReciboController extends AppBaseController
     {
    
 
-             /*listar los productos en ventana modal*/
+             /*listar los productos en dropdown*/
              $articulos=DB::table('tipopiezas as ar')
              ->select(DB::raw('CONCAT(ar.descrip," ",ar.tecnica) AS articulo'),'ar.id','ar.precio')
              ->orderBy('ar.descrip')
              ->get(); 
 
-               /*listar los cheques en ventana modal*/
+               /*listar los cheques en dropdown*/
                $cheques=DB::table('cheques')
                ->select(DB::raw('CONCAT(numero," ->  ",  SUBSTR(fecha,9,2),"/",SUBSTR(fecha,6,2),"/",SUBSTR(fecha,1,4) ,"    Saldo -> $",saldo) AS chequedescrip'),'id')
                ->where( 'rendido_at','=', null )

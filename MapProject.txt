@@ -90,3 +90,8 @@ project://resources\views\remitos\fields.blade.php
 
 
 
+- LOGS
+
+project://storage\logs\laravel.log
+
+C:\xampp\htdocs\xaminaweb\storage\logs\query\[fecha]

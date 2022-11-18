@@ -157,6 +157,9 @@ class RemitoController extends AppBaseController
 
             while($cont < count($lineas_detalle)){
 
+
+                
+
                 $detalle = new Remito_linea();
     
                 $detalle->remito_id      = $remito->id;
@@ -166,6 +169,8 @@ class RemitoController extends AppBaseController
                 //$detalle->updated_at    = null ;
                 //$detalle->created_at    = $mytime ;
                 $detalle->save();
+
+                
 
                 //Cerrar existencia anterior
                 $existencia = new Existencia();                

@@ -13,6 +13,8 @@ use Flash;
 use Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Talonario;
+use App\Models\Existencia;
+use App\Models\Deposito;
 use Carbon\Carbon;
 include "funciones.php";
 
@@ -170,16 +172,16 @@ class FacturaController extends AppBaseController
 
              /*listar los artículos a vender*/
 
-             $cSelect = 
-             "SELECT i.id, i.codigo12, i.npieza,i.namepieza,i.precio FROM inventarios i
-             INNER JOIN existencias e
-             ON i.id = e.inventario_id
-             WHERE i.vendido_at IS NULL
-             AND e.deposito_id = 1";
+            //  $cSelect = 
+            //  "SELECT i.id, i.codigo12, i.npieza,i.namepieza,i.precio FROM inventarios i
+            //  INNER JOIN existencias e
+            //  ON i.id = e.inventario_id
+            //  WHERE i.vendido_at IS NULL
+            //  AND e.deposito_id = 1";
      
      
-             //dd($cCuit);
-             $articulos = DB::select(DB::raw($cSelect));
+            //  //dd($cCuit);
+            //  $articulos = DB::select(DB::raw($cSelect));
 
 
 
@@ -207,13 +209,17 @@ class FacturaController extends AppBaseController
             $fecha_hoy= $fecha_hoy->format('d/m/Y');   
             //dd($mytime);
 
+             /*listar los deposito en dropdown*/
+             $depositos= Deposito::all();
+
 
         
         return view('facturas.preparar',[
             "clientes"=>$clientes,
-            "articulos"=>$articulos,
+            // "articulos"=>$articulos,
             "nueva_factura"=>$nueva_factura,      
-            "fecha"=>$fecha_hoy     
+            "fecha"=>$fecha_hoy,    
+            "depositos"=>$depositos,    
             ]);        
 
     }
@@ -229,7 +235,16 @@ class FacturaController extends AppBaseController
 
         //dd($request);
 
+
+        $deposito_id = 1 ; //Depósito Central por Default, esto debería venir del formulario.
+
         try {
+
+
+                DB::beginTransaction();  //to start transaction.
+
+
+            
 
                 $input = $request->all();
                 //dd($input);
@@ -324,6 +339,34 @@ class FacturaController extends AppBaseController
                 }
 
  
+                // Actualizar Existencia 18/11/2022    
+                $cont=0;                
+                while($cont < count($lineas_detalle)){
+
+
+                    if ( ! Existencia::Actualizar( $request->_producto_id[$cont], 
+                                             $deposito_id,
+                                             $fecha_factura ,
+                                             'FAC' ,
+                                             $factura->formulario   ) ){
+
+                                                DB::rollBack(); // after each error.
+            
+                                               
+
+                                                $mensaje_error= 'PROBLEMAS DE EXISTENCIA'; 
+                                                Flash::error($mensaje_error );                    
+                                                return back()->withInput()
+                                                    ->withErrors([$mensaje_error]);                                                
+
+                                             }                                            ;
+
+                    //voy por aca                    
+
+ 
+                    $cont=$cont+1;
+                }
+
 
 
 
@@ -332,7 +375,7 @@ class FacturaController extends AppBaseController
                 $talonario->Actualizarproximodocumento('FAC', $factura->formulario );
    
                 //dd($ultimo_formulario);
-
+                //Actualizar($inventario_id, $deposito_id, $fecha_hasta, $tiposalida, $documento_sal , $deposito_id_to = false  )
 
 
 
@@ -350,7 +393,7 @@ class FacturaController extends AppBaseController
                 //** Grabar SAldo de cheque
                 //cCadena = [update cheques set saldo = saldo - '&cTotal' where cheque = '&cCheque' ]	
                 
- 
+                DB::commit(); //when transaction confirmed. ;
 
                 Flash::success('Factura guardada: ' . $factura->formulario );
 

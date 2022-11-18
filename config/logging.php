@@ -113,6 +113,9 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'database' => [
+            'enabled' => env('LOG_DATABASE', false),
+        ],        
     ],
 
 ];

@@ -1602,3 +1602,17 @@ Función Inventario:
 - bug: Inventario updated successfully. Traducir
 - Req: Factura.show
 - Req: Facturas Actualizar existencia.
+
+
+18/11/2022
+Viernes
+
+Trabajo en Actualizar Existencias
+
+app\Http\Controllers\FacturaController.php
+
+- Incorporar el Depósito en formulario de Factura
+- Arreglar Aspecto de Formulario de Factura
+
+- Ahora la factura permite la selección del depósito del cual salen las facturas
+- Ahora tengo contro de transacciones al grabar la factura, incorporar esta seguridad en otras transacciones complejas
