@@ -2,7 +2,7 @@
     <table class="table" id="inventarios-table">
         <thead>
         <tr>
-        <th>Npieza</th>            
+        <th>Número</th>            
         <th>Código Ean13</th>
         <th>Nombre de la pieza</th>            
         <th>Ean13</th>

@@ -432,12 +432,7 @@ class ChequeController extends AppBaseController
     public function rendicion_guardar(Request $request)
     {
 
-        // if( $cheque_id == 0)
-        // {
-        //     Flash::error("No se ha registrado un cheque válido" ); 
-        //     return back()->withInput();            
 
-        // }
 
 
 
@@ -509,29 +504,7 @@ class ChequeController extends AppBaseController
 
                //Pedir número de pieza
                $nueva_pieza = $talonario->proximodocumento('pieza');                       
-
-                     
-                     
-
-                //dd($renglon);
-
-
-                // // {#1663 ▼
-                // //     +"id": 10
-                // //     +"cheque_id": 9
-                // //     +"formulario": "00000010"
-                // //     +"artesano_id": 72
-                // //     +"tipopieza_id": 72
-                // //     +"cantidad": 5
-                // //     +"preciounit": "390.00"
-                // //     +"importe": "1950.00"
-                // //     +"descrip": "LAZO"
-                // //     +"tecnica": "TRENZA DE 8 T."
-                // //     +"precio": "390.00"
-                // //     +"nombre": "DIAZ, NIEVES OSVALDO"
-                // //     +"inventario": 72
-                // //     +"fecha": "2022-10-26"
-                // //   }
+ 
 
                     
                $inventario = new Inventario();

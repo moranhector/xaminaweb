@@ -6,7 +6,7 @@
 
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Inventarios</h1>
+                <h1>Piezas</h1>
                 <div class="col-sm">
                     <nav class="navbar navbar-light bg-light">
                         <form class="form-inline" method {{route('inventarios.index')}}>

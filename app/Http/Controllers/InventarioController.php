@@ -74,7 +74,7 @@ class InventarioController extends AppBaseController
         //DB::enableQueryLog();
 
         $inventario = Inventario::join('existencias', 'inventarios.id', '=', 'existencias.inventario_id')
-        ->where('inventarios.id', $pieza)
+        ->where('inventarios.npieza', $pieza)
         ->where('existencias.fecha_hasta',NULL)
         ->get(['inventarios.*', 'existencias.deposito_id']);    
         

@@ -65,7 +65,7 @@
 <li class="nav-item">
     <a href="{{ route('inventarios.index') }}"
        class="nav-link {{ Request::is('inventarios*') ? 'active' : '' }}">
-        <p>Inventarios</p>
+        <p>Piezas</p>
     </a>
 </li>
 

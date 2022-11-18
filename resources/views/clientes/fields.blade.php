@@ -6,7 +6,7 @@
 
 <!-- Ivacond Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('ivacond', 'Ivacond:') !!}
+    {!! Form::label('ivacond', 'Condición IVA:') !!}
     {!! Form::select('ivacond', ['Responsable Inscripto' => 'Responsable Inscripto', 'Consumidor Final' => 'Consumidor Final', 'Monotributista' => 'Monotributista'], null, ['class' => 'form-control custom-select']) !!}
 </div>
 
@@ -19,7 +19,7 @@
 
 <!-- Telefono Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('telefono', 'Telefono:') !!}
+    {!! Form::label('telefono', 'Teléfono:') !!}
     {!! Form::text('telefono', null, ['class' => 'form-control']) !!}
 </div>
 
@@ -31,7 +31,7 @@
 
 <!-- Tipodoc Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('tipodoc', 'Tipodoc:') !!}
+    {!! Form::label('tipodoc', 'Tipo documento:') !!}
     {!! Form::select('tipodoc', ['DNI' => 'DNI', 'CUIT' => 'CUIT', 'CI-EX' => 'CI-EX', 'LE' => 'LE', 'LC' => 'LC'], null, ['class' => 'form-control custom-select']) !!}
 </div>
 

@@ -1599,4 +1599,6 @@ Función Inventario:
 - Req: Reporte de Inventario: Enviar a Excel y PDF.
 - Bug: Al mostrar la Preview de la Rendición muestra el precio original y no con el 30%
 
-
+- bug: Inventario updated successfully. Traducir
+- Req: Factura.show
+- Req: Facturas Actualizar existencia.

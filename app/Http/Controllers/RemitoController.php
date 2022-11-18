@@ -104,7 +104,7 @@ class RemitoController extends AppBaseController
      */
     public function store(CreateRemitoRequest $request)
     {
-        //dd($request);
+        dd($request);
 
         try {
 

@@ -77,5 +77,85 @@ class Existencia extends Model
         'user_name' => 'nullable'
     ];
 
-    
+
+    public function estaDisponible( $inventario_id)
+    {
+        $existencia = new Existencia();                
+        $existencia = Existencia::where('inventario_id', $inventario_id)
+        ->where('fecha_hasta',null)->get();
+
+        if ( $existencia->count() > 0 ) {
+            return true ;  
+        }
+        return false ;
+    }
+
+    public function estaDisponibleDeposito( $inventario_id, $deposito_id)
+    {
+        $existencia = new Existencia();                
+        $existencia = Existencia::where('inventario_id', $inventario_id)
+        ->where('deposito_id', $deposito_id)
+        ->where('fecha_hasta',null)->get();
+
+        if ( $existencia->count() > 0 ) {
+            return true ;  
+        }
+        return false ;
+    }
+
+
+    public function Actualizar($inventario_id, $deposito_id, $fecha_hasta, $tiposalida, $documento_sal , $deposito_id_to = false  ) {
+
+
+        try {
+                        //Cerrar existencia anterior
+                        $existencia = new Existencia();                
+                        $existencia = Existencia::where('inventario_id', $inventario_id )
+                        ->where('fecha_hasta',null)
+                        ->first();
+
+                        if ( ! Existencia::estaDisponibleDeposito( $inventario_id, $deposito_id) ) {
+                            return false ;  
+                        }
+
+
+                        $existencia->fecha_hasta   = $fecha_hasta;
+                        $existencia->tiposalida    = $tiposalida ;                
+                        $existencia->documento_sal = $documento_sal   ;                
+        
+                        $existencia->save();
+
+                        if ($tiposalida <> "FAC")  // si es una venta no se hace un registro de existencia nuevo
+                        {
+
+                        //Abrir existencia nueva
+        
+                        $existencia = new Existencia();
+                        $existencia->inventario_id = $inventario_id  ;
+                        $existencia->tipodoc       = $tiposalida ;
+                        $existencia->documento     = $documento_sal ;
+                        $existencia->deposito_id   = $deposito_id_to  ;
+                        $existencia->fecha_desde   = $fecha_hasta ;
+                        $existencia->save();                           
+
+                            
+                        }
+        
+ 
+
+                        return true ;  
+
+            } catch(Exception $e){
+            
+            
+              
+                return false ;  
+            } 
+
+
+                      
+    }
+
+
+
 }
