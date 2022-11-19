@@ -1616,3 +1616,31 @@ app\Http\Controllers\FacturaController.php
 
 - Ahora la factura permite la selección del depósito del cual salen las facturas
 - Ahora tengo contro de transacciones al grabar la factura, incorporar esta seguridad en otras transacciones complejas
+
+- PROBLEMA AL ARRANCAR EL ARTISAN SERVE:
+    Por el archivo: C:\xampp\htdocs\xaminaweb\app\Providers\AppServiceProvider.php
+
+    Hay que comentar el párrafo del Log:
+
+            // para hacer log de Sql // Comentar al arrancar el servidor, luego se puede activar.
+
+        $this->commands([
+            InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class,
+        ]);
+        if ($this->app->environment('local')) {
+            DB::listen(function($query) {
+                Log::info('Query: ' . $query->sql . PHP_EOL);
+                Log::info($query->bindings);
+            });
+        }        
+        // FIN para hacer log de Sql        
+
+
+19/11/2022
+Sábado
+
+-Facturas: Validar al Seleccionar la pieza, de acuerdo a la Existencia en el depósito.
+    Ver Remitos.
+    

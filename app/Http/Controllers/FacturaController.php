@@ -356,8 +356,7 @@ class FacturaController extends AppBaseController
 
                                                 $mensaje_error= 'PROBLEMAS DE EXISTENCIA'; 
                                                 Flash::error($mensaje_error );                    
-                                                return back()->withInput()
-                                                    ->withErrors([$mensaje_error]);                                                
+                                                return back()->withInput();                                                
 
                                              }                                            ;
 

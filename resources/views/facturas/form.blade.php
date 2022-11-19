@@ -1,3 +1,10 @@
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+
+
+
 <script language="JavaScript">
 function abre_buscador() {
     var nwin = window.open("{{ route('seleccionar_clientes') }}", "abookpopup",
@@ -7,8 +14,30 @@ function abre_buscador() {
 }
 </script>
 
+<script type="text/javascript">
+    $(window).on('load', function() {
+        cliente = $('#documento').val()    ;
+        console.log( "longitud del documento" , cliente.length);
+        //EVITAR QUE SE RECARGUE EL DEPOSITO ANTE UN ERROR
+        if ( cliente.length == 0) // Solo si es la primera vez que entra al formulario
+        {
+             $('#myModal').modal('show');
+        }
+    });
+</script>
 
+<script type="text/javascript">
+    function cerrarmodal(){
+    // alert("si");
+    //nombre_deposito = $("#deposito_id").val();
+    nombre_deposito = $('#deposito_id option:selected').text()  //ACA ME TRAIGO EL NOMBRE DEL DEPOSITO NO EL ID
+    $("#deposito").val( nombre_deposito ) ;
+    $('#myModal').modal('toggle');
+    $('#documento').focus();    //ACA PONGO EL CURSOR PARA SELECCIONAR UN CLIENTE
+}
+</script>
 
+ 
 
 
 @include('flash::message')
@@ -17,20 +46,10 @@ function abre_buscador() {
     <div class="col-md-2">
         <label class="form-control-label" for="articulo">Depósito</label>
 
+        <input type="text" id="deposito" name="deposito" READONLY >
 
 
-
-        <select class="form-control selectpicker" name="id_cheque" id="id_cheque" data-live-search="true">
-
-            <!-- <option value="0" selected>Seleccione depósito</option> -->
-
-            @foreach($depositos as $deposito)
-
-            <option value="{{ $deposito->id }}">{{$deposito->nombre}}</option>
-
-            @endforeach
-
-        </select>
+ 
 
 
 
@@ -230,4 +249,51 @@ insertar pieza en renglones
         </table>
     </div>
 
+</div>
+
+
+
+
+
+
+
+<!-- <div class="text-center">      SELECCIONAR DEPOSITO 
+    <a href="#myModal" class="trigger-btn" data-toggle="modal">Seleccionar Depósito</a>
+</div> -->
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Facturar</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <label class="form-control-label" for="articulo">Por favor seleccione Depósito</label>
+
+
+
+
+                <select class="form-control selectpicker" name="id_deposito" id="deposito_id" data-live-search="true">
+
+              
+
+                    @foreach($depositos as $deposito)
+
+                    <option value="{{ $deposito->id }}">{{$deposito->nombre}}</option>
+
+                    @endforeach
+
+                </select>
+
+                <button type="button" class="btn btn-primary" onclick="cerrarmodal()" >Aceptar</button><!-- Boton que va a la función para cerrar la ventana modal-->
+
+            </div>
+
+
+             
+        </div>
+    </div>
 </div>

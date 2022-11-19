@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191); //Solved by increasing StringLength    
 
-        // para hacer log de Sql
+        // para hacer log de Sql // Comentar al arrancar el servidor, luego se puede activar.
 
         $this->commands([
             InstallCommand::class,
