@@ -1644,3 +1644,48 @@ Sábado
 -Facturas: Validar al Seleccionar la pieza, de acuerdo a la Existencia en el depósito.
     Ver Remitos.
     
+
+Trabajo en 
+1 resources\views\remitos\create.blade.php
+
+2 resources\views\facturas\preparar.blade.php
+
+Hago que en 2 haga la misma petición ajax que en Remitos
+
+- Ahora la funcion ajax pieza deposito busca en el depósito correcto
+- Pero luego el botón agregar permite agregar
+
+20/11/2022
+Domingo
+
+-Repasar consistencia del modelo de Inventario: Inventario, Existencia
+-Terminar con la función Factura - Colores como Recibo - Campo Vendido At
+-Incorporar Transacción en Recibo y Remito
+-Limpiar las tablas
+-Continuar con Remito
+
+-Recibos: Bug, no permitir agregar piezas si no está seleccionado el cheque.
+            El programa al cargar formulario de Recibo debería avisar que no hay cheques cargados.
+
+            Probar si desborda el saldo de un cheque.
+
+
+-Rendición: Muestra precio que no corresponde al de la pieza.
+            Impresión no muestra el saldo del cheque a depositar.
+
+-Inventarios: No muestra el Total ni la Cantidad total. Falta el reporte a Pdf.
+
+-Facturas: Arreglar Formulario, ancho de columnas.
+
+-Sistema: Versión en el Footer, Cambiar a Fecha de la versión.
+
+
+-Error: Estoy buscando en existencias por Nro de Pieza, debo hacerlo por Id.
+-Error: Permito agregar renglones en factura sin haber limpiado la pieza.
+
+Pruebo el Ajax deposito con:
+
+http://localhost:8000/ajax_pieza_deposito/200080/1
+
+
+-- Factura grabada Ok, pero no actualiza el inventario, Actualiza ok Existencias                        

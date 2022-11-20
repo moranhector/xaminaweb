@@ -47,6 +47,7 @@ $('#pieza').keydown(function(e) {
                    $('#success_message').html(response.message);
                    $("#precio_venta").val(response.piezas[0].precio);
                    $("#descrip").val(response.piezas[0].namepieza);
+                   $("#inventario_id").val(response.piezas[0].id); //Aquí viene el ID DE LA PIEZA
                    //agregar_renglon_factura();
 
 
@@ -76,10 +77,11 @@ $("#guardarfactura").hide();
 
 function agregar_renglon_factura() {
 
-   producto_id = $("#producto_id").val();
-   descrip = $("#descrip").val();
+   //producto_id = $("#producto_id").val();  //codigo de la pieza
+   inventario_id = $("#inventario_id").val(); //id de  la pieza
+   descrip = $("#descrip").val();               //descripcion de la pieza
    precio_venta = $("#precio_venta").val();
-   pieza = $("#pieza").val();
+   pieza = $("#pieza").val(); //codigo de la pieza
 
 
    if ( descrip.length > 0)
@@ -92,10 +94,11 @@ function agregar_renglon_factura() {
     
         var fila = '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
         concat('<i class="fa fa-times fa-2x"></i></button></td>',
-            '<td><input type="text"   name="_producto_id[]"   value="' + pieza + '" readonly ></td>',
-            '<td><input type="text"   name="_descrip[]"       value="' + descrip + '"   readonly ></td>',
-            '<td><input type="text"   name="_precio_venta[]"  value="' + precio_venta + '"  readonly ></td>',
-            '<td><input type="text"   name="_subtotal[]"      value="' + subtotal[cont] + '"     readonly   ></td></tr>'
+            '<td><input type="text"   name="_inventario_id[]" value="' + inventario_id + '" HIDDEN >',
+            '    <input type="text"   name="_pieza[]"         value="' + pieza + '" readonly  size="5" ></td>',
+            '<td><input type="text"   name="_descrip[]"       value="' + descrip + '"   readonly  size="30" ></td>',
+            '<td><input type="text"   name="_precio_venta[]"  value="' + precio_venta + '"  readonly  size="8" ></td>',
+            '<td><input type="text"   name="_subtotal[]"      value="' + subtotal[cont] + '"     readonly  size="8"   ></td></tr>'
             );
     
         limpiar();
@@ -120,9 +123,11 @@ function agregar_renglon_factura() {
 
 function limpiar() {
 
-   $("#id_producto").val("");
+   $("#pieza").val("");
    //$("#cantidad").val("");
    $("#precio_venta").val("");
+   $("#descrip").val("");
+   $("#inventario_id").val("");
 
 }
 
@@ -163,7 +168,7 @@ function eliminar(index) {
    evaluar();
 }
 // ACA CAMBIO EL VALOR DEL PRECIOS SEGUN EL SELECT
-$('#id_producto').on('change', function() {
+$('#pieza').on('change', function() {
 
 
    var articulos_data = $("#id_producto").val();

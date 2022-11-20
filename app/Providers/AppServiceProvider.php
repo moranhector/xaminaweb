@@ -31,17 +31,17 @@ class AppServiceProvider extends ServiceProvider
 
         // para hacer log de Sql // Comentar al arrancar el servidor, luego se puede activar.
 
-        $this->commands([
-            InstallCommand::class,
-            ClientCommand::class,
-            KeysCommand::class,
-        ]);
-        if ($this->app->environment('local')) {
-            DB::listen(function($query) {
-                Log::info('Query: ' . $query->sql . PHP_EOL);
-                Log::info($query->bindings);
-            });
-        }        
+        // $this->commands([
+        //     InstallCommand::class,
+        //     ClientCommand::class,
+        //     KeysCommand::class,
+        // ]);
+        // if ($this->app->environment('local')) {
+        //     DB::listen(function($query) {
+        //         Log::info('Query: ' . $query->sql . PHP_EOL);
+        //         Log::info($query->bindings);
+        //     });
+        // }        
         // FIN para hacer log de Sql        
 
     }

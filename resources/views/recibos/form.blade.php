@@ -247,6 +247,7 @@ function abre_buscador() {
       <tr>
           <th  colspan="5"><p align="right">TOTAL PAGAR:</p></th>
           <th><p align="right"><span align="right" id="total_pagar_html">$ 0.00</span> <input type="hidden" name="total_pagar" id="total_pagar"></p></th>
+    
       </tr>  
 
   </tfoot>

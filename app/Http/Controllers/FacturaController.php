@@ -14,6 +14,7 @@ use Response;
 use Illuminate\Support\Facades\DB;
 use App\Models\Talonario;
 use App\Models\Existencia;
+use App\Models\Inventario;
 use App\Models\Deposito;
 use Carbon\Carbon;
 include "funciones.php";
@@ -233,7 +234,39 @@ class FacturaController extends AppBaseController
     public function guardar(Request $request)
     {
 
-        //dd($request);
+        // dd($request);
+
+
+
+        // +request: Symfony\Component\HttpFoundation\InputBag {#44 ▼
+        //     #parameters: array:17 [▼
+        //       "_token" => "KHEEq7CmjXZ0yCCiHwTvkENpJKyDlEdrZVn4mgEj"
+        //       "deposito" => "CENTRAL"
+        //       "documento" => "18083471"
+        //       "cliente_nombre" => "CONSUMIDOR FINAL"
+        //       "formulario" => "11"
+        //       "fecha" => "20/11/2022"
+        //       "id_inventario" => null
+        //       "pieza" => null
+        //       "descrip" => null
+        //       "precio_venta" => null
+        //       "total_pagar" => "130.00"
+        //       "_inventario_id" => array:1 [▼
+        //         0 => "1"
+        //       ]
+        //       "_pieza" => array:1 [▼
+        //         0 => "200080"
+        //       ]
+        //       "_descrip" => array:1 [▼
+        //         0 => "VINCHA P/ SOMBRERO SIMPLE"
+        //       ]
+        //       "_precio_venta" => array:1 [▼
+        //         0 => "130.00"
+        //       ]
+        //       "_subtotal" => array:1 [▼
+        //         0 => "130.00"
+        //       ]
+        //       "id_deposito" => "1"        
 
 
         $deposito_id = 1 ; //Depósito Central por Default, esto debería venir del formulario.
@@ -269,8 +302,7 @@ class FacturaController extends AppBaseController
                 $mytime= $mytime->toDateString();
                 //dd($mytime);
 
-                //dd('$request->documento',$request->documento);
-                //Traer datos del Artesano
+ 
 
                 //\DB::enableQueryLog(); // Enable query log
 
@@ -319,21 +351,21 @@ class FacturaController extends AppBaseController
                 $factura->save();
 
                 //GUARDAR RENGLONES DE LA FACTURA
-                $lineas_detalle = $request->_producto_id ; //Tomo el Id del Recibo insertado
+                $cant_lineas_detalle = $request->_inventario_id ; //Tomo el Id del Recibo insertado
                 $cont=0;
 
-                while($cont < count($lineas_detalle)){
+                while($cont < count($cant_lineas_detalle)){
 
                     $detalle = new Faclinea();
         
                     $detalle->factura_id     = $factura->id;
-                    $detalle->inventario_id  = $request->_producto_id[$cont];
-                    //$detalle->cantidad      = $request->_cantidad[$cont];
+                    $detalle->inventario_id  = $request->_inventario_id[$cont];
+           
                     $detalle->cantidad      = 1 ;
                     $detalle->preciounit    = $request->_precio_venta[$cont];
                     $detalle->importe       = $request->_subtotal[$cont];
-                    //$detalle->updated_at    = null ;
-                    //$detalle->created_at    = $mytime ;
+                    //$detalle->updated_at    = Se actualiza sola por el módulo
+                    //$detalle->created_at    = Se actualiza sola por el módulo
                     $detalle->save();
                     $cont=$cont+1;
                 }
@@ -341,58 +373,38 @@ class FacturaController extends AppBaseController
  
                 // Actualizar Existencia 18/11/2022    
                 $cont=0;                
-                while($cont < count($lineas_detalle)){
+                while($cont < count($cant_lineas_detalle)){
 
 
-                    if ( ! Existencia::Actualizar( $request->_producto_id[$cont], 
+                    if ( ! Existencia::Actualizar( $request->_inventario_id[$cont], 
                                              $deposito_id,
                                              $fecha_factura ,
                                              'FAC' ,
-                                             $factura->formulario   ) ){
-
-                                                DB::rollBack(); // after each error.
-            
-                                               
-
+                                             $factura->formulario   ) )
+                                             //SI NO PUEDE ACTUALZIAR REGRESARA CON LOS ERRORES
+                                             {
+                                                DB::rollBack(); // after each error.            
                                                 $mensaje_error= 'PROBLEMAS DE EXISTENCIA'; 
                                                 Flash::error($mensaje_error );                    
                                                 return back()->withInput();                                                
-
                                              }                                            ;
 
-                    //voy por aca                    
+                    //Actualizar INVENTARIO Grabar Factura,  vendido_at,    
+                    
+                    $inventario = Inventario::find(  $request->_inventario_id[$cont] );
 
- 
+                    $inventario->factura = $factura->formulario ;
+                    $inventario->factura_id = $factura->formulario ;
+                    $inventario->vendido_at = $factura->id ;
+                    $inventario->save();
+
                     $cont=$cont+1;
                 }
 
-
-
-
-
                 $talonario = new Talonario;
                 $talonario->Actualizarproximodocumento('FAC', $factura->formulario );
-   
-                //dd($ultimo_formulario);
-                //Actualizar($inventario_id, $deposito_id, $fecha_hasta, $tiposalida, $documento_sal , $deposito_id_to = false  )
-
-
-
-
-
-
-                // $tipo = 'REC';
-                // $talonario = Talonario::where('tipo', $tipo)->first();
-                // $UltimoDoc = $recibo->formulario;
-                // $nProximoDoc = strval($UltimoDoc) + 1  ;
-                // $talonario->proximodoc = $nProximoDoc;
-                // $talonario->save();
                 
-            
-                //** Grabar SAldo de cheque
-                //cCadena = [update cheques set saldo = saldo - '&cTotal' where cheque = '&cCheque' ]	
-                
-                DB::commit(); //when transaction confirmed. ;
+                DB::commit(); //CONFIRMO TRANSACCION FACTURA ;
 
                 Flash::success('Factura guardada: ' . $factura->formulario );
 
@@ -401,7 +413,7 @@ class FacturaController extends AppBaseController
 
         } catch(Exception $e){
             
-            
+                DB::rollBack(); // after each error.
               
 
 
