@@ -61,7 +61,7 @@ return $ano.'-'.$mes.'-'.$dia;
 
 }
 
-function american2frech( $americandate)
+function american2french( $americandate)
 {
     //2022-12-31
     $dia = substr($americandate,8,2);

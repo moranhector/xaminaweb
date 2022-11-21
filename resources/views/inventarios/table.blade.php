@@ -38,7 +38,7 @@
                 <td>{!! DNS1D::getBarcodeHTML( $inventario->codigo12 , 'EAN13') !!}</td>
                 <td>{{ $inventario->precio }}</td>                                          
                 <td>{{ $inventario->costo }}</td>   
-                <td>{{ american2frech( $inventario->comprado_at  ) }}</td>                   
+                <td>{{ american2french( $inventario->comprado_at  ) }}</td>                   
 
 
             <!-- <td>{{ $inventario->tipopieza_id }}</td> -->

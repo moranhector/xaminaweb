@@ -18,7 +18,7 @@
             <td>{{ $talonario->proximodoc }}</td>
             <!-- <td>{{ $talonario->fechavto }}</td> -->
              
-            <td>{{ american2frech( $talonario->updated_at ) }}<b> {{\Carbon\Carbon::parse( $talonario->updated_at   )->diffForHumans() }}</b></td> 
+            <td>{{ american2french( $talonario->updated_at ) }}<b> {{\Carbon\Carbon::parse( $talonario->updated_at   )->diffForHumans() }}</b></td> 
                 <td width="120">
                     {!! Form::open(['route' => ['talonarios.destroy', $talonario->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

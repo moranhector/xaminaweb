@@ -418,7 +418,7 @@ class InventarioController extends AppBaseController
 
         }
         // Paso la fecha a Frances
-        $fecha_hasta_french = american2frech( $fecha_hasta)  ; 
+        $fecha_hasta_french = american2french( $fecha_hasta)  ; 
         $namepieza  = $request->get('namepieza');
 
         
@@ -441,12 +441,16 @@ class InventarioController extends AppBaseController
         AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' )";    
         
         $cSelect = 
-        "SELECT i.id,i.codigo12,i.npieza, i.namepieza,i.tipopieza_id,t.descrip,i.precio,i.costo, i.comprado_at FROM inventarios i     
+        "SELECT i.id,i.codigo12,i.npieza, i.namepieza,i.tipopieza_id,t.descrip,i.precio,i.costo, i.comprado_at, d.nombre as deposito, i.vendido_at  FROM inventarios i     
         INNER JOIN tipopiezas t
         ON i.tipopieza_id = t.id 
+        inner join existencias e
+        on e.inventario_id = i.id
+        inner join depositos d
+        on e.deposito_id = d.id
         WHERE $filtroPorPieza      
         comprado_at <= '$fecha_hasta'
-        AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' )";  
+        AND ( vendido_at IS NULL OR vendido_at > '$fecha_hasta' ) and  ( e.fecha_hasta < '$fecha_hasta'   OR e.fecha_hasta IS NULL )  " ;  
 
  
         $inventarios = collect(  DB::select(DB::raw($cSelect)) ) ->paginate(100);                         

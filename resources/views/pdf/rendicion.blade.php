@@ -157,7 +157,7 @@
  
 
                 <td style="border:0;" width="40%" align="right">
-                    <B>Fecha rendición: {{ american2frech( $cheque->rendido_at ) }} </B>
+                    <B>Fecha rendición: {{ american2french( $cheque->rendido_at ) }} </B>
                 </td>
 
 

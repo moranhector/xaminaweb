@@ -9,6 +9,7 @@ use App\Models\Remito;
 use App\Models\Remito_linea;
 use App\Models\Existencia;
 use App\Models\Talonario;
+use App\Models\Deposito;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
@@ -88,8 +89,12 @@ class RemitoController extends AppBaseController
         $fecha_hoy= $fecha_hoy->format('d/m/Y');   
         //dd($mytime);
 
+             /*listar los deposito en dropdown*/
+             $depositos= Deposito::all();        
+
         return view('remitos.create',[
-            "fecha_hoy"=>$fecha_hoy     
+            "fecha_hoy"=>$fecha_hoy ,    
+            "depositos"=>$depositos               
             ]);
     }
 
@@ -104,9 +109,19 @@ class RemitoController extends AppBaseController
      */
     public function store(CreateRemitoRequest $request)
     {
-        dd($request);
+        //dd($request->request);
+
+        // "deposito_id_from" => "CENTRAL"
+        // "id_deposito_1" => "1"
+        // "deposito_id_to" => "CENTRAL"
+        // "id_deposito_2" => "1"
+
 
         try {
+            
+
+
+            //DB::beginTransaction();  //to start transaction.            
 
             $input = $request->all();
 
@@ -125,23 +140,14 @@ class RemitoController extends AppBaseController
     
             
             $data = $request->validate($rules);
-            //dd('$request->documento',$request->documento);
-
-            if ($request->deposito_id_from == $request->deposito_id_to )
-            {
-                //dd('llega');
-
-                throw new Exception('Depósitos no pueden ser iguales');
-            }
-            
-
-  
+ 
 
             $remito = new Remito();
             $remito->fecha = $fecha_remito ;
-            $remito->deposito_id_from = $request->deposito_id_from ;
-            $remito->deposito_id_to = $request->deposito_id_to ;
-            $remito->descrip = $request->remito_descrip ;
+            $remito->deposito_id_from = $request->id_deposito_1 ;
+            $remito->deposito_id_to = $request->id_deposito_2;
+            $descrip = empty($request->remito_descrip ) ? 'S/D' : $request->remito_descrip;
+            $remito->descrip = $descrip ;
             $remito->user_name = "" ;
 
  
@@ -153,7 +159,7 @@ class RemitoController extends AppBaseController
             $lineas_detalle = $request->_producto_id ; //Tomo el Id del ReMITO insertado
             $cont=0;
 
- 
+            
 
             while($cont < count($lineas_detalle)){
 
@@ -163,54 +169,35 @@ class RemitoController extends AppBaseController
                 $detalle = new Remito_linea();
     
                 $detalle->remito_id      = $remito->id;
-                $detalle->inventario_id  = $request->_producto_id[$cont];
+                $detalle->inventario_id  = $request->_inventario_id[$cont];
                 //$detalle->cantidad      = $request->_cantidad[$cont];
 
                 //$detalle->updated_at    = null ;
                 //$detalle->created_at    = $mytime ;
                 $detalle->save();
 
-                
+                if ( ! Existencia::Actualizar( $detalle->inventario_id, 
+                    $remito->deposito_id_from,
+                    $fecha_remito ,
+                    'REMITO' ,
+                    $remito->id, $remito->deposito_id_to  ) )
+                    //SI NO PUEDE ACTUALZIAR REGRESARA CON LOS ERRORES
+                    {
+                    //DB::rollBack(); // after each error.            
+                    $mensaje_error= 'PROBLEMAS DE EXISTENCIA'; 
+                    Flash::error($mensaje_error );                    
+                    return back()->withInput();                                                
+                    }                                            ;                
 
-                //Cerrar existencia anterior
-                $existencia = new Existencia();                
-                $existencia = Existencia::where('inventario_id', $detalle->inventario_id)
-                ->where('fecha_hasta',null)
-                ->first();
-                $existencia->fecha_hasta   = now();
-                $existencia->tiposalida    = "REMITO" ;                
-                $existencia->documento_sal = $remito->id  ;                
-
-                $existencia->save();
-
-                //Abrir existencia nueva
-
-                $existencia = new Existencia();
-                $existencia->inventario_id = $detalle->inventario_id ;
-                $existencia->tipodoc       = "REMITO" ;
-                $existencia->documento     = $remito->id ;
-                $existencia->deposito_id   = $remito->deposito_id_to ;
-                $existencia->fecha_desde   = now() ;
-                $existencia->save();
-
-
-
+ 
 
 
                 $cont=$cont+1;
             }
 
-
- 
-
-
-
+ 	
             
-        
-            //** Grabar SAldo de cheque
-            //cCadena = [update cheques set saldo = saldo - '&cTotal' where cheque = '&cCheque' ]	
-            
-
+            //DB::commit(); //CONFIRMO TRANSACCION REMITO ;
 
             Flash::success('Remito guardado: ' . $remito->id );
 

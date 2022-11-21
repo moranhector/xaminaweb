@@ -33,7 +33,8 @@ $('#pieza').keydown(function(e) {
 
 
         var nPieza   = document.getElementById('pieza').value;
-        var deposito = document.getElementById('deposito_id_from').value;
+        var deposito = document.getElementById('deposito_id1').value;
+        console.log("deposito id?",deposito);
 
         //miurl = "/fetch-pieza/"+nPieza ;
         //alert(miurl); 
@@ -57,6 +58,7 @@ $('#pieza').keydown(function(e) {
 
                     $("#precio_venta").val(response.piezas[0].precio);
                     $("#descrip").val(response.piezas[0].namepieza);
+                    $("#inventario_id").val(response.piezas[0].id); //Aquí viene el ID DE LA PIEZA                    
 
                     //agregar_renglon_factura();
 
@@ -99,6 +101,7 @@ function agregar_renglon_remito() {
     descrip = $("#descrip").val();
     precio_venta = $("#precio_venta").val();
     pieza = $("#pieza").val();
+    inventario_id = $("#inventario_id").val(); //id de  la pieza    
 
 
 
@@ -108,7 +111,8 @@ function agregar_renglon_remito() {
 
     var fila = '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
     concat('<i class="fa fa-times fa-2x"></i></button></td>',
-        '<td><input type="text"   name="_producto_id[]"   value="' + pieza + '" readonly ></td>',
+        '<td><input type="text"   name="_inventario_id[]" value="' + inventario_id + '" HIDDEN >',
+        '<input type="text"   name="_producto_id[]"   value="' + pieza + '" readonly ></td>',
         '<td><input type="text"   name="_descrip[]"       value="' + descrip + '"   readonly ></td>',
         '</tr>');
 
@@ -134,6 +138,7 @@ function limpiar() {
     $("#precio_venta").val("");
     $("#descrip").val("");
     $("#pieza").val("");
+    $("#inventario_id").val("");    
 
 }
 

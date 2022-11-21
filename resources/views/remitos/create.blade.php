@@ -1,5 +1,104 @@
 @extends('layouts.app')
 
+<!-- INCLUIR ESTA LINEA PARA LOS FORMULARIOS MODALES DE INICIO -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+
+<style type="text/css">
+.clock .display {
+    font-size: 14px;
+    color: white;
+    letter-spacing: 1px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.tabla_head {
+
+    background: #FE6602;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    "
+
+}
+
+
+
+/*EL MEDIA ES PARA PC*/
+@media (min-width: 768px) {
+
+    #titulo {
+        font-family: "Open Sans";
+        font-weight: bold;
+        text-align: center;
+        font-size: 45px;
+        color: #8A1538;
+        padding-top: 20px;
+    }
+
+
+
+    .leyendas {
+        font-size: 40px;
+    }
+
+
+
+}
+</style>
+
+<!-- SELECCION DE DEPOSITO -->
+<!-- SELECCION DE DEPOSITO -->
+<!-- SELECCION DE DEPOSITO  ESTOY COPIANDO DE FACTURAS FORM-->
+
+<script type="text/javascript">
+$(window).on('load', function() {
+    // cliente = $('#documento').val()    ;
+    // console.log( "longitud del documento" , cliente.length);
+    // //EVITAR QUE SE RECARGUE EL DEPOSITO ANTE UN ERROR
+    // if ( cliente.length == 0) // Solo si es la primera vez que entra al formulario
+    // {
+    $('#myModal').modal('show');
+    // }
+});
+</script>
+
+<script type="text/javascript">
+function cerrarmodal() {
+
+    nombre_deposito1 = $('#deposito_id1 option:selected').text() //ACA ME TRAIGO EL NOMBRE DEL DEPOSITO NO EL ID
+    depo1 = $('#deposito_id1 option:selected').val() //ACA ME TRAIGO EL NOMBRE DEL DEPOSITO NO EL ID
+    //console.log('HE COPIADO',depo1);
+ 
+
+    nombre_deposito2   = $('#deposito_id2 option:selected').text() //ACA ME TRAIGO EL NOMBRE DEL DEPOSITO NO EL ID
+    depo2 = $('#deposito_id2 option:selected').val() //ACA ME TRAIGO EL NOMBRE DEL DEPOSITO NO EL ID    
+ 
+    if ( depo1==depo2 ) {
+        alert("Seleccione Depósito destino distinto al orígen");
+        return false;
+    }
+ 
+
+    $("#deposito_id_from").val( nombre_deposito1 ) ;  //COPIO DESCRIPCION DEPOSITO ORIGEN
+    $("#id_deposito_1").val( depo1 ) ;        //COPIO ID DEPOSITO ORIGEN
+    
+    $("#deposito_id_to").val( nombre_deposito2 ) ;    //COPIO DESCRIPCION DEPOSITO DESTINO
+    $("#id_deposito_2").val( depo2 ) ;        //COPIO ID DEPOSITO ORIGEN
+
+
+    $('#myModal').modal('toggle');
+    $('#remito_descrip').focus(); //ACA PONGO EL CURSOR PARA SELECCIONAR UN CLIENTE
+}
+</script>
+
+<!-- FIN SELECCION DE DEPOSITO -->
+<!-- FIN SELECCION DE DEPOSITO -->
+<!-- FIN SELECCION DE DEPOSITO -->
+
+
+
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
@@ -21,13 +120,58 @@
 
         <div class="card-body">
 
- 
-            @include('remitos.fields')
- 
-            <div class="form-group row">
+
+
+
+
+
+            <div class="col-sm-6">
+                <label for="remito_descrip">Descripción:</label>
+                <input class="form-control" name="remito_descrip" type="text" id="remito_descrip"
+                    placeholder="Descripción">
+            </div>
+
+            <!-- Fecha Field -->
+            <div class="col-sm-2">
+                <label for="fecha">Fecha:</label>
+                <input class="form-control" id="fecha" name="fecha" type="text" value={{ $fecha_hoy }}>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="form-control-label" for="articulo">Depósito</label>
+
+                    <input type="text" id="deposito_id_from" name="deposito_id_from" READONLY>
+                    <input type="text" id="id_deposito_1" name="id_deposito_1" value=" " HIDDEN>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <label class="form-control-label" for="articulo">Depósito</label>
+
+                    <input type="text" id="deposito_id_to" name="deposito_id_to" READONLY>
+                    <input type="text" id="id_deposito_2"  name="id_deposito_2" value=" " HIDDEN >                    
+                </div>
+            </div>            
 
  
-                <input type="hidden" id="id_inventario" name="id_inventario" class="form-control">
+
+
+
+
+
+
+
+
+
+            <div class="form-group row">
+
+
+                <!-- <input type="hidden" id="id_inventario" name="id_inventario" class="form-control"> -->
+                <input type="text" id="inventario_id" HIDDEN >   
 
                 <!--  
 
@@ -80,10 +224,10 @@
                     <table id="detalles" class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr class="bg-success">
-                                <th>Acción</th>
-                                <th>Pieza</th>
-                                <th>Descripción</th>
-                                <th> &nbsp </th>
+                                <th class="tabla_head">Acción</th>
+                                <th class="tabla_head">Pieza</th>
+                                <th class="tabla_head">Descripción</th>
+                                <th class="tabla_head"> &nbsp </th>
 
                             </tr>
                         </thead>
@@ -134,6 +278,67 @@
     </div>
 </div>
 @endsection
+
+
+<!-- <div class="text-center">      SELECCIONAR DEPOSITO 
+    <a href="#myModal" class="trigger-btn" data-toggle="modal">Seleccionar Depósito</a>
+</div> -->
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remito</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <label class="form-control-label" for="articulo">Por favor seleccione Depósitos</label>
+
+
+
+
+                <select class="form-control selectpicker" name="deposito_id1" id="deposito_id1" data-live-search="true">
+
+
+
+                    @foreach($depositos as $deposito)
+
+                    <option value="{{ $deposito->id }}">{{$deposito->nombre}}</option>
+
+                    @endforeach
+
+                </select>
+
+
+                <select class="form-control selectpicker" name="deposito_id2" id="deposito_id2" data-live-search="true">
+
+
+
+                    @foreach($depositos as $deposito)
+
+                    <option value="{{ $deposito->id }}">{{$deposito->nombre}}</option>
+
+                    @endforeach
+
+                </select>
+
+
+
+
+                <button type="button" class="btn btn-primary" onclick="cerrarmodal()">Aceptar</button>
+                <!-- Boton que va a la función para cerrar la ventana modal-->
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
 
 @push('formularios')
 

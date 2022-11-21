@@ -34,7 +34,8 @@
             <td>{{ \Carbon\Carbon::parse($existencia->fecha_desde)->format('d/m/Y') }}</td>             
             
           
-            <td>{{ \Carbon\Carbon::parse($existencia->fecha_hasta)->format('d/m/Y') }}</td>             
+            <td>{{ american2french($existencia->fecha_hasta) }}</td>     
+                    
                 <td width="120">
                     {!! Form::open(['route' => ['existencias.destroy', $existencia->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

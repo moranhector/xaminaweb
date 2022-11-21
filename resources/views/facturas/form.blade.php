@@ -1,3 +1,4 @@
+<!-- INCLUIR ESTA LINEA PARA LOS FORMULARIOS MODALES DE INICIO -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 </script>
@@ -57,6 +58,11 @@ function abre_buscador() {
 }
 </script>
 
+<!-- SELECCION DE DEPOSITO -->
+<!-- SELECCION DE DEPOSITO -->
+<!-- SELECCION DE DEPOSITO -->
+
+
 <script type="text/javascript">
     $(window).on('load', function() {
         cliente = $('#documento').val()    ;
@@ -80,7 +86,10 @@ function abre_buscador() {
 }
 </script>
 
- 
+<!-- FIN SELECCION DE DEPOSITO -->
+<!-- FIN SELECCION DE DEPOSITO -->
+<!-- FIN SELECCION DE DEPOSITO -->
+
 
 
 @include('flash::message')

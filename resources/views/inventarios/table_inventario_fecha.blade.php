@@ -10,6 +10,8 @@
         <th>Precio</th>
         <th>Costo</th>        
         <th>Fecha Compra</th>                
+        <th>Fecha Venta</th>                
+        <th>Depósito</th>                
         <!-- <th>Comprob</th> -->
         <!-- <th>Recibo Id</th>
         <th>Factura</th>
@@ -36,7 +38,9 @@
                 <td>{!! DNS1D::getBarcodeHTML( $inventario->codigo12 , 'EAN13') !!}</td>
                 <td>{{ $inventario->precio }}</td>                                          
                 <td>{{ $inventario->costo }}</td>   
-                <td>{{ american2frech( $inventario->comprado_at  ) }}</td>    
+                <td>{{ american2french( $inventario->comprado_at  ) }}</td>    
+                <td>{{ american2french( $inventario->vendido_at  ) }}</td>    
+                <td>{{ $inventario->deposito }}</td>    
             <!-- <td>{ { $inventario->comprob } }</td> -->
             <!-- <td>{ { $inventario->recibo_id } }</td>
             <td>{ { $inventario->factura }}</td>

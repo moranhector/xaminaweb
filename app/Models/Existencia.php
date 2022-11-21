@@ -106,7 +106,7 @@ class Existencia extends Model
 
     public function Actualizar($inventario_id, $deposito_id, $fecha_hasta, $tiposalida, $documento_sal , $deposito_id_to = false  ) {
 
-
+        //dd( $inventario_id, $deposito_id, $fecha_hasta, $tiposalida, $documento_sal , $deposito_id_to );
         try {
                         //Cerrar existencia anterior
                         $existencia = new Existencia();                
