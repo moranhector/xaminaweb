@@ -110,6 +110,12 @@ function cerrarmodal() {
     </div>
 </section>
 
+@include('flash::message')
+
+
+
+
+
 <div class="content px-3">
 
     @include('adminlte-templates::common.errors')

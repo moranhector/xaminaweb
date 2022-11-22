@@ -6,3 +6,5 @@ TRUNCATE TABLE cheques ;
 TRUNCATE TABLE rendiciones ;
 TRUNCATE TABLE remitos;
 TRUNCATE TABLE remito_lineas;
+TRUNCATE TABLE facturas;
+TRUNCATE TABLE faclineas;

@@ -117,30 +117,36 @@ class RemitoController extends AppBaseController
         // "id_deposito_2" => "1"
 
 
+         // Primero reviso si vienen piezas duplicadas, en Javascript es más difícil controlar
+
+         if( hayDuplicados( $request->_producto_id ))  //Función en Funciones.php
+         {
+            $mensaje_error= 'Piezas repetidas en Remito - No se pudo Grabar - Por favor vuelva a cargar'; 
+            Flash::error($mensaje_error );                    
+            return back()->withInput();                     
+         }      
+         
+        //  $mensaje_error= 'ESTUVO OK'; 
+        //  Flash::error($mensaje_error );                    
+        //  return back()->withInput();                    
+
+
         try {
             
 
 
-            //DB::beginTransaction();  //to start transaction.            
+            DB::beginTransaction();  //to start transaction.            
 
             $input = $request->all();
 
             //fecha al formato americano
             $fecha_remito = french2american( $request->fecha )  ;          
 
-        
-
-
             $rules = [
                      'fecha' => 'required',
-
             ];
-
-
-    
             
             $data = $request->validate($rules);
- 
 
             $remito = new Remito();
             $remito->fecha = $fecha_remito ;
@@ -148,10 +154,7 @@ class RemitoController extends AppBaseController
             $remito->deposito_id_to = $request->id_deposito_2;
             $descrip = empty($request->remito_descrip ) ? 'S/D' : $request->remito_descrip;
             $remito->descrip = $descrip ;
-            $remito->user_name = "" ;
-
- 
-            
+            $remito->user_name = "" ;           
             $remito->save();
      
 
@@ -180,7 +183,7 @@ class RemitoController extends AppBaseController
                     $remito->deposito_id_from,
                     $fecha_remito ,
                     'REMITO' ,
-                    $remito->id, $remito->deposito_id_to  ) )
+                    zeros($remito->id,8), $remito->deposito_id_to  ) )
                     //SI NO PUEDE ACTUALZIAR REGRESARA CON LOS ERRORES
                     {
                     //DB::rollBack(); // after each error.            
@@ -189,15 +192,10 @@ class RemitoController extends AppBaseController
                     return back()->withInput();                                                
                     }                                            ;                
 
- 
-
-
-                $cont=$cont+1;
+                 $cont=$cont+1;
             }
 
- 	
-            
-            //DB::commit(); //CONFIRMO TRANSACCION REMITO ;
+            DB::commit(); //CONFIRMO TRANSACCION REMITO ;
 
             Flash::success('Remito guardado: ' . $remito->id );
 

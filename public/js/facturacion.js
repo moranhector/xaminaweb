@@ -43,6 +43,8 @@ $('#pieza').keydown(function(e) {
                    $('#success_message').addClass('alert');
                    $('#success_message').html(response.message);
                } else {
+
+                
                    $('#success_message').addClass('alert');
                    $('#success_message').html(response.message);
                    $("#precio_venta").val(response.piezas[0].precio);
@@ -86,7 +88,7 @@ function agregar_renglon_factura() {
 
    if ( descrip.length > 0)
    {
-        subtotal[cont] = (precio_venta);
+        subtotal[cont] = (precio_venta * 1); //Esta multiplicación es importante porque convierte en número la precio_venta !!
         //_subtotal = subtotal[cont] ;
         total = parseFloat( total + subtotal[cont] );
         console.log(total);
@@ -113,12 +115,6 @@ function agregar_renglon_factura() {
    }
 
 
-
-
-
-
-
-
 }
 
 function limpiar() {
@@ -134,8 +130,6 @@ function limpiar() {
 function totales() {
 
    $("#total").html("$ " + total.toFixed(2));
-
-
    $("#total_pagar_html").html("$ " + total.toFixed(2));
    $("#total_pagar").val(total.toFixed(2));
 }

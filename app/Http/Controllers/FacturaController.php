@@ -234,8 +234,22 @@ class FacturaController extends AppBaseController
     public function guardar(Request $request)
     {
 
-        // dd($request);
+        //dd( $request->request );
 
+         // Primero reviso si vienen piezas duplicadas, en Javascript es más difícil controlar
+
+         if( hayDuplicados( $request->_pieza ))  //Función en Funciones.php
+         {
+            $mensaje_error= 'Piezas repetidas en Factura - No se pudo Grabar - Por favor vuelva a cargar'; 
+            Flash::error($mensaje_error );                    
+            return back()->withInput();                     
+         }      
+         
+        //  $mensaje_error= 'ESTUVO OK'; 
+        //  Flash::error($mensaje_error );                    
+        //  return back()->withInput();            
+
+    
 
 
         // +request: Symfony\Component\HttpFoundation\InputBag {#44 ▼
@@ -269,7 +283,7 @@ class FacturaController extends AppBaseController
         //       "id_deposito" => "1"        
 
 
-        $deposito_id = 1 ; //Depósito Central por Default, esto debería venir del formulario.
+        $deposito_id = $request->id_deposito ; //Depósito seleccionado del formulario.
 
         try {
 
@@ -286,6 +300,7 @@ class FacturaController extends AppBaseController
                 $rules = [
                      'formulario' => 'required',
                      'fecha' => 'required',
+                     'cliente_nombre' => 'required',
                      //'artesano_id' => 'required'                                      
                 ];
         
@@ -395,7 +410,7 @@ class FacturaController extends AppBaseController
 
                     $inventario->factura = $factura->formulario ;
                     $inventario->factura_id = $factura->formulario ;
-                    $inventario->vendido_at = $factura->id ;
+                    $inventario->vendido_at = $fecha_factura ;
                     $inventario->save();
 
                     $cont=$cont+1;

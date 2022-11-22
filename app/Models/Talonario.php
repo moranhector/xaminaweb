@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
+//include "funciones.php";
 /**
  * Class Talonario
  * @package App\Models
@@ -71,8 +72,17 @@ class Talonario extends Model
     {
         $talonario = Talonario::where('tipo', $tipo)->first();
         $UltimoDoc = $valor;
+        $nLongitud = strlen($valor);
         $nProximoDoc = strval($UltimoDoc) + 1  ;
-        $talonario->proximodoc = $nProximoDoc;
+
+        // if( substr($valor,0,1)) //Venía con Zeros, grabo con zeros
+        // {
+            $talonario->proximodoc = zeros( $nProximoDoc, $nLongitud );
+        // }
+        // else
+        // {
+        //     $talonario->proximodoc =  $nProximoDoc ;            
+        // }    
         $talonario->save();
             return ;
 

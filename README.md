@@ -1680,12 +1680,39 @@ Domingo
 -Sistema: Versión en el Footer, Cambiar a Fecha de la versión.
 
 
--Error: Estoy buscando en existencias por Nro de Pieza, debo hacerlo por Id.
--Error: Permito agregar renglones en factura sin haber limpiado la pieza.
+-Error: Estoy buscando en existencias por Nro de Pieza, debo hacerlo por Id. OK
+-Error: Permito agregar renglones en factura sin haber limpiado la pieza.    OK
 
 Pruebo el Ajax deposito con:
 
 http://localhost:8000/ajax_pieza_deposito/200080/1
 
 
--- Factura grabada Ok, pero no actualiza el inventario, Actualiza ok Existencias                        
+-- Factura grabada Ok, pero no actualiza el inventario, Actualiza ok Existencias    OK                   
+
+
+
+-- RECIBOS pasar el javascript a archivo Javascript OK
+
+
+-- REMITOS: Seleccionar Depósitos en el Inicio.
+   FALTA INCREMENTAR CANTIDAD DE PIEZAS AL PIE DEL FORMULARIO mañana
+
+
+22/11/2022
+Martes
+
+Guardar Remito rellenado con Zeros. OK
+
+
+Rendición: Falta poder registrar la Fecha de Rendición.
+
+Factura: No Puede eliminar renglones. Revisar Eliminar de otros documentos.
+
+        Esta totalizando pésimo: Con dos piezas, una por 52 pesos más otra de 130 totaliza 52130 $ !!!!!!
+
+
+Sistema: Al vencer Sessión del Usuario que vaya al Login o Welcome.
+
+        
+
