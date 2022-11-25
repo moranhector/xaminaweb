@@ -1966,6 +1966,16 @@ resources\views\layouts\app.blade.php
 
 
 
+Existencias: En Menú poner Movimientos.
+
+Rendición: Pedir Fecha ? -> LA ENTRADA DE LAS PIEZAS ES CON LA FECHA DE LA COMPRA.
+
+REMITO: Botón eliminar renglones no funciona. OK
+        No totaliza cantidades.
+        Agrega renglones vacíos. OK
+        Evitar que se cargue dos veces la misma pieza. Será posible enviar todo el formulario para recuperarlo completo?
+
+
 
 
 

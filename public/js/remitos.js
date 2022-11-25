@@ -103,27 +103,29 @@ function agregar_renglon_remito() {
     pieza = $("#pieza").val();
     inventario_id = $("#inventario_id").val(); //id de  la pieza    
 
+    if ( descrip.length > 0)
+    {
+
+        subtotal[cont] = 1 ;
+        //_subtotal = subtotal[cont] ;
+        total = total + subtotal[cont];
+
+        var fila = '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm"  onclick="eliminar('+cont+');"  >'.
+        concat('<i class="fa fa-times fa-2x"></i></button></td>',
+            '<td><input type="text"   name="_inventario_id[]" value="' + inventario_id + '" HIDDEN >',
+            '<input type="text"   name="_producto_id[]"   value="' + pieza + '" readonly ></td>',
+            '<td><input type="text"   name="_descrip[]"       value="' + descrip + '"   readonly ></td>',
+            '</tr>');
+
+        limpiar();
+        totales();
+
+        // evaluar();
 
 
-    subtotal[cont] = (precio_venta);
-    //_subtotal = subtotal[cont] ;
-    total = total + subtotal[cont];
 
-    var fila = '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
-    concat('<i class="fa fa-times fa-2x"></i></button></td>',
-        '<td><input type="text"   name="_inventario_id[]" value="' + inventario_id + '" HIDDEN >',
-        '<input type="text"   name="_producto_id[]"   value="' + pieza + '" readonly ></td>',
-        '<td><input type="text"   name="_descrip[]"       value="' + descrip + '"   readonly ></td>',
-        '</tr>');
-
-    limpiar();
-    totales();
-
-    // evaluar();
-
-
-
-    $('#detalles').append(fila);
+        $('#detalles').append(fila);
+    }
 
 
 }
@@ -145,10 +147,9 @@ function limpiar() {
 function totales() {
 
 
-
-
-    //$("#total_pagar_html").html("$ " + total.toFixed(2));
-    //$("#total_pagar").val(total.toFixed(2));
+ 
+    $("#cantidad_piezas_p").html(total.toFixed(0));
+    $("#cantidad_piezas_input").val(total.toFixed(0));
 }
 
 
@@ -166,15 +167,15 @@ function totales() {
 
 function eliminar(index) {
 
-    total = total - subtotal[index];
+    // total = total - subtotal[index];
+    console.log('entra');
+ 
+    // total_pagar_html = total;
 
-    //total_impuesto= total*20/100;
-    total_pagar_html = total;
-
-    $("#total").html("USD$" + total);
-    $("#total_impuesto").html("USD$" + total_impuesto);
-    $("#total_pagar_html").html("USD$" + total_pagar_html);
-    $("#total_pagar").val(total_pagar_html.toFixed(2));
+    // $("#total").html("USD$" + total);
+    // $("#total_impuesto").html("USD$" + total_impuesto);
+    // $("#total_pagar_html").html("USD$" + total_pagar_html);
+    // $("#total_pagar").val(total_pagar_html.toFixed(2));
 
     $("#fila" + index).remove();
     evaluar();

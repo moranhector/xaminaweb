@@ -113,7 +113,7 @@ function cerrarmodal() {
 @include('flash::message')
 
 
-
+    
 
 
 <div class="content px-3">
@@ -233,7 +233,7 @@ function cerrarmodal() {
                                 <th class="tabla_head">Acción</th>
                                 <th class="tabla_head">Pieza</th>
                                 <th class="tabla_head">Descripción</th>
-                                <th class="tabla_head"> &nbsp </th>
+                             
 
                             </tr>
                         </thead>
@@ -245,15 +245,15 @@ function cerrarmodal() {
 
                             <tr>
                                 <th> &nbsp </th>
-                                <th> &nbsp </th>
+                                
 
                                 <th>
                                     <p align="right">CANTIDAD DE PIEZAS:</p>
                                 </th>
                                 <th>
                                     <!-- <p align="right"><span align="right" id="total_pagar_html">$ 0.00</span> <input type="hidden" name="total_pagar" id="total_pagar"></p> -->
-                                    <p align="right"><span align="right" id="cantidad_piezas"> 0 </span> <input
-                                            type="hidden" name="cantidad_piezas" id="cantidad_piezas"></p>
+                                    <p align="right"><span align="right" id="cantidad_piezas_p"> 0 </span> <input
+                                            type="hidden" name="cantidad_piezas" id="cantidad_piezas_input"></p>
                                 </th>
                             </tr>
 

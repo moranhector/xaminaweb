@@ -94,7 +94,7 @@ function agregar_renglon_factura() {
         console.log(total);
         //console.log(parseFloat(total));
     
-        var fila = '<tr class="selected" id="fila"><td><button type="button" class="btn btn-danger btn-sm" >'.
+        var fila = '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm"  onclick="eliminar('+cont+');"  >'.
         concat('<i class="fa fa-times fa-2x"></i></button></td>',
             '<td><input type="text"   name="_inventario_id[]" value="' + inventario_id + '" HIDDEN >',
             '    <input type="text"   name="_pieza[]"         value="' + pieza + '" readonly  size="5" ></td>',
@@ -161,6 +161,8 @@ function eliminar(index) {
    $("#fila" + index).remove();
    evaluar();
 }
+
+
 // ACA CAMBIO EL VALOR DEL PRECIOS SEGUN EL SELECT
 $('#pieza').on('change', function() {
 
