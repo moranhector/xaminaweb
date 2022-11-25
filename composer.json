@@ -17,7 +17,8 @@
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.2",
         "milon/barcode": "^9.0",
-        "spatie/laravel-collection-macros": "^7.6"
+        "spatie/laravel-collection-macros": "^7.6",
+        "spatie/laravel-permission": "^5.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

@@ -67,6 +67,7 @@
                         <p>
                             {{ Auth::user()->name }}
                             <small>Registrado en: {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            <div>{{ Auth::user()->getRoleNames() }}</div>
                         </p>
                     </li>
                     <!-- Menu Footer-->

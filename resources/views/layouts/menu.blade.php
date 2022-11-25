@@ -1,17 +1,12 @@
-
-
-
 <li class="nav-item">
-    <a href="{{ route('artesanos.index') }}"
-       class="nav-link {{ Request::is('artesanos*') ? 'active' : '' }}">
+    <a href="{{ route('artesanos.index') }}" class="nav-link {{ Request::is('artesanos*') ? 'active' : '' }}">
         <p>Artesanos</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('rubros.index') }}"
-       class="nav-link {{ Request::is('rubros*') ? 'active' : '' }}">
+    <a href="{{ route('rubros.index') }}" class="nav-link {{ Request::is('rubros*') ? 'active' : '' }}">
         <p>Rubros</p>
     </a>
 </li>
@@ -21,24 +16,21 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('tipopiezas.index') }}"
-       class="nav-link {{ Request::is('tipopiezas*') ? 'active' : '' }}">
+    <a href="{{ route('tipopiezas.index') }}" class="nav-link {{ Request::is('tipopiezas*') ? 'active' : '' }}">
         <p>Tipos de piezas</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('cheques.index') }}"
-       class="nav-link {{ Request::is('cheques*') ? 'active' : '' }}">
+    <a href="{{ route('cheques.index') }}" class="nav-link {{ Request::is('cheques*') ? 'active' : '' }}">
         <p>Cheques</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('recibos.index') }}"
-       class="nav-link {{ Request::is('recibos*') ? 'active' : '' }}">
+    <a href="{{ route('recibos.index') }}" class="nav-link {{ Request::is('recibos*') ? 'active' : '' }}">
         <p>Recibos de Compra</p>
     </a>
 </li>
@@ -46,7 +38,7 @@
 
 
 
- 
+
 
 <!-- <li class="nav-item">
     <a href="{{ route('preparar.recibo') }}"
@@ -55,24 +47,21 @@
     </a>
 </li> -->
 <li class="nav-item">
-    <a href="{{ route('depositos.index') }}"
-       class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
+    <a href="{{ route('depositos.index') }}" class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
         <p>Depósitos</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('inventarios.index') }}"
-       class="nav-link {{ Request::is('inventarios*') ? 'active' : '' }}">
+    <a href="{{ route('inventarios.index') }}" class="nav-link {{ Request::is('inventarios*') ? 'active' : '' }}">
         <p>Piezas</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('talonarios.index') }}"
-       class="nav-link {{ Request::is('talonarios*') ? 'active' : '' }}">
+    <a href="{{ route('talonarios.index') }}" class="nav-link {{ Request::is('talonarios*') ? 'active' : '' }}">
         <p>Talonarios</p>
     </a>
 </li>
@@ -88,16 +77,14 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('clientes.index') }}"
-       class="nav-link {{ Request::is('clientes*') ? 'active' : '' }}">
+    <a href="{{ route('clientes.index') }}" class="nav-link {{ Request::is('clientes*') ? 'active' : '' }}">
         <p>Clientes</p>
     </a>
 </li>
 
 
 <li class="nav-item">
-    <a href="{{ route('facturas.index') }}"
-       class="nav-link {{ Request::is('facturas*') ? 'active' : '' }}">
+    <a href="{{ route('facturas.index') }}" class="nav-link {{ Request::is('facturas*') ? 'active' : '' }}">
         <p>Facturas</p>
     </a>
 </li>
@@ -113,24 +100,26 @@
 
 
 <li class="nav-item">
-    <a href="{{ route('existencias.index') }}"
-       class="nav-link {{ Request::is('existencias*') ? 'active' : '' }}">
+    <a href="{{ route('existencias.index') }}" class="nav-link {{ Request::is('existencias*') ? 'active' : '' }}">
         <p>Existencias</p>
     </a>
 </li>
 
 <li class="nav-item">
-    <a href="{{ route('inventario_fecha') }}"
-       class="nav-link {{ Request::is('Inventario_fecha') ? 'active' : '' }}">
+    <a href="{{ route('inventario_fecha') }}" class="nav-link {{ Request::is('Inventario_fecha') ? 'active' : '' }}">
         <p>Inventario a fecha</p>
     </a>
 </li>
 
 <li class="nav-item">
-    <a href="{{ route('remitos.index') }}"
-       class="nav-link {{ Request::is('remitos*') ? 'active' : '' }}">
+    <a href="{{ route('remitos.index') }}" class="nav-link {{ Request::is('remitos*') ? 'active' : '' }}">
         <p>Remitos</p>
     </a>
 </li>
 
- 
+<a class="nav-link" href="/usuarios">
+    <i class=" fas fa-users"></i><span>Usuarios</span>
+</a>
+<a class="nav-link" href="/roles">
+    <i class=" fas fa-user-lock"></i><span>Roles</span>
+</a>

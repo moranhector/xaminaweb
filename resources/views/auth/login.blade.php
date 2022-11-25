@@ -38,9 +38,9 @@
     <div >
 
 
-        <div class="login-box">
+        <div class="login-box card">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+                <a href="{{ url('/home') }}"><b> </b></a>
             </div>
 
             <!-- /.login-logo -->
@@ -49,7 +49,7 @@
             <div class="card">
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">
-                        LOGIN
+                        Sistema Mercado Artesanal   LOGIN
                     </p>
 
                     <form method="post" action="{{ url('/login') }}">
@@ -84,7 +84,7 @@
                             <div class="col-8">
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="remember">
-                                    <label for="remember">Recordarme</label>
+                                    <!-- <label for="remember">Recordarme</label> -->
                                 </div>
                             </div>
 
@@ -96,10 +96,10 @@
                     </form>
 
                     <p class="mb-1">
-                        <a href="{{ route('password.request') }}">Olvidé mi contraseña</a>
+                        <!-- <a href="{{ route('password.request') }}">Olvidé mi contraseña</a> -->
                     </p>
-                    <p class="mb-0">
-                        <a href="{{ route('register') }}" class="text-center">Registrarme</a>
+                     <p class="mb-0">
+                        <a href="{{ route('register') }}" class="text-center">Registrarme</a> 
                     </p>
                 </div>
                 <!-- /.login-card-body -->

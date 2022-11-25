@@ -178,6 +178,8 @@ return [
         Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
         App\Providers\Debug::class,        
+        Spatie\Permission\PermissionServiceProvider::class,
+                
 
     ],
 

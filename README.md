@@ -1714,5 +1714,258 @@ Factura: No Puede eliminar renglones. Revisar Eliminar de otros documentos.
 
 Sistema: Al vencer Sessión del Usuario que vaya al Login o Welcome.
 
-        
+Factura: Falla al grabar con el cliente vacio.      OK
+
+Factura: Está grabando mal la fecha vendido_at.  OK
+
+Factura: Permite insertar en la factura 2 veces el mísmo artículo. OK
+Remito : Permite insertar en el remito 2 veces el mísmo artículo.  OK
+
+Factura: Grabar el formulario de la Factura en Existencia OK
+
+Talonarios: Si viene con Ceros, rellenar con Ceros. OK
+
+Funciones.php 
+
+    PHP Deprecated:  Array and string offset access syntax with curly braces is deprecated in C:\xampp\htdocs\xaminaweb\app\Models\funciones.php on line 271
+Revisar sintaxis
+function ean13($digits){
+    //first change digits to a string so that we can access individual numbers
+    $digits =(string)$digits;
+    // 1. Add the values of the digits in the even-numbered positions: 2, 4, 6, etc.
+    $even_sum = $digits{1} + $digits{3} + $digits{5} + $digits{7} + $digits{9} + $digits{11};
+
+    
+25/11/2022
+Viernes
+
+INSTALAR LARAVEL SPATIE PERMISSION
+
+Sigo el tutorial de Informatica DP
+https://www.youtube.com/watch?v=I4vgw0dcKwo
+
+
+composer require spatie/laravel-permission
+
+OK
+
+
+Segundo Paso Providers
+
+Optional: The service provider will automatically get registered. Or you may manually add the service provider in your config/app.php file:
+
+'providers' => [
+    // ...
+    Spatie\Permission\PermissionServiceProvider::class,
+];
+
+OK
+
+Tercer Paso: Publicar
+
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+PS C:\xampp\htdocs\xaminaweb> php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+Copied File [\vendor\spatie\laravel-permission\config\permission.php] To [\config\permission.php]
+Copied File [\vendor\spatie\laravel-permission\database\migrations\create_permission_tables.php.stub] To [\database\migrations\2022_11_25_105223_create_permission_tables.php]
+
+OK
+
+Cuarto Paso:
+
+php artisan optimize:clear
+
+OK
+
+Quinto Paso: Migrar
+
+Atención, solo creo permission tables. Estará bien ?
+
+Parece que sí.
+
+
+Sexto Paso: Crear Rutas
+
+//y creamos un grupo de rutas protegidas para los controladores
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RolController::class);
+    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('blogs', BlogController::class);
+});
+
+Y agregar 
+
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\BlogController;
+
+https://www.youtube.com/watch?v=SzH67-KqNgs&t=1166s
+
+Ver Tutorial Arriba
+
+Septimo Paso:
+
+Copiar Controllers: RoleController y UsuarioController.
+
+
+
+Octavo Paso:
+
+Copiar carpetas de Vistas 
+
+Profile, Roles, Usuarios 
+
+Noveno Paso
+
+Agregar en Menu
+
+
+Decimo Paso
+________________________________
+
+Crear Usuario Superadmin
+ 
+Copiar
+app\Providers\AuthServiceProvider.php
+
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
+
+class AuthServiceProvider extends ServiceProvider
+{
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+    ];
+
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        //agregamos el usuario Super Admin
+        // Otorga implícitamente todos los permisos a la función "Superadministrador"       
+        Gate::before(function ($user, $ability) {
+            return $user->email == 'admin@gmail.com' ?? null;
+        });
+    }
+}
+
+11avo Paso Crear Seeders
+____________________________
+
+https://www.youtube.com/watch?v=yp8qPUpie0A
+
+Copiar database\seeders\SeederTablaPermisos.php
+database\seeders\DatabaseSeeder.php
+
+php artisan db:seed --class=SeederTablaPermisos
+
+PS C:\xampp\htdocs\xaminaweb> php artisan db:seed --class=SeederTablaPermisos
+Database seeding completed successfully.
+
+Ok
+
+
+12avo Paso - Modificar Model User
+___________________________________
+app\Models\User.php
+
+//Agregamos spatie
+use Spatie\Permission\Traits\HasRoles;
+
+Agregar hasroles en esta lina
+
+class User extends Authenticatable
+{
+    use HasApiTokens, HasFactory, Notifiable , HasRoles;
+
+
+
+
+
+Ultimo Paso 13
+___________
+
+Agregar en el Kernel en     protected $routeMiddleware = [
+
+app\Http\Kernel.php
+
+        //agregamos spatie
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class
+
+
+Paso 14
+
+ 
+
+Arme una planilla de Excel para diseñar los permisos.
+
+esto me permite construir un insert semi automatizado.
+
+C:\xampp\htdocs\xaminaweb\database\sql\Diseño de Permisos.xlsx
+
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'ARTESANOS-VER','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'ARTESANOS-CREAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'ARTESANOS-EDITAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'ARTESANOS-BORRAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'RUBROS-VER','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'RUBROS-CREAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'RUBROS-EDITAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'RUBROS-BORRAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'TIPOPIEZA-VER','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'TIPOPIEZA-CREAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'TIPOPIEZA-EDITAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'TIPOPIEZA-BORRAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'CHEQUES-VER','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'CHEQUES-CREAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'CHEQUES-EDITAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'CHEQUES-BORRAR','web');
+INSERT INTO permissions(id,NAME,guard_name) VALUES ( NULL,'RECIBOS-VER','web');
+
+Ejecutar estas instrucciones en SQLYOG.
+
+
+Paso 15
+
+Crear roles seleccionando los permisos diseñados en paso 
+
+    
+Paso 16
+Crear usuarios de distintos roles.
+
+
+
+Paso 17 - Acceder como un usuario de un rol determinado.
+
+Mostrar en App el nombre del Rol del Usuario.
+
+resources\views\layouts\app.blade.php
+
+
+                        <p>
+                            {{ Auth::user()->name }}
+                            <small>Registrado en: {{ Auth::user()->created_at->format('M. Y') }}</small>
+                            <div>{{ Auth::user()->getRoleNames() }}</div>
+                        </p>
+
+
+
+
+
+
 
