@@ -7,12 +7,17 @@
                 <div class="col-sm-6">
                     <h1>Facturas</h1>
                 </div>
+
+                @can('FACTURAS-CREAR')  
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('preparar.factura') }}">
                         Registrar nueva factura
                     </a>
                 </div>
+                @endcan
+
+
             </div>
         </div>
     </section>

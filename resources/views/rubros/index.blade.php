@@ -20,13 +20,14 @@
 
 
          
- 
+            @can('RUBROS-CREAR') 
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('rubros.create') }}">
                         Registrar nuevo rubro
                     </a>
                 </div>
+            @endcan    
           
         </div>
     </section>

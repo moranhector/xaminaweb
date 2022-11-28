@@ -30,11 +30,20 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
+
+                        @can('FACTURAS-EDITAR')  
                         <a href="{{ route('facturas.edit', [$factura->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
+                         @endcan
+
+                        @can('FACTURAS-BORRAR') 
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        @endcan
+
+
+
                     </div>
                     {!! Form::close() !!}
                 </td>

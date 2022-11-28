@@ -20,12 +20,13 @@
                 </div>
             </div>
 
+            @can('REMITOS-CREAR')             
             <div class="col-sm-6">
                 <a class="btn btn-primary float-right" href="{{ route('remitos.create') }}">
                     Registrar nuevo
                 </a>
             </div>
-
+            @endcan
 
 
         </div>

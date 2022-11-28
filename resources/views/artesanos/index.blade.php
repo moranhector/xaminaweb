@@ -31,12 +31,13 @@
             </div>
 
 
-
+            @can('ARTESANOS-CREAR')  
             <div class="col-sm-6">
                 <a class="btn btn-primary float-right" href="{{ route('artesanos.create') }}">
                     Registrar nuevo
                 </a>
             </div>
+            @endcan
 
         </div>
 </section>

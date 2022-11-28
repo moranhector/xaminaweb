@@ -65,10 +65,13 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
+                        
+                        @can('INVENTARIOS-EDITAR')
                         <a href="{{ route('inventarios.edit', [$inventario->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
+                        @endcan
  
                     </div>
                     {!! Form::close() !!}

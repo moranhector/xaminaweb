@@ -7,12 +7,16 @@
                 <div class="col-sm-6">
                     <h1>Talonarios</h1>
                 </div>
+
+                @can('TALONARIOS-CREAR')
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('talonarios.create') }}">
                         Alta
                     </a>
                 </div>
+                @endcan
+
             </div>
         </div>
     </section>

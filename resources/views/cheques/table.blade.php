@@ -30,6 +30,8 @@
                     <!-- <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
                         class="btn btn-sm btn-secondary float-right">Rendir</a>                        -->
 
+                        
+                        @can('RENDICIONES-CREAR')
                         @if (empty($cheque->rendido_at))
                             <a href="{{ route('cheques.rendir', [$cheque->id]) }}"
                             class="btn btn-sm btn-info float-left">Rendir</a>                           
@@ -37,15 +39,16 @@
                             <a href="{{ route('imprimir_rendicion', [$cheque->id]) }}"  
                             class="btn btn-sm btn-info float-left">Imprim</a>   
                         @endif
+                        @endcan
 
                         <a href="{{ route('cheques.show', [$cheque->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
 
-
-
+                        @can('CHEQUES-BORRAR') 
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Está seguro de anular cheque $cheque->numero?')"]) !!}
+                        @endcan                        
                     </div>
                     {!! Form::close() !!}
                 </td>

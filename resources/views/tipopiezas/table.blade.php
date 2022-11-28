@@ -25,11 +25,18 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
+
+                        @can('TIPOPIEZA-EDITAR')
                         <a href="{{ route('tipopiezas.edit', [$tipopieza->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
+                        @endcan
+
+                        @can('TIPOPIEZA-BORRAR')
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}
+                        @endcan
+
                     </div>
                     {!! Form::close() !!}
                 </td>

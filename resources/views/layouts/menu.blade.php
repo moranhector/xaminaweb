@@ -1,71 +1,68 @@
+@can('ARTESANOS-VER')
 <li class="nav-item">
     <a href="{{ route('artesanos.index') }}" class="nav-link {{ Request::is('artesanos*') ? 'active' : '' }}">
         <p>Artesanos</p>
     </a>
 </li>
+@endcan
 
-
+@can('RUBROS-VER')
 <li class="nav-item">
     <a href="{{ route('rubros.index') }}" class="nav-link {{ Request::is('rubros*') ? 'active' : '' }}">
         <p>Rubros</p>
     </a>
 </li>
+@endcan
 
 
 
-
-
+@can('TIPOPIEZA-VER')
 <li class="nav-item">
     <a href="{{ route('tipopiezas.index') }}" class="nav-link {{ Request::is('tipopiezas*') ? 'active' : '' }}">
         <p>Tipos de piezas</p>
     </a>
 </li>
+@endcan
 
-
+@can('CHEQUES-VER')
 <li class="nav-item">
     <a href="{{ route('cheques.index') }}" class="nav-link {{ Request::is('cheques*') ? 'active' : '' }}">
         <p>Cheques</p>
     </a>
 </li>
+@endcan
 
-
+@can('RECIBOS-VER')
 <li class="nav-item">
     <a href="{{ route('recibos.index') }}" class="nav-link {{ Request::is('recibos*') ? 'active' : '' }}">
         <p>Recibos de Compra</p>
     </a>
 </li>
+@endcan
 
-
-
-
-
-
-<!-- <li class="nav-item">
-    <a href="{{ route('preparar.recibo') }}"
-       class="nav-link {{ Request::is('preparar.recibo*') ? 'active' : '' }}">
-        <p>Registrar Recibo</p>
-    </a>
-</li> -->
+@can('DEPOSITOS-VER')
 <li class="nav-item">
     <a href="{{ route('depositos.index') }}" class="nav-link {{ Request::is('depositos*') ? 'active' : '' }}">
         <p>Depósitos</p>
     </a>
 </li>
+@endcan
 
-
+@can('PIEZAS-VER')
 <li class="nav-item">
     <a href="{{ route('inventarios.index') }}" class="nav-link {{ Request::is('inventarios*') ? 'active' : '' }}">
         <p>Piezas</p>
     </a>
 </li>
+@endcan
 
-
+@can('TALONARIOS-VER')
 <li class="nav-item">
     <a href="{{ route('talonarios.index') }}" class="nav-link {{ Request::is('talonarios*') ? 'active' : '' }}">
         <p>Talonarios</p>
     </a>
 </li>
-
+@endcan
 
 <!-- <li class="nav-item">
     <a href="{{ route('rendiciones.index') }}"
@@ -75,20 +72,21 @@
 </li> -->
 
 
-
+@can('CLIENTES-VER')
 <li class="nav-item">
     <a href="{{ route('clientes.index') }}" class="nav-link {{ Request::is('clientes*') ? 'active' : '' }}">
         <p>Clientes</p>
     </a>
 </li>
+@endcan
 
-
+@can('FACTURAS-VER')
 <li class="nav-item">
     <a href="{{ route('facturas.index') }}" class="nav-link {{ Request::is('facturas*') ? 'active' : '' }}">
         <p>Facturas</p>
     </a>
 </li>
-
+@endcan
 
 <!-- <li class="nav-item">
     <a href="{{ route('faclineas.index') }}"
@@ -98,28 +96,38 @@
 </li> -->
 
 
-
+@can('EXISTENCIAS-VER')
 <li class="nav-item">
     <a href="{{ route('existencias.index') }}" class="nav-link {{ Request::is('existencias*') ? 'active' : '' }}">
         <p>Movimientos</p>
     </a>
 </li>
+@endcan
 
+@can('INVENTARIO-VER')
 <li class="nav-item">
     <a href="{{ route('inventario_fecha') }}" class="nav-link {{ Request::is('Inventario_fecha') ? 'active' : '' }}">
         <p>Inventario a fecha</p>
     </a>
 </li>
+@endcan
 
+@can('REMITOS-VER')
 <li class="nav-item">
     <a href="{{ route('remitos.index') }}" class="nav-link {{ Request::is('remitos*') ? 'active' : '' }}">
         <p>Remitos</p>
     </a>
 </li>
+@endcan
 
+@can('USUARIOS-VER')
 <a class="nav-link" href="/usuarios">
     <i class=" fas fa-users"></i><span>Usuarios</span>
 </a>
+@endcan
+
+@can('ROLES-VER')
 <a class="nav-link" href="/roles">
     <i class=" fas fa-user-lock"></i><span>Roles</span>
 </a>
+@endcan

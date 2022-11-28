@@ -20,16 +20,26 @@
             <td>{{ $artesano->departamento }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['artesanos.destroy', $artesano->id], 'method' => 'delete']) !!}
+
                     <div class='btn-group'>
                         <a href="{{ route('artesanos.show', [$artesano->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
+                        @can('ARTESANOS-EDITAR')                        
                         <a href="{{ route('artesanos.edit', [$artesano->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}
+                        @endcan                        
+
+                        @can('ARTESANOS-BORRAR')
+
+                            {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}                            
+ 
+                        @endcan
+
+                       
                     </div>
                     {!! Form::close() !!}
                 </td>

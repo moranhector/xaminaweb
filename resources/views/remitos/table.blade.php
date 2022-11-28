@@ -29,11 +29,19 @@
                            class='btn btn-default btn-xs'>
                             <i class="far fa-eye"></i>
                         </a>
+
+                        @can('REMITOS-EDITAR')   
                         <a href="{{ route('remitos.edit', [$remito->id]) }}"
                            class='btn btn-default btn-xs'>
                             <i class="far fa-edit"></i>
                         </a>
+                          @endcan
+
+                        @can('REMITOS-BORRAR')   
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Está seguro de eliminar este registro?')"]) !!}
+                          @endcan
+
+
                     </div>
                     {!! Form::close() !!}
                 </td>
